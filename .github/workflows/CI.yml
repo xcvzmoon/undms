@@ -203,8 +203,13 @@ jobs:
           " >> $GITHUB_OUTPUT
       - name: Install dependencies
         run: |
-          pnpm config set supported-architectures.cpu '["current", "arm64", "x64", "arm"]'
-          pnpm config set supported-architectures.libc '["current", "musl", "gnu"]'
+          pnpm config set "supportedArchitectures.cpu" "current"
+          pnpm config set "supportedArchitectures.cpu" "arm64" --location project
+          pnpm config set "supportedArchitectures.cpu" "x64" --location project
+          pnpm config set "supportedArchitectures.cpu" "arm" --location project
+          pnpm config set "supportedArchitectures.libc" "current"
+          pnpm config set "supportedArchitectures.libc" "musl" --location project
+          pnpm config set "supportedArchitectures.libc" "gnu" --location project
           pnpm install
       - name: Download artifacts
         uses: actions/download-artifact@v7
