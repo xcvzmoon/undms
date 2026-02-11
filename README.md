@@ -1,31 +1,28 @@
-# `@napi-rs/package-template`
+# `@xcvzmoon/undms`
 
-![https://github.com/napi-rs/package-template/actions](https://github.com/napi-rs/package-template/workflows/CI/badge.svg)
+![https://github.com/xcvzmoon/undms/actions](https://github.com/xcvzmoon/undms/workflows/CI/badge.svg)
 
-> Template project for writing node packages with napi-rs.
+> Text and Metadata Extraction Library for Document Files with Text Similarity Comparison built with napi-rs.
 
-# Usage
-
-1. Click **Use this template**.
-2. **Clone** your project.
-3. Run `yarn install` to install dependencies.
-4. Run `yarn napi rename -n [@your-scope/package-name] -b [binary-name]` command under the project folder to rename your package.
-
-## Install this test package
+## Installation
 
 ```bash
-yarn add @napi-rs/package-template
+pnpm add @xcvzmoon/undms
 ```
 
-## Ability
+## Purpose
+
+This library is designed to extract text and metadata from various document formats (PDF, Word, Excel, etc.) and provide text similarity comparison capabilities. Currently in early development phase with basic functionality.
+
+## Development
 
 ### Build
 
-After `yarn build/npm run build` command, you can see `package-template.[darwin|win32|linux].node` file in project root. This is the native addon built from [lib.rs](./src/lib.rs).
+After `pnpm build` command, you can see `undms.[darwin|win32|linux].node` file in project root. This is the native addon built from [lib.rs](./src/lib.rs).
 
 ### Test
 
-With [ava](https://github.com/avajs/ava), run `yarn test/npm run test` to testing native addon. You can also switch to another testing framework if you want.
+With [ava](https://github.com/avajs/ava), run `pnpm test` to test the native addon. You can also switch to another testing framework if you want.
 
 ### CI
 
@@ -37,36 +34,23 @@ Release native package is very difficult in old days. Native packages may ask de
 
 With `GitHub actions`, we can easily prebuild a `binary` for major platforms. And with `N-API`, we should never be afraid of **ABI Compatible**.
 
-The other problem is how to deliver prebuild `binary` to users. Downloading it in `postinstall` script is a common way that most packages do it right now. The problem with this solution is it introduced many other packages to download binary that has not been used by `runtime codes`. The other problem is some users may not easily download the binary from `GitHub/CDN` if they are behind a private network (But in most cases, they have a private NPM mirror).
+The other problem is how to deliver prebuilt `binary` to users. Downloading it in `postinstall` script is a common way that most packages do it right now. The problem with this solution is it introduced many other packages to download binary that has not been used by `runtime codes`. The other problem is some users may not easily download the binary from `GitHub/CDN` if they are behind a private network (But in most cases, they have a private NPM mirror).
 
 In this package, we choose a better way to solve this problem. We release different `npm packages` for different platforms. And add it to `optionalDependencies` before releasing the `Major` package to npm.
 
-`NPM` will choose which native package should download from `registry` automatically. You can see [npm](./npm) dir for details. And you can also run `yarn add @napi-rs/package-template` to see how it works.
+`NPM` will choose which native package should download from `registry` automatically. You can see [npm](./npm) dir for details. And you can also run `pnpm add @xcvzmoon/undms` to see how it works.
 
-## Develop requirements
+## Development requirements
 
 - Install the latest `Rust`
-- Install `Node.js@10+` which fully supported `Node-API`
-- Install `yarn@1.x`
+- Install `Node.js@12+` which fully supports `Node-API`
+- Install `pnpm`
 
 ## Test in local
 
-- yarn
-- yarn build
-- yarn test
-
-And you will see:
-
-```bash
-$ ava --verbose
-
-  ✔ sync function from native code
-  ✔ sleep function from native code (201ms)
-  ─
-
-  2 tests passed
-✨  Done in 1.12s.
-```
+- pnpm install
+- pnpm build
+- pnpm test
 
 ## Release package
 
