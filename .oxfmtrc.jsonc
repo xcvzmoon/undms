@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "experimentalSortPackageJson": false,
+  "experimentalSortImports": {
+    "groups": [
+      ["external-type", "internal-type", "parent-type", "sibling-type", "index-type"],
+      ["side-effect"],
+      ["builtin"],
+      ["external"],
+      ["internal"],
+      ["parent"],
+      ["sibling"],
+      ["index"],
+    ],
+    "newlinesBetween": false,
+  },
+  "singleQuote": true,
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "pnpm-lock.yaml",
+    "CHANGELOG.md",
+    ".DS_Store",
+    ".env*",
+    ".vscode",
+    "target",
+    "index.js",
+    "package-template.wasi-browser.js",
+    "package-template.wasi.cjs",
+    "wasi-worker-browser.mjs",
+    "wasi-worker.mjs",
+  ],
+}
