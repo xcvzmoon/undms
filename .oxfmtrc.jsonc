@@ -29,5 +29,6 @@
     "package-template.wasi.cjs",
     "wasi-worker-browser.mjs",
     "wasi-worker.mjs",
+    "index.d.ts",
   ],
 }
