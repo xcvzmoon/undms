@@ -1,71 +1,162 @@
-# `@xcvzmoon/undms`
+# undms
 
 ![https://github.com/xcvzmoon/undms/actions](https://github.com/xcvzmoon/undms/workflows/CI/badge.svg)
 
-> Text and Metadata Extraction Library for Document Files with Text Similarity Comparison built with napi-rs.
+Text and metadata extraction library for document files with text similarity comparison, built with napi-rs.
 
 ## Installation
 
 ```bash
-pnpm add @xcvzmoon/undms
+bun add undms
 ```
 
-## Purpose
+## Features
 
-This library is designed to extract text and metadata from various document formats (PDF, Word, Excel, etc.) and provide text similarity comparison capabilities. Currently in early development phase with basic functionality.
+- Extracts text and metadata from document files
+- Computes similarity between extracted documents and reference texts
+- Works in Node.js and Bun (via N-API)
+
+## Supported formats
+
+- Text: `text/*`, plus JSON/XML/JS/TS MIME variants
+- DOCX: `application/vnd.openxmlformats-officedocument.wordprocessingml.document`
+- XLSX: `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
+- PDF: `application/pdf`
+- Images: `image/jpeg`, `image/png`, `image/gif`, `image/bmp`, `image/tiff`, `image/webp`
+
+## Metadata schema
+
+Each extracted document may include a `metadata` payload with these optional fields:
+
+```ts
+type MetadataPayload = {
+  text?: {
+    lineCount: number;
+    wordCount: number;
+    characterCount: number;
+    nonWhitespaceCharacterCount: number;
+  };
+  docx?: {
+    paragraphCount: number;
+    tableCount: number;
+    imageCount: number;
+    hyperlinkCount: number;
+  };
+  xlsx?: {
+    sheetCount: number;
+    sheetNames: string[];
+    rowCount: number;
+    columnCount: number;
+    cellCount: number;
+  };
+  pdf?: {
+    title?: string;
+    author?: string;
+    subject?: string;
+    producer?: string;
+    pageSize?: { width: number; height: number };
+    pageCount: number;
+  };
+  image?: {
+    width: number;
+    height: number;
+    format?: string;
+    cameraMake?: string;
+    cameraModel?: string;
+    datetimeOriginal?: string;
+    location: {
+      latitude?: number;
+      longitude?: number;
+    };
+  };
+};
+```
+
+## Handler details
+
+- Text: decodes content (UTF-8 by default) and provides text metadata.
+- DOCX: extracts paragraphs, plus paragraph/table/image/hyperlink counts.
+- XLSX: extracts cell text and reports sheet/row/column/cell counts.
+- PDF: extracts text and document info (title/author/subject/producer) and page size/count when available.
+- Images: runs OCR to extract text and reads EXIF for camera details and GPS location when present.
+
+## Troubleshooting
+
+- OCR is CPU-intensive; large images can be slow.
+- EXIF GPS fields depend on the source image; if absent, `location` still exists but latitude/longitude are undefined.
+- PDF metadata fields are optional and may be empty when the source file does not include them.
+- If OCR returns empty text, check that the image has legible, high-contrast text.
+
+## Usage
+
+```ts
+import { extract, computeDocumentSimilarity, computeTextSimilarity } from 'undms';
+
+const result = extract([
+  {
+    name: 'note.txt',
+    size: 12,
+    type: 'text/plain',
+    lastModified: Date.now(),
+    webkitRelativePath: '',
+    buffer: Buffer.from('hello world!'),
+  },
+]);
+
+const matches = computeDocumentSimilarity(
+  result[0].documents.map((doc) => ({
+    name: doc.name,
+    size: doc.size,
+    type: result[0].mimeType,
+    lastModified: Date.now(),
+    webkitRelativePath: '',
+    buffer: Buffer.from(doc.content),
+  })),
+  ['reference text A', 'reference text B'],
+  70,
+  'hybrid',
+);
+
+const textMatches = computeTextSimilarity('alpha beta gamma', ['alpha beta gamma'], 99, 'hybrid');
+```
+
+## API
+
+### `extract(documents)`
+
+Extracts text and metadata from input documents. Output is grouped by MIME type.
+
+### `computeDocumentSimilarity(documents, referenceTexts, threshold?, method?)`
+
+Extracts documents and computes similarity against the reference texts.
+
+### `computeTextSimilarity(sourceText, referenceTexts, threshold?, method?)`
+
+Computes similarity for raw text without file extraction.
 
 ## Development
 
+### Requirements
+
+- Rust (latest stable)
+- Node.js 12+ (for Node-API)
+- Bun
+
 ### Build
 
-After `pnpm build` command, you can see `undms.[darwin|win32|linux].node` file in project root. This is the native addon built from [lib.rs](./src/lib.rs).
+```bash
+bun run build
+```
 
 ### Test
 
-With [ava](https://github.com/avajs/ava), run `pnpm test` to test the native addon. You can also switch to another testing framework if you want.
-
-### CI
-
-With GitHub Actions, each commit and pull request will be built and tested automatically in [`node@20`, `@node22`] x [`macOS`, `Linux`, `Windows`] matrix. You will never be afraid of the native addon broken in these platforms.
-
-### Release
-
-Release native package is very difficult in old days. Native packages may ask developers who use it to install `build toolchain` like `gcc/llvm`, `node-gyp` or something more.
-
-With `GitHub actions`, we can easily prebuild a `binary` for major platforms. And with `N-API`, we should never be afraid of **ABI Compatible**.
-
-The other problem is how to deliver prebuilt `binary` to users. Downloading it in `postinstall` script is a common way that most packages do it right now. The problem with this solution is it introduced many other packages to download binary that has not been used by `runtime codes`. The other problem is some users may not easily download the binary from `GitHub/CDN` if they are behind a private network (But in most cases, they have a private NPM mirror).
-
-In this package, we choose a better way to solve this problem. We release different `npm packages` for different platforms. And add it to `optionalDependencies` before releasing the `Major` package to npm.
-
-`NPM` will choose which native package should download from `registry` automatically. You can see [npm](./npm) dir for details. And you can also run `pnpm add @xcvzmoon/undms` to see how it works.
-
-## Development requirements
-
-- Install the latest `Rust`
-- Install `Node.js@12+` which fully supports `Node-API`
-- Install `pnpm`
-
-## Test in local
-
-- pnpm install
-- pnpm build
-- pnpm test
-
-## Release package
-
-Ensure you have set your **NPM_TOKEN** in the `GitHub` project setting.
-
-In `Settings -> Secrets`, add **NPM_TOKEN** into it.
-
-When you want to release the package:
-
 ```bash
-npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease [--preid=<prerelease-id>] | from-git]
-
-git push
+bun run test
 ```
 
-GitHub actions will do the rest job for you.
+### Benchmarks
 
-> WARN: Don't run `npm publish` manually.
+```bash
+bun run bench
+bun run bench:sweep
+```
