@@ -1,4 +1,4 @@
-name: CI
+name: ci
 env:
   DEBUG: napi:*
   APP_NAME: undms
