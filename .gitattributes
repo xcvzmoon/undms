@@ -1,6 +1,24 @@
 # Auto detect text files and perform LF normalization
 *        text=auto
 
+# Binary files - must be marked to prevent line ending corruption on Windows
+*.pdf    binary
+*.docx   binary
+*.xlsx   binary
+*.xls    binary
+*.pptx   binary
+*.ppt    binary
+*.jpg    binary
+*.jpeg   binary
+*.png    binary
+*.gif    binary
+*.bmp    binary
+*.ico    binary
+*.zip    binary
+*.gz     binary
+*.tar    binary
+*.node   binary
+
 
 *.ts    text eol=lf merge=union
 *.tsx   text eol=lf merge=union
