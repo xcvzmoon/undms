@@ -15,7 +15,7 @@ dashmap     = "6.1.0"
 docx-rs     = "0.4.19"
 encoding_rs = "0.8.35"
 image       = "0.25.9"
-lopdf       = { version = "0.33.0", features = ["pom", "pom_parser"] }
+lopdf       = "0.39.0"
 napi        = "3.0.0"
 napi-derive = "3.0.0"
 ocrs        = "0.12.0"
