@@ -1,7 +1,6 @@
 use crate::core::handler::{DocumentHandler, ExtractionResult};
 use crate::models::metadata::{MetadataPayload, PdfMetadata, PdfPageSize, build_text_metadata};
 use lopdf::{Document, Object};
-use pdf_extract::extract_text_from_mem;
 
 pub struct PdfHandler;
 
@@ -11,30 +10,34 @@ impl PdfHandler {
   }
 
   fn extract_text_with_metadata(&self, content: &[u8]) -> Result<(String, PdfMetadata), String> {
-    match extract_text_from_mem(content) {
-      Ok(text) => {
-        let cleaned = text
-          .lines()
-          .map(|line| line.trim())
-          .filter(|line| !line.is_empty())
-          .collect::<Vec<_>>()
-          .join("\n");
+    let document =
+      Document::load_mem(content).map_err(|e| format!("PDF extraction failed: {}", e))?;
 
-        let mut pdf_metadata = self.extract_pdf_metadata(content);
+    let pages = document.get_pages();
+    let page_count = pages.len() as u32;
 
-        if pdf_metadata.page_count == 0 {
-          let page_breaks = text.matches('\x0c').count() as u32;
-          pdf_metadata.page_count = if text.trim().is_empty() {
-            0
-          } else {
-            page_breaks + 1
-          };
-        }
-
-        Ok((cleaned, pdf_metadata))
+    let mut text = String::new();
+    for (page_num, _) in pages.iter() {
+      if let Ok(page_text) = document.extract_text(&[*page_num]) {
+        text.push_str(&page_text);
+        text.push('\n');
       }
-      Err(error) => Err(format!("PDF extraction failed: {}", error)),
     }
+
+    let cleaned = text
+      .lines()
+      .map(|line| line.trim())
+      .filter(|line| !line.is_empty())
+      .collect::<Vec<_>>()
+      .join("\n");
+
+    let mut pdf_metadata = self.extract_pdf_metadata(content);
+
+    if pdf_metadata.page_count == 0 {
+      pdf_metadata.page_count = page_count;
+    }
+
+    Ok((cleaned, pdf_metadata))
   }
 
   fn extract_pdf_metadata(&self, content: &[u8]) -> PdfMetadata {
