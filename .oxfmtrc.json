@@ -10,9 +10,9 @@
       ["internal"],
       ["parent"],
       ["sibling"],
-      ["index"],
+      ["index"]
     ],
-    "newlinesBetween": false,
+    "newlinesBetween": false
   },
   "singleQuote": true,
   "ignorePatterns": [
@@ -30,5 +30,6 @@
     "wasi-worker-browser.mjs",
     "wasi-worker.mjs",
     "index.d.ts",
-  ],
+    "*.toml"
+  ]
 }
