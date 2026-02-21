@@ -1,16 +1,28 @@
 
 [package]
-authors = ["LongYinan <lynweklm@gmail.com>"]
-edition = "2021"
+authors = ["Mon Albert Gamil <mrgamilmonalbert@gmail.com>"]
+edition = "2024"
 name    = "undms"
-version = "0.1.0"
+version = "1.0.0"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
+calamine    = "0.33.0"
+chardetng   = "0.1.17"
+dashmap     = "6.1.0"
+docx-rs     = "0.4.19"
+encoding_rs = "0.8.35"
+image       = "0.25.9"
+lopdf       = "0.33.0"
 napi        = "3.0.0"
 napi-derive = "3.0.0"
+ocrs        = "0.12.0"
+pdf-extract = "0.10.0"
+rayon       = "1.11.0"
+rten        = "0.24.0"
+strsim      = "0.11.1"
 
 [build-dependencies]
 napi-build = "2"
