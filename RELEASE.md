@@ -1,4 +1,4 @@
-# Release v1.0.0
+# Release v1.1.1
 
 Initial release of undms - a high-performance text and metadata extraction library built with Rust and napi-rs.
 

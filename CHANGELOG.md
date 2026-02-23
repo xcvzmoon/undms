@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.0.0...v1.1.1)
+
+### 🏡 Chore
+
+- Add artifacts dir ([d4bbf45](https://github.com/xcvzmoon/undms/commit/d4bbf45))
+- **ci:** Update build and tests ([49f5915](https://github.com/xcvzmoon/undms/commit/49f5915))
+- Update package config ([e550740](https://github.com/xcvzmoon/undms/commit/e550740))
+- **release:** Bump 1.1.0 ([51cc3fb](https://github.com/xcvzmoon/undms/commit/51cc3fb))
+- Bump optional deps ([22cfe5d](https://github.com/xcvzmoon/undms/commit/22cfe5d))
+- Remove optional dependencies ([4592694](https://github.com/xcvzmoon/undms/commit/4592694))
+
+### 🤖 CI
+
+- Remove publish ([d011c1a](https://github.com/xcvzmoon/undms/commit/d011c1a))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil <mrgamilmonalbert@gmail.com>
+
 ## v1.1.0
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.0.0...v1.1.0)
