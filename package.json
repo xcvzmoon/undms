@@ -51,6 +51,9 @@
     "bench": "node --import @oxc-node/core/register benchmark/bench.ts",
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
+    "docs": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
     "format": "run-p format:oxfmt format:rs format:toml",
     "format:oxfmt": "oxfmt && oxfmt --check",
     "format:toml": "taplo format",
@@ -84,7 +87,8 @@
     "oxlint": "^1.49.0",
     "oxlint-tsgolint": "^0.12.2",
     "tinybench": "^6.0.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitepress": "2.0.0-alpha.16"
   },
   "lint-staged": {
     "*.{js,ts}": [
