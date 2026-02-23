@@ -56,7 +56,7 @@
     "format:toml": "taplo format",
     "format:rs": "cargo fmt",
     "lint": "oxlint --type-aware",
-    "prepublishOnly": "napi prepublish -t npm",
+    "prepublishOnly": "echo 'Bundled binaries already included'",
     "test": "ava",
     "preversion": "napi build --platform && git add .",
     "version": "napi version",
@@ -111,5 +111,11 @@
       "@oxc-node/core/register"
     ]
   },
-  "packageManager": "pnpm@10.30.1"
+  "packageManager": "pnpm@10.30.1",
+  "optionalDependencies": {
+    "undms-win32-x64-msvc": "1.0.0",
+    "undms-darwin-x64": "1.0.0",
+    "undms-linux-x64-gnu": "1.0.0",
+    "undms-darwin-arm64": "1.0.0"
+  }
 }
