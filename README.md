@@ -1,162 +1,365 @@
-# undms
+# UNDMS
 
+![undms](./undms.png)
+
+[![npm version](https://img.shields.io/npm/v/undms.svg)](https://www.npmjs.com/package/undms)
 ![https://github.com/xcvzmoon/undms/actions](https://github.com/xcvzmoon/undms/workflows/ci/badge.svg)
 
-Text and metadata extraction library for document files with text similarity comparison, built with napi-rs.
+High-performance document text and metadata extraction library with similarity comparison, built with napi-rs for Node.js and Bun.
 
 ## Installation
 
 ```bash
 bun add undms
+# or
+npm install undms
 ```
 
 ## Features
 
-- Extracts text and metadata from document files
-- Computes similarity between extracted documents and reference texts
-- Works in Node.js and Bun (via N-API)
+- **Multi-format extraction** - Text, DOCX, XLSX, PDF, and images
+- **Similarity comparison** - Compare documents against reference texts using multiple algorithms
+- **Rich metadata** - Extract format-specific metadata (EXIF, PDF info, DOCX stats, etc.)
+- **OCR support** - Extract text from images using Tesseract
+- **Parallel processing** - Documents are processed concurrently for performance
+- **TypeScript support** - Full type definitions included
 
-## Supported formats
+## Supported Formats
 
-- Text: `text/*`, plus JSON/XML/JS/TS MIME variants
-- DOCX: `application/vnd.openxmlformats-officedocument.wordprocessingml.document`
-- XLSX: `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
-- PDF: `application/pdf`
-- Images: `image/jpeg`, `image/png`, `image/gif`, `image/bmp`, `image/tiff`, `image/webp`
+| Format | MIME Type                                                                       | Features                                          |
+| ------ | ------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Text   | `text/*`, `application/json`, `application/xml`, etc.                           | Content + line/word/character counts              |
+| DOCX   | `application/vnd.openxmlformats-officedocument.wordprocessingml.document`       | Paragraphs, tables, images, hyperlinks            |
+| XLSX   | `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`             | Cell content, sheets, rows, columns               |
+| PDF    | `application/pdf`                                                               | Text, title, author, subject, producer, page info |
+| Images | `image/jpeg`, `image/png`, `image/gif`, `image/bmp`, `image/tiff`, `image/webp` | OCR text, EXIF data, GPS location                 |
 
-## Metadata schema
-
-Each extracted document may include a `metadata` payload with these optional fields:
-
-```ts
-type MetadataPayload = {
-  text?: {
-    lineCount: number;
-    wordCount: number;
-    characterCount: number;
-    nonWhitespaceCharacterCount: number;
-  };
-  docx?: {
-    paragraphCount: number;
-    tableCount: number;
-    imageCount: number;
-    hyperlinkCount: number;
-  };
-  xlsx?: {
-    sheetCount: number;
-    sheetNames: string[];
-    rowCount: number;
-    columnCount: number;
-    cellCount: number;
-  };
-  pdf?: {
-    title?: string;
-    author?: string;
-    subject?: string;
-    producer?: string;
-    pageSize?: { width: number; height: number };
-    pageCount: number;
-  };
-  image?: {
-    width: number;
-    height: number;
-    format?: string;
-    cameraMake?: string;
-    cameraModel?: string;
-    datetimeOriginal?: string;
-    location: {
-      latitude?: number;
-      longitude?: number;
-    };
-  };
-};
-```
-
-## Handler details
-
-- Text: decodes content (UTF-8 by default) and provides text metadata.
-- DOCX: extracts paragraphs, plus paragraph/table/image/hyperlink counts.
-- XLSX: extracts cell text and reports sheet/row/column/cell counts.
-- PDF: extracts text and document info (title/author/subject/producer) and page size/count when available.
-- Images: runs OCR to extract text and reads EXIF for camera details and GPS location when present.
-
-## Troubleshooting
-
-- OCR is CPU-intensive; large images can be slow.
-- EXIF GPS fields depend on the source image; if absent, `location` still exists but latitude/longitude are undefined.
-- PDF metadata fields are optional and may be empty when the source file does not include them.
-- If OCR returns empty text, check that the image has legible, high-contrast text.
-
-## Usage
+## Quick Start
 
 ```ts
 import { extract, computeDocumentSimilarity, computeTextSimilarity } from 'undms';
 
-const result = extract([
+const documents = [
   {
-    name: 'note.txt',
-    size: 12,
+    name: 'report.txt',
+    size: 1024,
     type: 'text/plain',
     lastModified: Date.now(),
     webkitRelativePath: '',
-    buffer: Buffer.from('hello world!'),
+    buffer: Buffer.from('Document content here...'),
   },
-]);
+];
 
-const matches = computeDocumentSimilarity(
-  result[0].documents.map((doc) => ({
-    name: doc.name,
-    size: doc.size,
-    type: result[0].mimeType,
+const result = extract(documents);
+console.log(result[0].documents[0].content);
+```
+
+## API Reference
+
+### `extract(documents)`
+
+Extracts text and metadata from input documents. Results are grouped by MIME type.
+
+**Parameters:**
+
+- `documents` - Array of `Document` objects
+
+**Returns:** `GroupedDocuments[]`
+
+```ts
+const result = extract([
+  {
+    name: 'document.pdf',
+    size: 1024,
+    type: 'application/pdf',
     lastModified: Date.now(),
     webkitRelativePath: '',
-    buffer: Buffer.from(doc.content),
-  })),
+    buffer: Buffer.from(pdfData),
+  },
+]);
+```
+
+### `computeDocumentSimilarity(documents, referenceTexts, threshold?, method?)`
+
+Extracts documents and computes similarity against reference texts.
+
+**Parameters:**
+
+- `documents` - Array of `Document` objects
+- `referenceTexts` - Candidate reference texts to compare against
+- `threshold` - Minimum score (0-100) to include a match (default: 30)
+- `method` - Similarity algorithm: `'jaccard'`, `'ngram'`, `'levenshtein'`, or `'hybrid'` (default)
+
+**Returns:** `GroupedDocumentsWithSimilarity[]`
+
+```ts
+const result = computeDocumentSimilarity(
+  documents,
   ['reference text A', 'reference text B'],
   70,
   'hybrid',
 );
-
-const textMatches = computeTextSimilarity('alpha beta gamma', ['alpha beta gamma'], 99, 'hybrid');
 ```
-
-## API
-
-### `extract(documents)`
-
-Extracts text and metadata from input documents. Output is grouped by MIME type.
-
-### `computeDocumentSimilarity(documents, referenceTexts, threshold?, method?)`
-
-Extracts documents and computes similarity against the reference texts.
 
 ### `computeTextSimilarity(sourceText, referenceTexts, threshold?, method?)`
 
-Computes similarity for raw text without file extraction.
+Computes similarity for plain text without file extraction.
+
+**Parameters:**
+
+- `sourceText` - Source text to compare
+- `referenceTexts` - Candidate reference texts
+- `threshold` - Minimum score (0-100) to include a match (default: 30)
+- `method` - Similarity algorithm (default: `'hybrid'`)
+
+**Returns:** `SimilarityMatch[]`
+
+```ts
+const matches = computeTextSimilarity(
+  'alpha beta gamma',
+  ['alpha beta gamma', 'different text'],
+  80,
+  'jaccard',
+);
+```
+
+## Type Definitions
+
+### Document
+
+Input document interface.
+
+```ts
+interface Document {
+  name: string;
+  size: number;
+  type: string; // MIME type
+  lastModified: number;
+  webkitRelativePath: string;
+  buffer: Buffer;
+}
+```
+
+### DocumentMetadata
+
+Extracted document result.
+
+```ts
+interface DocumentMetadata {
+  name: string;
+  size: number;
+  processingTime: number;
+  encoding: string;
+  content: string;
+  metadata?: MetadataPayload;
+  error?: string;
+}
+```
+
+### GroupedDocuments
+
+Documents grouped by MIME type.
+
+```ts
+interface GroupedDocuments {
+  mimeType: string;
+  documents: DocumentMetadata[];
+}
+```
+
+### GroupedDocumentsWithSimilarity
+
+Grouped documents with similarity matches.
+
+```ts
+interface GroupedDocumentsWithSimilarity {
+  mimeType: string;
+  documents: DocumentMetadataWithSimilarity[];
+}
+```
+
+### DocumentMetadataWithSimilarity
+
+Document metadata with similarity results.
+
+```ts
+interface DocumentMetadataWithSimilarity {
+  name: string;
+  size: number;
+  processingTime: number;
+  encoding: string;
+  content: string;
+  metadata?: MetadataPayload;
+  error?: string;
+  similarityMatches: SimilarityMatch[];
+}
+```
+
+### SimilarityMatch
+
+Similarity comparison result.
+
+```ts
+interface SimilarityMatch {
+  referenceIndex: number;
+  similarityPercentage: number;
+}
+```
+
+### MetadataPayload
+
+Complete metadata payload with format-specific fields.
+
+```ts
+interface MetadataPayload {
+  text?: TextMetadata;
+  docx?: DocxMetadata;
+  xlsx?: XlsxMetadata;
+  pdf?: PdfMetadata;
+  image?: ImageMetadata;
+}
+```
+
+### TextMetadata
+
+Text content statistics.
+
+```ts
+interface TextMetadata {
+  lineCount: number;
+  wordCount: number;
+  characterCount: number;
+  nonWhitespaceCharacterCount: number;
+}
+```
+
+### DocxMetadata
+
+DOCX document statistics.
+
+```ts
+interface DocxMetadata {
+  paragraphCount: number;
+  tableCount: number;
+  imageCount: number;
+  hyperlinkCount: number;
+}
+```
+
+### XlsxMetadata
+
+XLSX spreadsheet statistics.
+
+```ts
+interface XlsxMetadata {
+  sheetCount: number;
+  sheetNames: string[];
+  rowCount: number;
+  columnCount: number;
+  cellCount: number;
+}
+```
+
+### PdfMetadata
+
+PDF document information.
+
+```ts
+interface PdfMetadata {
+  title?: string;
+  author?: string;
+  subject?: string;
+  producer?: string;
+  pageSize?: PdfPageSize;
+  pageCount: number;
+}
+
+interface PdfPageSize {
+  width: number;
+  height: number;
+}
+```
+
+### ImageMetadata
+
+Image file information.
+
+```ts
+interface ImageMetadata {
+  width: number;
+  height: number;
+  format?: string;
+  cameraMake?: string;
+  cameraModel?: string;
+  datetimeOriginal?: string;
+  location: ImageLocation;
+}
+
+interface ImageLocation {
+  latitude?: number;
+  longitude?: number;
+}
+```
+
+## Similarity Methods
+
+| Method        | Description                                   |
+| ------------- | --------------------------------------------- |
+| `jaccard`     | Set-based similarity using Jaccard index      |
+| `ngram`       | N-gram token matching (default: trigrams)     |
+| `levenshtein` | Edit distance-based similarity                |
+| `hybrid`      | Weighted combination of all methods (default) |
+
+The similarity score is computed as a weighted blend of content similarity (80%) and metadata similarity (20%).
+
+## Error Handling
+
+All functions handle errors gracefully:
+
+- **Extraction errors** - Returned in the `error` field of `DocumentMetadata`
+- **Unsupported formats** - Returns empty content with `application/octet-stream` encoding
+- **Similarity errors** - Returns empty matches array
+
+```ts
+const result = extract(documents);
+if (result[0].documents[0].error) {
+  console.error('Extraction failed:', result[0].documents[0].error);
+}
+```
+
+## Troubleshooting
+
+- **OCR is slow** - Large images take time; consider resizing before processing
+- **Missing GPS data** - Not all images contain EXIF location; `location` object exists but fields may be undefined
+- **Empty PDF text** - Some PDFs are image-based; OCR is not currently applied to PDFs
+- **Unicode handling** - All similarity methods support Unicode text
 
 ## Development
 
 ### Requirements
 
 - Rust (latest stable)
-- Node.js 12+ (for Node-API)
-- Bun
+- Node.js 18+
+- pnpm
 
 ### Build
 
 ```bash
-bun run build
+pnpm build
 ```
 
 ### Test
 
 ```bash
-bun run test
+pnpm test
 ```
 
-### Benchmarks
+### Benchmark
 
 ```bash
-bun run bench
-bun run bench:sweep
+pnpm bench
 ```
+
+## License
+
+MIT
