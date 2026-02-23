@@ -8,7 +8,7 @@ hero:
   text: Document Text & Metadata Extraction
   tagline: High-performance document processing with built-in similarity comparison
   image:
-    src: /undms.png
+    src: /undms/undms.png
     alt: undms logo
   actions:
     - theme: brand

@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress';
 
 export default defineConfig({
+  base: '/undms/',
   title: 'undms',
   description:
     'High-performance document text and metadata extraction library with similarity comparison',
@@ -12,12 +13,12 @@ export default defineConfig({
       'link',
       {
         rel: 'icon',
-        href: '/undms.png',
+        href: '/undms/undms.png',
       },
     ],
   ],
   themeConfig: {
-    logo: '/undms.png',
+    logo: '/undms/undms.png',
     siteTitle: 'undms',
     nav: [
       {
