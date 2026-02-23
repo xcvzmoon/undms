@@ -1,6 +1,6 @@
 # undms
 
-![https://github.com/xcvzmoon/undms/actions](https://github.com/xcvzmoon/undms/workflows/CI/badge.svg)
+![https://github.com/xcvzmoon/undms/actions](https://github.com/xcvzmoon/undms/workflows/ci/badge.svg)
 
 Text and metadata extraction library for document files with text similarity comparison, built with napi-rs.
 
