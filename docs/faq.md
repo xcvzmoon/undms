@@ -6,7 +6,7 @@ Common questions about undms and their answers.
 
 ### What is undms?
 
-undms (Universal Document Metadata System) is a high-performance library for extracting text and metadata from various document formats. It supports PDF, DOCX, XLSX, plain text, and images with built-in similarity comparison features.
+undms is a high-performance library for extracting text and metadata from various document formats. It supports PDF, DOCX, XLSX, plain text, and images with built-in similarity comparison features.
 
 ### Why use undms?
 

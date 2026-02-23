@@ -13,12 +13,12 @@ export default defineConfig({
       'link',
       {
         rel: 'icon',
-        href: '/undms/undms.png',
+        href: '/undms.png',
       },
     ],
   ],
   themeConfig: {
-    logo: '/undms/undms.png',
+    logo: '/undms.png',
     siteTitle: 'undms',
     nav: [
       {

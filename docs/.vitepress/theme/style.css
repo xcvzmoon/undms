@@ -191,3 +191,42 @@
   background: rgba(59, 130, 246, 0.2);
   color: #3b82f6;
 }
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 0;
+  margin: 2rem 0;
+}
+
+.features .feature {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  transition: all 0.2s ease;
+}
+
+.features .feature:hover {
+  border-color: var(--vp-c-brand);
+  transform: translateY(-2px);
+}
+
+.features .feature-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.features .feature h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--vp-c-text-1);
+}
+
+.features .feature p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}

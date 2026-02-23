@@ -8,7 +8,7 @@ hero:
   text: Document Text & Metadata Extraction
   tagline: High-performance document processing with built-in similarity comparison
   image:
-    src: /undms/undms.png
+    src: /undms.png
     alt: undms logo
   actions:
     - theme: brand
@@ -17,20 +17,50 @@ hero:
     - theme: alt
       text: View API
       link: /api/extract
-  features:
-    - title: Multi-Format Support
-      details: Extract text from PDF, DOCX, XLSX, images, and plain text files with a unified API
-    - title: Similarity Comparison
-      details: Compare documents against reference texts using Jaccard, N-gram, Levenshtein, or hybrid algorithms
-    - title: Rich Metadata
-      details: Extract format-specific metadata including EXIF data, PDF properties, DOCX statistics, and more
-    - title: OCR Support
-      details: Extract text from images using Tesseract OCR with automatic language detection
-    - title: Parallel Processing
-      details: Documents are processed concurrently using Rayon for maximum performance
-    - title: TypeScript Support
-      details: Full type definitions included with intelligent autocomplete and type safety
 ---
+
+<script setup>
+const features = [
+  {
+    icon: '📄',
+    title: 'Multi-Format Support',
+    details: 'Extract text from PDF, DOCX, XLSX, images, and plain text files with a unified API',
+  },
+  {
+    icon: '🔍',
+    title: 'Similarity Comparison',
+    details: 'Compare documents against reference texts using Jaccard, N-gram, Levenshtein, or hybrid algorithms',
+  },
+  {
+    icon: '📊',
+    title: 'Rich Metadata',
+    details: 'Extract format-specific metadata including EXIF data, PDF properties, DOCX statistics, and more',
+  },
+  {
+    icon: '🖼️',
+    title: 'OCR Support',
+    details: 'Extract text from images using Tesseract OCR with automatic language detection',
+  },
+  {
+    icon: '⚡',
+    title: 'Parallel Processing',
+    details: 'Documents are processed concurrently using Rayon for maximum performance',
+  },
+  {
+    icon: '💎',
+    title: 'TypeScript Support',
+    details: 'Full type definitions included with intelligent autocomplete and type safety',
+  },
+]
+</script>
+
+<div class="features">
+  <div v-for="feature in features" class="feature">
+    <div class="feature-icon">{{ feature.icon }}</div>
+    <h3>{{ feature.title }}</h3>
+    <p>{{ feature.details }}</p>
+  </div>
+</div>
 
 ## Quick Example
 
