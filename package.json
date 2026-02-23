@@ -27,7 +27,8 @@
   "files": [
     "index.d.ts",
     "index.js",
-    "browser.js"
+    "browser.js",
+    "*.node"
   ],
   "napi": {
     "binaryName": "undms",
