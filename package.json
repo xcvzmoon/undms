@@ -86,12 +86,6 @@
     "tinybench": "^6.0.0",
     "typescript": "^5.9.3"
   },
-  "optionalDependencies": {
-    "undms-win32-x64-msvc": "1.1.0",
-    "undms-darwin-x64": "1.1.0",
-    "undms-linux-x64-gnu": "1.1.0",
-    "undms-darwin-arm64": "1.1.0"
-  },
   "lint-staged": {
     "*.{js,ts}": [
       "oxlint --fix"
