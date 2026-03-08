@@ -1,6 +1,6 @@
 {
   "name": "undms",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Text and Metadata Extraction Library for Document Files with Text Similarity Comparison",
   "main": "index.js",
   "types": "index.d.ts",

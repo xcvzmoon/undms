@@ -1,6 +1,32 @@
 # Changelog
 
 
+## v1.1.2
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.1.1...v1.1.2)
+
+### 🩹 Fixes
+
+- **image:** Embed OCR models and retry extraction with preprocessing ([ad916da](https://github.com/xcvzmoon/undms/commit/ad916da))
+
+### 📖 Documentation
+
+- Update ci link ([69022fc](https://github.com/xcvzmoon/undms/commit/69022fc))
+- Add comprehensive API documentation ([135e0b0](https://github.com/xcvzmoon/undms/commit/135e0b0))
+- Add VitePress documentation ([99789c2](https://github.com/xcvzmoon/undms/commit/99789c2))
+- Add GitHub Actions workflow for VitePress deployment ([6d80ccc](https://github.com/xcvzmoon/undms/commit/6d80ccc))
+- Fix base path for GitHub Pages deployment ([6f021ef](https://github.com/xcvzmoon/undms/commit/6f021ef))
+- Fix VitePress hero image path and features rendering ([cde5a00](https://github.com/xcvzmoon/undms/commit/cde5a00))
+
+### 🏡 Chore
+
+- Ignore vitepress output ([3768900](https://github.com/xcvzmoon/undms/commit/3768900))
+- Support esm build ([3cc7fdc](https://github.com/xcvzmoon/undms/commit/3cc7fdc))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil <mrgamilmonalbert@gmail.com>
+
 ## v1.1.1
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.0.0...v1.1.1)
