@@ -130,3 +130,5 @@ Cargo.lock
 /npm
 
 artifacts/
+
+.vitepress
