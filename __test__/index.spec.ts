@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs';
+import { execFileSync } from 'node:child_process';
 import test from 'ava';
 import * as undms from '../index';
 import {
@@ -78,6 +79,14 @@ function makeImageDocument(type = 'image/jpeg', name = 'image-ocr.jpg') {
     buffer,
   };
 }
+
+type EsmPackageImportCheck = {
+  namespaceExtract: string;
+  extract: string;
+  computeDocumentSimilarity: string;
+  computeTextSimilarity: string;
+  content: string;
+};
 
 test('extract: returns metadata and text content for supported text mime type', (context) => {
   const content = 'Hello from Rust addon';
@@ -666,4 +675,47 @@ test('computeDocumentSimilarity: works with image documents', (context) => {
       }
     | undefined;
   context.truthy(imageMetadata?.image);
+});
+
+test('package exports: supports ESM named imports from the package root', (context) => {
+  const output = execFileSync(
+    process.execPath,
+    [
+      '--input-type=module',
+      '--eval',
+      `
+        import * as undms from 'undms';
+        import { computeDocumentSimilarity, computeTextSimilarity, extract } from 'undms';
+        const result = extract([
+          {
+            name: 'note.txt',
+            size: 18,
+            type: 'text/plain',
+            lastModified: Date.now(),
+            webkitRelativePath: '',
+            buffer: Buffer.from('esm package import'),
+          },
+        ]);
+        console.log(JSON.stringify({
+          namespaceExtract: typeof undms.extract,
+          extract: typeof extract,
+          computeDocumentSimilarity: typeof computeDocumentSimilarity,
+          computeTextSimilarity: typeof computeTextSimilarity,
+          content: result[0].documents[0].content,
+        }));
+      `,
+    ],
+    {
+      cwd: new URL('..', import.meta.url),
+      encoding: 'utf8',
+    },
+  );
+  const parsed: unknown = JSON.parse(output);
+  const result = parsed as EsmPackageImportCheck;
+
+  context.is(result.namespaceExtract, 'function');
+  context.is(result.extract, 'function');
+  context.is(result.computeDocumentSimilarity, 'function');
+  context.is(result.computeTextSimilarity, 'function');
+  context.is(result.content, 'esm package import');
 });
