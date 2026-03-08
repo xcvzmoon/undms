@@ -1,9 +1,13 @@
 use crate::core::handler::{DocumentHandler, ExtractionResult};
 use crate::models::metadata::{ImageLocation, ImageMetadata, MetadataPayload, build_text_metadata};
-use image::{DynamicImage, GenericImageView, ImageFormat, ImageReader};
+use image::{DynamicImage, GenericImageView, ImageFormat, ImageReader, imageops::FilterType};
 use rten::Model;
 use std::io::Cursor;
-use std::path::PathBuf;
+
+const DETECTION_MODEL_BYTES: &[u8] = include_bytes!("../../text-detection-model.rten");
+const RECOGNITION_MODEL_BYTES: &[u8] = include_bytes!("../../text-recognition-model.rten");
+const MIN_OCR_LONGEST_EDGE: u32 = 1600;
+const OCR_CONTRAST_BOOST: f32 = 35.0;
 
 pub struct ImageHandler {
   model: ocrs::OcrEngine,
@@ -11,15 +15,10 @@ pub struct ImageHandler {
 
 impl ImageHandler {
   pub fn new() -> Self {
-    let detection_model_path =
-      PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("text-detection-model.rten");
-    let recognition_model_path =
-      PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("text-recognition-model.rten");
-
     let detection_model =
-      Model::load_file(detection_model_path).expect("Failed to load detection model");
+      Model::load_static_slice(DETECTION_MODEL_BYTES).expect("Failed to load detection model");
     let recognition_model =
-      Model::load_file(recognition_model_path).expect("Failed to load recognition model");
+      Model::load_static_slice(RECOGNITION_MODEL_BYTES).expect("Failed to load recognition model");
 
     let model = ocrs::OcrEngine::new(ocrs::OcrEngineParams {
       detection_model: Some(detection_model),
@@ -31,7 +30,7 @@ impl ImageHandler {
     Self { model }
   }
 
-  fn extract_text_from_image(&self, img: &DynamicImage) -> Result<String, String> {
+  fn run_ocr_pass(&self, img: &DynamicImage) -> Result<String, String> {
     let rgb_img = img.to_rgb8();
     let (width, height) = rgb_img.dimensions();
     let image_source = ocrs::ImageSource::from_bytes(rgb_img.as_raw(), (width, height))
@@ -66,6 +65,31 @@ impl ImageHandler {
     }
 
     Ok(extracted_text.trim().to_string())
+  }
+
+  fn extract_text_from_image(&self, img: &DynamicImage) -> Result<String, String> {
+    let mut best_text = String::new();
+    let mut best_score = 0;
+    let mut last_error = None;
+
+    for candidate in Self::ocr_variants(img) {
+      match self.run_ocr_pass(&candidate) {
+        Ok(text) => {
+          let score = Self::ocr_text_score(&text);
+          if score > best_score || (score == best_score && text.len() > best_text.len()) {
+            best_score = score;
+            best_text = text;
+          }
+        }
+        Err(error) => last_error = Some(error),
+      }
+    }
+
+    if best_score > 0 || last_error.is_none() {
+      Ok(best_text)
+    } else {
+      Err(last_error.unwrap_or_else(|| "OCR extraction failed".to_string()))
+    }
   }
 
   fn extract_exif_metadata(
@@ -141,6 +165,50 @@ impl ImageHandler {
         location,
       }),
     }
+  }
+
+  fn ocr_variants(img: &DynamicImage) -> Vec<DynamicImage> {
+    let mut variants = vec![img.clone()];
+
+    let grayscale = img.grayscale();
+    variants.push(grayscale.clone());
+    variants.push(grayscale.adjust_contrast(OCR_CONTRAST_BOOST));
+
+    if let Some(upscaled) = Self::upscale_for_ocr(img) {
+      variants.push(upscaled.clone());
+      variants.push(upscaled.grayscale().adjust_contrast(OCR_CONTRAST_BOOST));
+    }
+
+    variants
+  }
+
+  fn upscale_for_ocr(img: &DynamicImage) -> Option<DynamicImage> {
+    let (width, height) = img.dimensions();
+    let longest_edge = width.max(height);
+    if longest_edge >= MIN_OCR_LONGEST_EDGE || longest_edge == 0 {
+      return None;
+    }
+
+    let scale = MIN_OCR_LONGEST_EDGE as f32 / longest_edge as f32;
+    let new_width = ((width as f32 * scale).round() as u32).max(1);
+    let new_height = ((height as f32 * scale).round() as u32).max(1);
+
+    Some(img.resize_exact(new_width, new_height, FilterType::Lanczos3))
+  }
+
+  fn ocr_text_score(text: &str) -> usize {
+    let trimmed = text.trim();
+    if trimmed.is_empty() {
+      return 0;
+    }
+
+    let word_count = trimmed.split_whitespace().count();
+    let alphanumeric_count = trimmed
+      .chars()
+      .filter(|char| char.is_alphanumeric())
+      .count();
+
+    (word_count * 16) + alphanumeric_count
   }
 }
 
@@ -374,6 +442,35 @@ impl ImageHandler {
     } else {
       u32::from_be_bytes([bytes[0], bytes[1], bytes[2], bytes[3]])
     }
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::ImageHandler;
+  use image::DynamicImage;
+
+  #[test]
+  fn new_initializes_embedded_models() {
+    let _handler = ImageHandler::new();
+  }
+
+  #[test]
+  fn ocr_variants_include_upscaled_preprocessed_images_for_small_inputs() {
+    let img = DynamicImage::new_rgb8(320, 240);
+    let variants = ImageHandler::ocr_variants(&img);
+
+    assert_eq!(variants.len(), 5);
+    assert!(
+      variants.iter().any(|variant| variant.width() > img.width()),
+      "expected at least one upscaled OCR variant"
+    );
+  }
+
+  #[test]
+  fn upscale_for_ocr_skips_large_images() {
+    let img = DynamicImage::new_rgb8(2200, 1600);
+    assert!(ImageHandler::upscale_for_ocr(&img).is_none());
   }
 }
 
