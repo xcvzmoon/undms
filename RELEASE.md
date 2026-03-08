@@ -1,52 +1,50 @@
-# Release v1.1.1
+# Release v1.1.2
 
-Initial release of undms - a high-performance text and metadata extraction library built with Rust and napi-rs.
+This release improves OCR reliability, adds ESM package support, and expands the project documentation.
 
-## Features
+## Highlights
 
-### Document Extraction
+### OCR reliability improvements
 
-Extract text and metadata from various document formats:
+- Embedded OCR models directly in the package
+- Added retry logic with preprocessing for image extraction failures
+- Improved extraction resilience for image-based inputs
 
-- **Text files**: `text/*`, JSON, XML, JavaScript, TypeScript
-- **Microsoft Word**: `.docx` files (Office Open XML)
-- **Microsoft Excel**: `.xlsx` files (Office Open XML)
-- **PDF**: `.pdf` files with text extraction and metadata
-- **Images**: JPEG, PNG, GIF, BMP, TIFF, WebP with OCR and EXIF support
+### ESM package support
 
-### Text Similarity Comparison
+- Added ESM-compatible package exports
+- Generated both CommonJS and ESM loaders during the release build
+- Preserved existing CommonJS support for `require('undms')`
 
-Compare extracted documents against reference texts using multiple algorithms:
+### Documentation updates
 
-- **Jaccard similarity**: Set-based comparison
-- **Levenshtein distance**: Edit distance-based comparison
-- **Hybrid**: Combined approach for better accuracy
+- Added comprehensive API documentation
+- Added VitePress-based project documentation
+- Added GitHub Actions workflow for docs deployment
+- Fixed GitHub Pages base path and documentation asset rendering
 
-### Metadata Extraction
+## Installation
 
-Each format provides rich metadata:
+```bash
+bun add undms
+# or
+npm install undms
+# or
+pnpm add undms
+```
 
-| Format | Metadata                                                   |
-| ------ | ---------------------------------------------------------- |
-| Text   | Line count, word count, character count                    |
-| DOCX   | Paragraph count, table count, image count, hyperlink count |
-| XLSX   | Sheet names, row/column/cell counts                        |
-| PDF    | Title, author, subject, producer, page count, page size    |
-| Images | Dimensions, format, camera details, GPS location (EXIF)    |
+## Usage
 
-## API
+### CommonJS
 
-```ts
-import { extract, computeDocumentSimilarity, computeTextSimilarity } from 'undms';
+```js
+const { extract } = require('undms');
+```
 
-// Extract text and metadata from documents
-const result = extract([document]);
+### ESM
 
-// Compare documents against reference texts
-const matches = computeDocumentSimilarity(documents, referenceTexts, threshold, method);
-
-// Compare raw text without file extraction
-const textMatches = computeTextSimilarity(sourceText, referenceTexts, threshold, method);
+```js
+import { extract } from 'undms';
 ```
 
 ## Platform Support
@@ -62,15 +60,9 @@ Pre-built binaries for:
 
 - Node.js 12.22.0+ or Bun
 
-## Installation
+## Changelog
 
-```bash
-bun add undms
-# or
-npm install undms
-# or
-pnpm add undms
-```
+- Compare changes: https://github.com/xcvzmoon/undms/compare/v1.1.1...v1.1.2
 
 ## License
 
