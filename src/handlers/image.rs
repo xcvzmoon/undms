@@ -3,6 +3,7 @@ use crate::models::metadata::{ImageLocation, ImageMetadata, MetadataPayload, bui
 use image::{DynamicImage, GenericImageView, ImageFormat, ImageReader, imageops::FilterType};
 use rten::Model;
 use std::io::Cursor;
+use std::sync::OnceLock;
 
 const DETECTION_MODEL_BYTES: &[u8] = include_bytes!("../../text-detection-model.rten");
 const RECOGNITION_MODEL_BYTES: &[u8] = include_bytes!("../../text-recognition-model.rten");
@@ -10,46 +11,56 @@ const MIN_OCR_LONGEST_EDGE: u32 = 1600;
 const OCR_CONTRAST_BOOST: f32 = 35.0;
 
 pub struct ImageHandler {
-  model: ocrs::OcrEngine,
+  model: OnceLock<Result<ocrs::OcrEngine, String>>,
 }
 
 impl ImageHandler {
   pub fn new() -> Self {
-    let detection_model =
-      Model::load_static_slice(DETECTION_MODEL_BYTES).expect("Failed to load detection model");
-    let recognition_model =
-      Model::load_static_slice(RECOGNITION_MODEL_BYTES).expect("Failed to load recognition model");
+    Self {
+      model: OnceLock::new(),
+    }
+  }
 
-    let model = ocrs::OcrEngine::new(ocrs::OcrEngineParams {
+  fn load_ocr_engine() -> Result<ocrs::OcrEngine, String> {
+    let detection_model = Model::load_static_slice(DETECTION_MODEL_BYTES)
+      .map_err(|error| format!("Failed to load detection model: {}", error))?;
+    let recognition_model = Model::load_static_slice(RECOGNITION_MODEL_BYTES)
+      .map_err(|error| format!("Failed to load recognition model: {}", error))?;
+
+    ocrs::OcrEngine::new(ocrs::OcrEngineParams {
       detection_model: Some(detection_model),
       recognition_model: Some(recognition_model),
       ..Default::default()
     })
-    .expect("Failed to initialize OCR engine");
+    .map_err(|error| format!("Failed to initialize OCR engine: {}", error))
+  }
 
-    Self { model }
+  fn model(&self) -> Result<&ocrs::OcrEngine, String> {
+    self
+      .model
+      .get_or_init(Self::load_ocr_engine)
+      .as_ref()
+      .map_err(Clone::clone)
   }
 
   fn run_ocr_pass(&self, img: &DynamicImage) -> Result<String, String> {
+    let model = self.model()?;
     let rgb_img = img.to_rgb8();
     let (width, height) = rgb_img.dimensions();
     let image_source = ocrs::ImageSource::from_bytes(rgb_img.as_raw(), (width, height))
       .map_err(|e| format!("Failed to create image source: {}", e))?;
 
-    let ocr_input = self
-      .model
+    let ocr_input = model
       .prepare_input(image_source)
       .map_err(|e| format!("Failed to prepare OCR input: {}", e))?;
 
-    let word_rects = self
-      .model
+    let word_rects = model
       .detect_words(&ocr_input)
       .map_err(|e| format!("Failed to detect words: {}", e))?;
 
-    let line_rects = self.model.find_text_lines(&ocr_input, &word_rects);
+    let line_rects = model.find_text_lines(&ocr_input, &word_rects);
 
-    let line_texts = self
-      .model
+    let line_texts = model
       .recognize_text(&ocr_input, &line_rects)
       .map_err(|e| format!("OCR recognition failed: {}", e))?;
 
@@ -451,8 +462,18 @@ mod tests {
   use image::DynamicImage;
 
   #[test]
-  fn new_initializes_embedded_models() {
-    let _handler = ImageHandler::new();
+  fn new_defers_ocr_engine_initialization() {
+    let handler = ImageHandler::new();
+
+    assert!(handler.model.get().is_none());
+  }
+
+  #[test]
+  fn model_initializes_embedded_models_lazily() {
+    let handler = ImageHandler::new();
+
+    assert!(handler.model().is_ok());
+    assert!(handler.model.get().is_some());
   }
 
   #[test]
@@ -532,6 +553,15 @@ impl DocumentHandler for ImageHandler {
     let (width, height) = img.dimensions();
     let (location, camera_make, camera_model, datetime_original) =
       self.extract_exif_metadata(content);
+
+    if let Err(error) = self.model() {
+      return ExtractionResult {
+        content: None,
+        encoding: Some("utf-8".to_string()),
+        metadata: None,
+        error: Some(error),
+      };
+    }
 
     match self.extract_text_from_image(&img) {
       Ok(text) => {
