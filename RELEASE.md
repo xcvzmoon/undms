@@ -1,27 +1,20 @@
-# Release v1.1.2
+# Release v1.2.0
 
-This release improves OCR reliability, adds ESM package support, and expands the project documentation.
+This release fixes a native image OCR initialization failure that could abort the host process and improves runtime resilience for TypeScript consumers.
 
 ## Highlights
 
-### OCR reliability improvements
+### OCR initialization reliability
 
-- Embedded OCR models directly in the package
-- Added retry logic with preprocessing for image extraction failures
-- Improved extraction resilience for image-based inputs
+- Deferred OCR engine initialization until image extraction is actually used
+- Replaced panic-based model loading with normal extraction errors
+- Prevented Node.js and Bun processes from aborting when OCR model loading fails
 
-### ESM package support
+### Image extraction behavior
 
-- Added ESM-compatible package exports
-- Generated both CommonJS and ESM loaders during the release build
-- Preserved existing CommonJS support for `require('undms')`
-
-### Documentation updates
-
-- Added comprehensive API documentation
-- Added VitePress-based project documentation
-- Added GitHub Actions workflow for docs deployment
-- Fixed GitHub Pages base path and documentation asset rendering
+- Preserved existing OCR extraction behavior for valid image inputs
+- Continued returning structured extraction errors through the API surface
+- Kept embedded OCR models and preprocessing-based OCR retries from the previous release
 
 ## Installation
 
@@ -62,7 +55,7 @@ Pre-built binaries for:
 
 ## Changelog
 
-- Compare changes: https://github.com/xcvzmoon/undms/compare/v1.1.1...v1.1.2
+- Compare changes: https://github.com/xcvzmoon/undms/compare/v1.1.2...v1.2.0
 
 ## License
 

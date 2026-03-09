@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.1.2...v1.2.0)
+
+### 🩹 Fixes
+
+- **image:** Avoid aborting process on OCR model load failure ([bc83392](https://github.com/xcvzmoon/undms/commit/bc83392))
+
+### 🏡 Chore
+
+- Add release for v1.1.2 ([2397d7d](https://github.com/xcvzmoon/undms/commit/2397d7d))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil <mrgamilmonalbert@gmail.com>
+
 ## v1.1.2
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.1.1...v1.1.2)
