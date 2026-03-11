@@ -47,11 +47,13 @@
       "x86_64-pc-windows-msvc",
       "x86_64-apple-darwin",
       "x86_64-unknown-linux-gnu",
+      "x86_64-unknown-linux-musl",
+      "aarch64-unknown-linux-gnu",
       "aarch64-apple-darwin"
     ]
   },
   "engines": {
-    "node": ">= 12.22.0 < 13 || >= 14.17.0 < 15 || >= 15.12.0 < 16 || >= 16.0.0"
+    "node": ">=20"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -73,7 +75,8 @@
     "format:rs": "cargo fmt",
     "lint": "oxlint --type-aware",
     "prepublishOnly": "echo 'Bundled binaries already included'",
-    "test": "ava",
+    "test": "pnpm run build && ava",
+    "test:bindings": "ava",
     "preversion": "pnpm run build:cjs && pnpm run build:esm && git add .",
     "version": "napi version",
     "prepare": "husky",
