@@ -38,8 +38,7 @@
     "index.d.ts",
     "index.js",
     "index.mjs",
-    "browser.js",
-    "*.node"
+    "browser.js"
   ],
   "napi": {
     "binaryName": "undms",
@@ -59,6 +58,14 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
+  "optionalDependencies": {
+    "undms-darwin-arm64": "1.2.0",
+    "undms-darwin-x64": "1.2.0",
+    "undms-linux-arm64-gnu": "1.2.0",
+    "undms-linux-x64-gnu": "1.2.0",
+    "undms-linux-x64-musl": "1.2.0",
+    "undms-win32-x64-msvc": "1.2.0"
+  },
   "scripts": {
     "artifacts": "napi artifacts",
     "bench": "node --import @oxc-node/core/register benchmark/bench.ts",
@@ -74,7 +81,7 @@
     "format:toml": "taplo format",
     "format:rs": "cargo fmt",
     "lint": "oxlint --type-aware",
-    "prepublishOnly": "echo 'Bundled binaries already included'",
+    "prepublishOnly": "echo 'Publishing split packages via CI workflow'",
     "test": "pnpm run build && ava",
     "test:bindings": "ava",
     "preversion": "pnpm run build:cjs && pnpm run build:esm && git add .",
