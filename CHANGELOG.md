@@ -1,6 +1,25 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.2.0...v1.3.0)
+
+### 🚀 Enhancements
+
+- **ci:** Expand native target coverage and align Node support ([832514e](https://github.com/xcvzmoon/undms/commit/832514e))
+- **ci:** Expand native target coverage and add publish workflow ([e242104](https://github.com/xcvzmoon/undms/commit/e242104))
+
+### 🩹 Fixes
+
+- **ci:** Trigger publishing from chore(release) bump commits ([40e1fa5](https://github.com/xcvzmoon/undms/commit/40e1fa5))
+- **ci:** Allow docs workflow to install with split package deps ([6a1737f](https://github.com/xcvzmoon/undms/commit/6a1737f))
+- **ci:** Disable frozen lockfile for split package installs ([5779261](https://github.com/xcvzmoon/undms/commit/5779261))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil <mrgamilmonalbert@gmail.com>
+
 ## v1.2.0
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.1.2...v1.2.0)
