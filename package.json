@@ -70,6 +70,10 @@
   "scripts": {
     "artifacts": "napi artifacts",
     "bench": "node --import @oxc-node/core/register benchmark/bench.ts",
+    "bench:text": "node --import @oxc-node/core/register benchmark/bench-text.ts",
+    "bench:similarity": "node --import @oxc-node/core/register benchmark/bench-similarity.ts",
+    "bench:documents": "node --import @oxc-node/core/register benchmark/bench-documents.ts",
+    "bench:image": "node --import @oxc-node/core/register benchmark/bench-image.ts",
     "build": "pnpm run build:cjs && pnpm run build:esm",
     "build:cjs": "napi build --platform --release --js index.js",
     "build:esm": "napi build --platform --release --esm --js index.mjs",
