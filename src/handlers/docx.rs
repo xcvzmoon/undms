@@ -1,6 +1,6 @@
 use crate::core::handler::{DocumentHandler, ExtractionResult};
 use crate::models::metadata::{DocxMetadata, MetadataPayload, build_text_metadata};
-use docx_rs::{DocumentChild, DrawingData, ParagraphChild, RunChild, read_docx};
+use docx_rs::{DocumentChild, Docx, DrawingData, ParagraphChild, RunChild, read_docx};
 
 pub struct DocxHandler;
 
@@ -14,8 +14,7 @@ impl DocxHandler {
       || mime_type == "application/docx"
   }
 
-  fn extract_text(&self, content: &[u8]) -> Result<String, String> {
-    let docx = read_docx(content).map_err(|error| format!("Failed to read DOCX: {}", error))?;
+  fn extract_text(&self, docx: &Docx) -> String {
     let mut text = String::new();
 
     for child in &docx.document.children {
@@ -33,10 +32,10 @@ impl DocxHandler {
       }
     }
 
-    Ok(text.trim().to_string())
+    text.trim().to_string()
   }
 
-  fn count_paragraphs(&self, docx: &docx_rs::Docx) -> u32 {
+  fn count_paragraphs(&self, docx: &Docx) -> u32 {
     docx
       .document
       .children
@@ -45,7 +44,7 @@ impl DocxHandler {
       .count() as u32
   }
 
-  fn count_tables(&self, docx: &docx_rs::Docx) -> u32 {
+  fn count_tables(&self, docx: &Docx) -> u32 {
     docx
       .document
       .children
@@ -54,7 +53,7 @@ impl DocxHandler {
       .count() as u32
   }
 
-  fn count_images(&self, docx: &docx_rs::Docx) -> u32 {
+  fn count_images(&self, docx: &Docx) -> u32 {
     let mut count = 0u32;
 
     for child in &docx.document.children {
@@ -76,7 +75,7 @@ impl DocxHandler {
     count
   }
 
-  fn count_hyperlinks(&self, docx: &docx_rs::Docx) -> u32 {
+  fn count_hyperlinks(&self, docx: &Docx) -> u32 {
     let mut count = 0u32;
 
     for child in &docx.document.children {
@@ -92,7 +91,7 @@ impl DocxHandler {
     count
   }
 
-  fn build_metadata(&self, content: &str, docx: &docx_rs::Docx) -> Option<MetadataPayload> {
+  fn build_metadata(&self, content: &str, docx: &Docx) -> Option<MetadataPayload> {
     let text_metadata = build_text_metadata(content);
 
     let docx_metadata = DocxMetadata {
@@ -120,23 +119,14 @@ impl DocumentHandler for DocxHandler {
   fn extract(&self, content: &[u8]) -> ExtractionResult {
     match read_docx(content) {
       Ok(docx) => {
-        let text_result = self.extract_text(content);
-        match text_result {
-          Ok(text) => {
-            let metadata = self.build_metadata(&text, &docx);
-            ExtractionResult {
-              content: Some(text),
-              encoding: Some("utf-8".to_string()),
-              metadata,
-              error: None,
-            }
-          }
-          Err(error) => ExtractionResult {
-            content: None,
-            encoding: Some("utf-8".to_string()),
-            metadata: None,
-            error: Some(error),
-          },
+        let text = self.extract_text(&docx);
+        let metadata = self.build_metadata(&text, &docx);
+
+        ExtractionResult {
+          content: Some(text),
+          encoding: Some("utf-8".to_string()),
+          metadata,
+          error: None,
         }
       }
       Err(error) => ExtractionResult {
@@ -152,18 +142,25 @@ impl DocumentHandler for DocxHandler {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use std::fs;
+  use docx_rs::{Paragraph, Run};
+  use std::io::Cursor;
+
+  fn create_test_docx() -> Vec<u8> {
+    let mut bytes = Vec::new();
+    Docx::new()
+      .add_paragraph(Paragraph::new().add_run(Run::new().add_text("Test content")))
+      .build()
+      .pack(Cursor::new(&mut bytes))
+      .expect("Failed to create test DOCX");
+    bytes
+  }
 
   #[test]
   fn test_docx_handler_parses_generated_docx() {
-    let docx_bytes = fs::read("/tmp/test.docx").expect("Failed to read test.docx");
+    let docx_bytes = create_test_docx();
 
     let handler = DocxHandler::new();
     let result = handler.extract(&docx_bytes);
-
-    println!("Content: {:?}", result.content);
-    println!("Error: {:?}", result.error);
-    println!("Metadata: {:?}", result.metadata);
 
     assert!(result.content.is_some(), "Should have content");
     assert!(
