@@ -1,6 +1,49 @@
 # Changelog
 
 
+## v1.4.0
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.2.0...v1.4.0)
+
+### 🚀 Enhancements
+
+- **ci:** Expand native target coverage and align Node support ([832514e](https://github.com/xcvzmoon/undms/commit/832514e))
+- **ci:** Expand native target coverage and add publish workflow ([e242104](https://github.com/xcvzmoon/undms/commit/e242104))
+
+### 🔥 Performance
+
+- **core:** Remove DashMap aggregation and precompute similarity reference metadata ([d680904](https://github.com/xcvzmoon/undms/commit/d680904))
+- **similarity:** Reduce ngram normalization allocations and fix Unicode length handling ([2f82d4d](https://github.com/xcvzmoon/undms/commit/2f82d4d))
+- **metadata:** Compute text metadata in a single pass and clone image metadata structs ([4080668](https://github.com/xcvzmoon/undms/commit/4080668))
+- **text:** Add UTF-8 fast path before charset detection ([79690ec](https://github.com/xcvzmoon/undms/commit/79690ec))
+- **pdf:** Reuse parsed document for text and metadata extraction ([1a6227c](https://github.com/xcvzmoon/undms/commit/1a6227c))
+- **xlsx:** Build row text directly without temporary join allocations ([2b91e11](https://github.com/xcvzmoon/undms/commit/2b91e11))
+- **image:** Make OCR variants lazy, add early exit, and preserve metadata on OCR failure ([8001fcc](https://github.com/xcvzmoon/undms/commit/8001fcc))
+
+### 🩹 Fixes
+
+- **ci:** Trigger publishing from chore(release) bump commits ([40e1fa5](https://github.com/xcvzmoon/undms/commit/40e1fa5))
+- **ci:** Allow docs workflow to install with split package deps ([6a1737f](https://github.com/xcvzmoon/undms/commit/6a1737f))
+- **ci:** Disable frozen lockfile for split package installs ([5779261](https://github.com/xcvzmoon/undms/commit/5779261))
+- Remove double DOCX parse ([9394f79](https://github.com/xcvzmoon/undms/commit/9394f79))
+- Use character counts for levenshtein/hybrid normalization ([d1fe4d1](https://github.com/xcvzmoon/undms/commit/d1fe4d1))
+
+### 🏡 Chore
+
+- **release:** Bump 1.3.0 ([980e78f](https://github.com/xcvzmoon/undms/commit/980e78f))
+- **release:** Bump 1.3.0 ([0ad6091](https://github.com/xcvzmoon/undms/commit/0ad6091))
+- **bench:** Replace monolithic benchmark entrypoint with split benchmark guidance ([e770f14](https://github.com/xcvzmoon/undms/commit/e770f14))
+- **bench:** Add shared benchmark helpers and fixture builders ([46e15ea](https://github.com/xcvzmoon/undms/commit/46e15ea))
+- **bench:** Add focused text extraction benchmark ([9debaa7](https://github.com/xcvzmoon/undms/commit/9debaa7))
+- **bench:** Add focused similarity benchmark ([df78315](https://github.com/xcvzmoon/undms/commit/df78315))
+- **bench:** Add focused image extraction benchmark ([3f6fc72](https://github.com/xcvzmoon/undms/commit/3f6fc72))
+- **bench:** Add focused document extraction benchmarks ([3982e61](https://github.com/xcvzmoon/undms/commit/3982e61))
+- **scripts:** Add split benchmark commands for targeted perf runs ([0bcb2c5](https://github.com/xcvzmoon/undms/commit/0bcb2c5))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil <mrgamilmonalbert@gmail.com>
+
 ## v1.3.0
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.2.0...v1.3.0)

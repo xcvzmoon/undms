@@ -1,6 +1,6 @@
 {
   "name": "undms",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Text and Metadata Extraction Library for Document Files with Text Similarity Comparison",
   "main": "index.js",
   "types": "index.d.ts",
@@ -60,12 +60,12 @@
     "access": "public"
   },
   "optionalDependencies": {
-    "@xcvzmoon/undms-darwin-arm64": "1.3.0",
-    "@xcvzmoon/undms-darwin-x64": "1.3.0",
-    "@xcvzmoon/undms-linux-arm64-gnu": "1.3.0",
-    "@xcvzmoon/undms-linux-x64-gnu": "1.3.0",
-    "@xcvzmoon/undms-linux-x64-musl": "1.3.0",
-    "@xcvzmoon/undms-win32-x64-msvc": "1.3.0"
+    "@xcvzmoon/undms-darwin-arm64": "1.4.0",
+    "@xcvzmoon/undms-darwin-x64": "1.4.0",
+    "@xcvzmoon/undms-linux-arm64-gnu": "1.4.0",
+    "@xcvzmoon/undms-linux-x64-gnu": "1.4.0",
+    "@xcvzmoon/undms-linux-x64-musl": "1.4.0",
+    "@xcvzmoon/undms-win32-x64-msvc": "1.4.0"
   },
   "scripts": {
     "artifacts": "napi artifacts",
