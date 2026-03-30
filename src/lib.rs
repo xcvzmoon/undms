@@ -4,7 +4,6 @@ mod models;
 
 use core::handler::{DocumentHandler, ExtractionResult};
 use core::similarity::{SimilarityMethod, similarity};
-use dashmap::DashMap;
 use handlers::docx::DocxHandler;
 use handlers::image::ImageHandler;
 use handlers::pdf::PdfHandler;
@@ -25,6 +24,7 @@ use std::time::Instant;
 type HandlerRegistry = Arc<Vec<Arc<dyn DocumentHandler>>>;
 
 static HANDLER_REGISTRY: OnceLock<HandlerRegistry> = OnceLock::new();
+static LOG_ERRORS: OnceLock<bool> = OnceLock::new();
 
 struct ProcessedDocument {
   content: String,
@@ -58,6 +58,14 @@ fn find_handler<'a>(
     .find(|handler| handler.is_supported(mime_type))
 }
 
+fn should_log_errors() -> bool {
+  *LOG_ERRORS.get_or_init(|| {
+    std::env::var("UNDMS_LOG_ERRORS")
+      .map(|value| matches!(value.as_str(), "1" | "true" | "TRUE" | "yes" | "YES"))
+      .unwrap_or(false)
+  })
+}
+
 fn extract_document_content(
   document: &Document,
   handler: Option<&Arc<dyn DocumentHandler>>,
@@ -76,8 +84,10 @@ fn extract_document_content(
   };
   let elapsed_ms = start.elapsed().as_secs_f64() * 1000.0;
 
-  if let Some(error) = extraction_result.error.as_ref() {
-    eprintln!("Error extracting {}: {}", document.name, error);
+  if should_log_errors() {
+    if let Some(error) = extraction_result.error.as_ref() {
+      eprintln!("Error extracting {}: {}", document.name, error);
+    }
   }
 
   ProcessedDocument {
@@ -137,36 +147,33 @@ fn group_by_mime_type(documents: &[Document]) -> HashMap<String, Vec<&Document>>
 #[napi]
 pub fn extract(documents: Vec<Document>) -> Vec<GroupedDocuments> {
   let handlers = create_handler_registry();
-  let grouped: DashMap<String, Vec<DocumentMetadata>> = DashMap::new();
   let by_type = group_by_mime_type(&documents);
 
-  by_type.par_iter().for_each(|(mime_type, docs)| {
-    let handler = find_handler(mime_type, &handlers);
-    let metadata_list: Vec<DocumentMetadata> = docs
-      .iter()
-      .map(|document| {
-        let extracted = extract_document_content(document, handler);
+  by_type
+    .into_par_iter()
+    .map(|(mime_type, docs)| {
+      let handler = find_handler(&mime_type, &handlers);
+      let documents = docs
+        .into_iter()
+        .map(|document| {
+          let extracted = extract_document_content(document, handler);
 
-        DocumentMetadata {
-          name: document.name.clone(),
-          size: extracted.size,
-          processing_time: extracted.processing_time,
-          content: extracted.content,
-          encoding: extracted.encoding,
-          metadata: extracted.metadata,
-          error: extracted.error,
-        }
-      })
-      .collect();
+          DocumentMetadata {
+            name: document.name.clone(),
+            size: extracted.size,
+            processing_time: extracted.processing_time,
+            content: extracted.content,
+            encoding: extracted.encoding,
+            metadata: extracted.metadata,
+            error: extracted.error,
+          }
+        })
+        .collect();
 
-    grouped.insert(mime_type.clone(), metadata_list);
-  });
-
-  grouped
-    .into_iter()
-    .map(|(mime_type, documents)| GroupedDocuments {
-      mime_type,
-      documents,
+      GroupedDocuments {
+        mime_type,
+        documents,
+      }
     })
     .collect()
 }
@@ -210,45 +217,47 @@ pub fn compute_document_similarity(
   let threshold = similarity_threshold.unwrap_or(30.0);
   let method = parse_similarity_method(similarity_method.as_deref());
   let handlers = create_handler_registry();
-  let grouped: DashMap<String, Vec<DocumentMetadataWithSimilarity>> = DashMap::new();
   let by_type = group_by_mime_type(&documents);
+  let reference_metadata: Vec<Option<TextMetadata>> = reference_texts
+    .iter()
+    .map(|reference_text| build_text_metadata(reference_text))
+    .collect();
 
-  by_type.par_iter().for_each(|(mime_type, docs)| {
-    let handler = find_handler(mime_type, &handlers);
-    let metadata_list: Vec<DocumentMetadataWithSimilarity> = docs
-      .iter()
-      .map(|document| {
-        let extracted = extract_document_content(document, handler);
-        let similarity_matches = compute_similarity_matches(
-          &extracted.content,
-          &extracted.metadata,
-          &extracted.error,
-          &reference_texts,
-          method,
-          threshold,
-        );
+  by_type
+    .into_par_iter()
+    .map(|(mime_type, docs)| {
+      let handler = find_handler(&mime_type, &handlers);
+      let documents = docs
+        .into_iter()
+        .map(|document| {
+          let extracted = extract_document_content(document, handler);
+          let similarity_matches = compute_similarity_matches(
+            &extracted.content,
+            &extracted.metadata,
+            &extracted.error,
+            &reference_texts,
+            &reference_metadata,
+            method,
+            threshold,
+          );
 
-        DocumentMetadataWithSimilarity {
-          name: document.name.clone(),
-          size: extracted.size,
-          processing_time: extracted.processing_time,
-          encoding: extracted.encoding,
-          content: extracted.content,
-          metadata: extracted.metadata,
-          error: extracted.error,
-          similarity_matches,
-        }
-      })
-      .collect();
+          DocumentMetadataWithSimilarity {
+            name: document.name.clone(),
+            size: extracted.size,
+            processing_time: extracted.processing_time,
+            encoding: extracted.encoding,
+            content: extracted.content,
+            metadata: extracted.metadata,
+            error: extracted.error,
+            similarity_matches,
+          }
+        })
+        .collect();
 
-    grouped.insert(mime_type.clone(), metadata_list);
-  });
-
-  grouped
-    .into_iter()
-    .map(|(mime_type, documents)| GroupedDocumentsWithSimilarity {
-      mime_type,
-      documents,
+      GroupedDocumentsWithSimilarity {
+        mime_type,
+        documents,
+      }
     })
     .collect()
 }
@@ -268,6 +277,7 @@ fn compute_similarity_matches(
   metadata: &Option<MetadataPayload>,
   extraction_error: &Option<String>,
   reference_texts: &[String],
+  reference_metadata: &[Option<TextMetadata>],
   method: SimilarityMethod,
   threshold: f64,
 ) -> Vec<SimilarityMatch> {
@@ -282,11 +292,10 @@ fn compute_similarity_matches(
     .enumerate()
     .filter_map(|(index, reference_text)| {
       let content_similarity = similarity(content, reference_text, method);
-      let reference_metadata = build_text_metadata(reference_text);
       let combined_similarity = combine_similarity(
         content_similarity,
         source_text_metadata,
-        reference_metadata.as_ref(),
+        reference_metadata.get(index).and_then(Option::as_ref),
       );
 
       if combined_similarity >= threshold {
@@ -380,11 +389,17 @@ pub fn compute_text_similarity(
     image: None,
   });
 
+  let reference_metadata: Vec<Option<TextMetadata>> = reference_texts
+    .iter()
+    .map(|reference_text| build_text_metadata(reference_text))
+    .collect();
+
   compute_similarity_matches(
     &source_text,
     &source_metadata,
     &None,
     &reference_texts,
+    &reference_metadata,
     method,
     threshold,
   )
@@ -436,11 +451,16 @@ mod tests {
   #[test]
   fn compute_similarity_matches_returns_empty_on_extraction_error() {
     let reference_texts = vec!["alpha beta".to_string()];
+    let reference_metadata = reference_texts
+      .iter()
+      .map(|reference_text| build_text_metadata(reference_text))
+      .collect::<Vec<_>>();
     let matches = compute_similarity_matches(
       "alpha beta",
       &None,
       &Some("forced extraction failure".to_string()),
       &reference_texts,
+      &reference_metadata,
       SimilarityMethod::Hybrid,
       0.0,
     );
