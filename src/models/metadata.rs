@@ -47,14 +47,14 @@ pub struct PdfPageSize {
 }
 
 #[napi(object)]
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct ImageLocation {
   pub latitude: Option<f64>,
   pub longitude: Option<f64>,
 }
 
 #[napi(object)]
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct ImageMetadata {
   pub width: u32,
   pub height: u32,
@@ -80,13 +80,35 @@ pub fn build_text_metadata(content: &str) -> Option<TextMetadata> {
     return None;
   }
 
+  let mut line_count = 1u32;
+  let mut word_count = 0u32;
+  let mut character_count = 0u32;
+  let mut non_whitespace_character_count = 0u32;
+  let mut in_word = false;
+
+  for character in content.chars() {
+    character_count += 1;
+
+    if character == '\n' {
+      line_count += 1;
+    }
+
+    if character.is_whitespace() {
+      in_word = false;
+      continue;
+    }
+
+    non_whitespace_character_count += 1;
+    if !in_word {
+      word_count += 1;
+      in_word = true;
+    }
+  }
+
   Some(TextMetadata {
-    line_count: content.lines().count() as u32,
-    word_count: content.split_whitespace().count() as u32,
-    character_count: content.chars().count() as u32,
-    non_whitespace_character_count: content
-      .chars()
-      .filter(|character| !character.is_whitespace())
-      .count() as u32,
+    line_count,
+    word_count,
+    character_count,
+    non_whitespace_character_count,
   })
 }
