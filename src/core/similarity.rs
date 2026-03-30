@@ -61,7 +61,7 @@ fn char_ngrams(text: &str, n: usize) -> HashSet<String> {
 }
 
 pub fn levenshtein(source: &str, target: &str, max_distance: Option<usize>) -> f64 {
-  let max_length = source.len().max(target.len());
+  let max_length = source.chars().count().max(target.chars().count());
   if max_length == 0 {
     return 100.0;
   }
@@ -142,8 +142,11 @@ pub fn hybrid(source: &str, target: &str) -> f64 {
     return jaccard_score;
   }
 
-  if source.len() < 1000 && target.len() < 1000 {
-    let max_length = source.len().max(target.len());
+  let source_char_count = source.chars().count();
+  let target_char_count = target.chars().count();
+
+  if source_char_count < 1000 && target_char_count < 1000 {
+    let max_length = source_char_count.max(target_char_count);
     let max_allowed_distance = (max_length as f64 * 0.8) as usize;
     let distance = bounded_levenshtein(source, target, Some(max_allowed_distance));
 
@@ -163,5 +166,17 @@ pub fn similarity(source: &str, target: &str, method: SimilarityMethod) -> f64 {
     SimilarityMethod::Ngram => ngram(source, target, 3),
     SimilarityMethod::Levenshtein => levenshtein(source, target, None),
     SimilarityMethod::Hybrid => hybrid(source, target),
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+
+  #[test]
+  fn levenshtein_uses_character_count_for_unicode_strings() {
+    let score = levenshtein("é", "e", None);
+
+    assert_eq!(score, 0.0);
   }
 }
