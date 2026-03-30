@@ -42,22 +42,41 @@ pub fn ngram(source: &str, target: &str, n: usize) -> f64 {
 }
 
 fn char_ngrams(text: &str, n: usize) -> HashSet<String> {
-  let cleaned = text
-    .to_lowercase()
-    .split_whitespace()
-    .collect::<Vec<_>>()
-    .join(" ");
+  let cleaned = normalize_similarity_text(text);
+  let chars: Vec<char> = cleaned.chars().collect();
 
-  if cleaned.len() < n {
+  if chars.len() < n {
     return HashSet::new();
   }
 
-  cleaned
-    .chars()
-    .collect::<Vec<_>>()
+  chars
     .windows(n)
     .map(|window| window.iter().collect::<String>())
     .collect()
+}
+
+fn normalize_similarity_text(text: &str) -> String {
+  let mut normalized = String::with_capacity(text.len());
+  let mut previous_was_whitespace = false;
+
+  for character in text.chars().flat_map(char::to_lowercase) {
+    if character.is_whitespace() {
+      if !normalized.is_empty() && !previous_was_whitespace {
+        normalized.push(' ');
+        previous_was_whitespace = true;
+      }
+      continue;
+    }
+
+    normalized.push(character);
+    previous_was_whitespace = false;
+  }
+
+  if normalized.ends_with(' ') {
+    normalized.pop();
+  }
+
+  normalized
 }
 
 pub fn levenshtein(source: &str, target: &str, max_distance: Option<usize>) -> f64 {
@@ -178,5 +197,13 @@ mod tests {
     let score = levenshtein("é", "e", None);
 
     assert_eq!(score, 0.0);
+  }
+
+  #[test]
+  fn normalize_similarity_text_collapses_whitespace_once() {
+    assert_eq!(
+      normalize_similarity_text("  Alpha\n\tBeta   Gamma  "),
+      "alpha beta gamma"
+    );
   }
 }
