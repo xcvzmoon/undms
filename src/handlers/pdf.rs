@@ -24,14 +24,15 @@ impl PdfHandler {
       }
     }
 
-    let cleaned = text
-      .lines()
-      .map(|line| line.trim())
-      .filter(|line| !line.is_empty())
-      .collect::<Vec<_>>()
-      .join("\n");
+    let mut cleaned = String::new();
+    for line in text.lines().map(str::trim).filter(|line| !line.is_empty()) {
+      if !cleaned.is_empty() {
+        cleaned.push('\n');
+      }
+      cleaned.push_str(line);
+    }
 
-    let mut pdf_metadata = self.extract_pdf_metadata(content);
+    let mut pdf_metadata = self.extract_pdf_metadata(&document, page_count);
 
     if pdf_metadata.page_count == 0 {
       pdf_metadata.page_count = page_count;
@@ -40,33 +41,29 @@ impl PdfHandler {
     Ok((cleaned, pdf_metadata))
   }
 
-  fn extract_pdf_metadata(&self, content: &[u8]) -> PdfMetadata {
+  fn extract_pdf_metadata(&self, document: &Document, page_count: u32) -> PdfMetadata {
     let mut title = None;
     let mut author = None;
     let mut subject = None;
     let mut producer = None;
     let mut page_size = None;
-    let mut page_count = 0u32;
 
-    if let Ok(document) = Document::load_mem(content) {
-      let pages = document.get_pages();
-      page_count = pages.len() as u32;
+    let pages = document.get_pages();
 
-      if let Some((_, first_page_id)) = pages.iter().next() {
-        if let Ok(Object::Dictionary(page_dict)) = document.get_object(*first_page_id) {
-          if let Some(size) = Self::extract_page_size(&document, page_dict) {
-            page_size = Some(size);
-          }
+    if let Some((_, first_page_id)) = pages.iter().next() {
+      if let Ok(Object::Dictionary(page_dict)) = document.get_object(*first_page_id) {
+        if let Some(size) = Self::extract_page_size(document, page_dict) {
+          page_size = Some(size);
         }
       }
+    }
 
-      if let Ok(Object::Reference(info_ref)) = document.trailer.get(b"Info") {
-        if let Ok(Object::Dictionary(info_dict)) = document.get_object(*info_ref) {
-          title = Self::extract_info_string(&info_dict, b"Title");
-          author = Self::extract_info_string(&info_dict, b"Author");
-          subject = Self::extract_info_string(&info_dict, b"Subject");
-          producer = Self::extract_info_string(&info_dict, b"Producer");
-        }
+    if let Ok(Object::Reference(info_ref)) = document.trailer.get(b"Info") {
+      if let Ok(Object::Dictionary(info_dict)) = document.get_object(*info_ref) {
+        title = Self::extract_info_string(&info_dict, b"Title");
+        author = Self::extract_info_string(&info_dict, b"Author");
+        subject = Self::extract_info_string(&info_dict, b"Subject");
+        producer = Self::extract_info_string(&info_dict, b"Producer");
       }
     }
 
