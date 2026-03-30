@@ -9,6 +9,7 @@ const DETECTION_MODEL_BYTES: &[u8] = include_bytes!("../../text-detection-model.
 const RECOGNITION_MODEL_BYTES: &[u8] = include_bytes!("../../text-recognition-model.rten");
 const MIN_OCR_LONGEST_EDGE: u32 = 1600;
 const OCR_CONTRAST_BOOST: f32 = 35.0;
+const OCR_EARLY_EXIT_SCORE: usize = 256;
 
 pub struct ImageHandler {
   model: OnceLock<Result<ocrs::OcrEngine, String>>,
@@ -83,16 +84,38 @@ impl ImageHandler {
     let mut best_score = 0;
     let mut last_error = None;
 
-    for candidate in Self::ocr_variants(img) {
-      match self.run_ocr_pass(&candidate) {
-        Ok(text) => {
-          let score = Self::ocr_text_score(&text);
-          if score > best_score || (score == best_score && text.len() > best_text.len()) {
-            best_score = score;
-            best_text = text;
-          }
-        }
-        Err(error) => last_error = Some(error),
+    if self.try_ocr_candidate(img, &mut best_text, &mut best_score, &mut last_error)? {
+      return Ok(best_text);
+    }
+
+    let grayscale = img.grayscale();
+    if self.try_ocr_candidate(&grayscale, &mut best_text, &mut best_score, &mut last_error)? {
+      return Ok(best_text);
+    }
+
+    let contrasted = grayscale.adjust_contrast(OCR_CONTRAST_BOOST);
+    if self.try_ocr_candidate(
+      &contrasted,
+      &mut best_text,
+      &mut best_score,
+      &mut last_error,
+    )? {
+      return Ok(best_text);
+    }
+
+    if let Some(upscaled) = Self::upscale_for_ocr(img) {
+      if self.try_ocr_candidate(&upscaled, &mut best_text, &mut best_score, &mut last_error)? {
+        return Ok(best_text);
+      }
+
+      let upscaled_contrasted = upscaled.grayscale().adjust_contrast(OCR_CONTRAST_BOOST);
+      if self.try_ocr_candidate(
+        &upscaled_contrasted,
+        &mut best_text,
+        &mut best_score,
+        &mut last_error,
+      )? {
+        return Ok(best_text);
       }
     }
 
@@ -178,19 +201,28 @@ impl ImageHandler {
     }
   }
 
-  fn ocr_variants(img: &DynamicImage) -> Vec<DynamicImage> {
-    let mut variants = vec![img.clone()];
+  fn try_ocr_candidate(
+    &self,
+    candidate: &DynamicImage,
+    best_text: &mut String,
+    best_score: &mut usize,
+    last_error: &mut Option<String>,
+  ) -> Result<bool, String> {
+    match self.run_ocr_pass(candidate) {
+      Ok(text) => {
+        let score = Self::ocr_text_score(&text);
+        if score > *best_score || (score == *best_score && text.len() > best_text.len()) {
+          *best_score = score;
+          *best_text = text;
+        }
 
-    let grayscale = img.grayscale();
-    variants.push(grayscale.clone());
-    variants.push(grayscale.adjust_contrast(OCR_CONTRAST_BOOST));
-
-    if let Some(upscaled) = Self::upscale_for_ocr(img) {
-      variants.push(upscaled.clone());
-      variants.push(upscaled.grayscale().adjust_contrast(OCR_CONTRAST_BOOST));
+        Ok(*best_score >= OCR_EARLY_EXIT_SCORE)
+      }
+      Err(error) => {
+        *last_error = Some(error);
+        Ok(false)
+      }
     }
-
-    variants
   }
 
   fn upscale_for_ocr(img: &DynamicImage) -> Option<DynamicImage> {
@@ -458,7 +490,7 @@ impl ImageHandler {
 
 #[cfg(test)]
 mod tests {
-  use super::ImageHandler;
+  use super::{ImageHandler, OCR_EARLY_EXIT_SCORE};
   use image::DynamicImage;
 
   #[test]
@@ -477,15 +509,8 @@ mod tests {
   }
 
   #[test]
-  fn ocr_variants_include_upscaled_preprocessed_images_for_small_inputs() {
-    let img = DynamicImage::new_rgb8(320, 240);
-    let variants = ImageHandler::ocr_variants(&img);
-
-    assert_eq!(variants.len(), 5);
-    assert!(
-      variants.iter().any(|variant| variant.width() > img.width()),
-      "expected at least one upscaled OCR variant"
-    );
+  fn ocr_text_score_uses_expected_early_exit_threshold() {
+    assert!(ImageHandler::ocr_text_score("word ".repeat(16).trim()) >= OCR_EARLY_EXIT_SCORE);
   }
 
   #[test]
@@ -554,11 +579,22 @@ impl DocumentHandler for ImageHandler {
     let (location, camera_make, camera_model, datetime_original) =
       self.extract_exif_metadata(content);
 
+    let empty_metadata = self.build_metadata(
+      "",
+      width,
+      height,
+      format.clone(),
+      location.clone(),
+      camera_make.clone(),
+      camera_model.clone(),
+      datetime_original.clone(),
+    );
+
     if let Err(error) = self.model() {
       return ExtractionResult {
-        content: None,
+        content: Some(String::new()),
         encoding: Some("utf-8".to_string()),
-        metadata: None,
+        metadata: Some(empty_metadata),
         error: Some(error),
       };
     }
@@ -583,9 +619,9 @@ impl DocumentHandler for ImageHandler {
         }
       }
       Err(error) => ExtractionResult {
-        content: None,
+        content: Some(String::new()),
         encoding: Some("utf-8".to_string()),
-        metadata: None,
+        metadata: Some(empty_metadata),
         error: Some(error),
       },
     }
