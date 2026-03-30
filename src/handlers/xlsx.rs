@@ -36,10 +36,15 @@ impl XlsxHandler {
         for row in range.rows() {
           let mut row_has_value = false;
           let mut row_column_count = 0u32;
-          let mut row_text: Vec<String> = Vec::new();
+          let mut first_cell = true;
 
           for cell in row.iter() {
             if cell.is_empty() {
+              continue;
+            }
+
+            let value = cell.to_string();
+            if value.is_empty() {
               continue;
             }
 
@@ -47,23 +52,20 @@ impl XlsxHandler {
             row_column_count += 1;
             cell_count += 1;
 
-            let value = cell.to_string();
-            if !value.is_empty() {
-              row_text.push(value);
+            if !first_cell {
+              text.push('\t');
             }
+            text.push_str(&value);
+            first_cell = false;
           }
 
           if row_has_value {
             row_count += 1;
+            text.push('\n');
           }
 
           if row_column_count > column_count {
             column_count = row_column_count;
-          }
-
-          if !row_text.is_empty() {
-            text.push_str(&row_text.join("\t"));
-            text.push('\n');
           }
         }
       }
