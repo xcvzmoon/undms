@@ -18,6 +18,12 @@ impl TextHandler {
     encoding.name().to_string()
   }
 
+  fn decode_utf8_fast_path(&self, content: &[u8]) -> Option<String> {
+    std::str::from_utf8(content)
+      .ok()
+      .map(|text| text.to_owned())
+  }
+
   fn validate_mime_type(&self, mime_type: &str) -> bool {
     mime_type.starts_with("text/")
       || matches!(
@@ -63,6 +69,16 @@ impl DocumentHandler for TextHandler {
   }
 
   fn extract(&self, content: &[u8]) -> ExtractionResult {
+    if let Some(text) = self.decode_utf8_fast_path(content) {
+      let metadata = self.build_text_metadata(&text);
+      return ExtractionResult {
+        content: Some(text),
+        encoding: Some("utf-8".to_string()),
+        metadata,
+        error: None,
+      };
+    }
+
     let encoding = self.detect_encoding(content);
     let text = self.decode_text(&encoding, content);
     let normalized_encoding = encoding.to_ascii_lowercase();
