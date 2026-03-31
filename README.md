@@ -2,8 +2,10 @@
 
 ![undms](./undms.png)
 
-[![npm version](https://img.shields.io/npm/v/undms.svg)](https://www.npmjs.com/package/undms)
-![https://github.com/xcvzmoon/undms/actions](https://github.com/xcvzmoon/undms/workflows/ci/badge.svg)
+[![CI](https://img.shields.io/github/actions/workflow/status/xcvzmoon/undms/CI.yaml?branch=main&color=black)](https://github.com/xcvzmoon/undms/actions/workflows/CI.yaml)
+[![license](https://img.shields.io/github/license/xcvzmoon/undms?color=black)](https://github.com/xcvzmoon/undms/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/undms?color=black)](https://www.npmjs.com/package/undms)
+[![npm downloads](https://img.shields.io/npm/dm/undms?color=black)](https://www.npmjs.com/package/undms)
 
 High-performance document text and metadata extraction library with similarity comparison, built with napi-rs for Node.js and Bun.
 
