@@ -84,12 +84,12 @@ function requireNative() {
         const binding = require('@xcvzmoon/undms-android-arm64');
         const bindingPackageVersion = require('@xcvzmoon/undms-android-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -107,12 +107,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/undms-android-arm-eabi/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -138,12 +138,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-win32-x64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -161,12 +161,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-win32-x64-msvc/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -185,12 +185,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/undms-win32-ia32-msvc/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -208,12 +208,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/undms-win32-arm64-msvc/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -234,12 +234,12 @@ function requireNative() {
       const bindingPackageVersion =
         require('@xcvzmoon/undms-darwin-universal/package.json').version;
       if (
-        bindingPackageVersion !== '1.4.0' &&
+        bindingPackageVersion !== '1.5.0' &&
         process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
         process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
       ) {
         throw new Error(
-          `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+          `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
         );
       }
       return binding;
@@ -256,12 +256,12 @@ function requireNative() {
         const binding = require('@xcvzmoon/undms-darwin-x64');
         const bindingPackageVersion = require('@xcvzmoon/undms-darwin-x64/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -278,12 +278,12 @@ function requireNative() {
         const binding = require('@xcvzmoon/undms-darwin-arm64');
         const bindingPackageVersion = require('@xcvzmoon/undms-darwin-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -304,12 +304,12 @@ function requireNative() {
         const binding = require('@xcvzmoon/undms-freebsd-x64');
         const bindingPackageVersion = require('@xcvzmoon/undms-freebsd-x64/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -326,12 +326,12 @@ function requireNative() {
         const binding = require('@xcvzmoon/undms-freebsd-arm64');
         const bindingPackageVersion = require('@xcvzmoon/undms-freebsd-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -354,12 +354,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-linux-x64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -377,12 +377,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-linux-x64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -402,12 +402,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-linux-arm64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -425,12 +425,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-linux-arm64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -450,12 +450,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-linux-arm-musleabihf/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -473,12 +473,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-linux-arm-gnueabihf/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -498,12 +498,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-linux-loong64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -521,12 +521,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-linux-loong64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -546,12 +546,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-linux-riscv64-musl/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -569,12 +569,12 @@ function requireNative() {
           const bindingPackageVersion =
             require('@xcvzmoon/undms-linux-riscv64-gnu/package.json').version;
           if (
-            bindingPackageVersion !== '1.4.0' &&
+            bindingPackageVersion !== '1.5.0' &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
             process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
           ) {
             throw new Error(
-              `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+              `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
             );
           }
           return binding;
@@ -593,12 +593,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/undms-linux-ppc64-gnu/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -616,12 +616,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/undms-linux-s390x-gnu/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -643,12 +643,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/undms-openharmony-arm64/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -666,12 +666,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/undms-openharmony-x64/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;
@@ -689,12 +689,12 @@ function requireNative() {
         const bindingPackageVersion =
           require('@xcvzmoon/undms-openharmony-arm/package.json').version;
         if (
-          bindingPackageVersion !== '1.4.0' &&
+          bindingPackageVersion !== '1.5.0' &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK &&
           process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0'
         ) {
           throw new Error(
-            `Native binding package version mismatch, expected 1.4.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
+            `Native binding package version mismatch, expected 1.5.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`,
           );
         }
         return binding;

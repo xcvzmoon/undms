@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.5.0
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.4.0...v1.5.0)
+
+### 🚀 Enhancements
+
+- Support pptx ([666ec65](https://github.com/xcvzmoon/undms/commit/666ec65))
+
+### 🏡 Chore
+
+- **readme:** Update badges ([86bad83](https://github.com/xcvzmoon/undms/commit/86bad83))
+- **readme:** Update icon style ([8af576e](https://github.com/xcvzmoon/undms/commit/8af576e))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil ([@xcvzmoon](https://github.com/xcvzmoon))
+
 ## v1.4.0
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.2.0...v1.4.0)
