@@ -24,7 +24,7 @@ const features = [
   {
     icon: '📄',
     title: 'Multi-Format Support',
-    details: 'Extract text from PDF, DOCX, XLSX, images, and plain text files with a unified API',
+    details: 'Extract text from PDF, DOCX, XLSX, PPTX, images, and plain text files with a unified API',
   },
   {
     icon: '🔍',

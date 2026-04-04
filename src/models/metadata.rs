@@ -30,6 +30,15 @@ pub struct XlsxMetadata {
 
 #[napi(object)]
 #[derive(Debug)]
+pub struct PptxMetadata {
+  pub title: Option<String>,
+  pub author: Option<String>,
+  pub subject: Option<String>,
+  pub slide_count: u32,
+}
+
+#[napi(object)]
+#[derive(Debug)]
 pub struct PdfMetadata {
   pub title: Option<String>,
   pub author: Option<String>,
@@ -71,6 +80,7 @@ pub struct MetadataPayload {
   pub text: Option<TextMetadata>,
   pub docx: Option<DocxMetadata>,
   pub xlsx: Option<XlsxMetadata>,
+  pub pptx: Option<PptxMetadata>,
   pub pdf: Option<PdfMetadata>,
   pub image: Option<ImageMetadata>,
 }

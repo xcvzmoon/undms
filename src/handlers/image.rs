@@ -188,6 +188,7 @@ impl ImageHandler {
       text: text_metadata,
       docx: None,
       xlsx: None,
+      pptx: None,
       pdf: None,
       image: Some(ImageMetadata {
         width,

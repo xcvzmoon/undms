@@ -54,6 +54,7 @@ impl TextHandler {
       text: Some(text),
       docx: None,
       xlsx: None,
+      pptx: None,
       pdf: None,
       image: None,
     })

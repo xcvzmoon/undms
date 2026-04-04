@@ -7,6 +7,7 @@ use core::similarity::{SimilarityMethod, similarity};
 use handlers::docx::DocxHandler;
 use handlers::image::ImageHandler;
 use handlers::pdf::PdfHandler;
+use handlers::pptx::PptxHandler;
 use handlers::text::TextHandler;
 use handlers::xlsx::XlsxHandler;
 use models::document::{Document, DocumentMetadata, GroupedDocuments};
@@ -42,6 +43,7 @@ fn create_handler_registry() -> HandlerRegistry {
         Arc::new(TextHandler::new()),
         Arc::new(DocxHandler::new()),
         Arc::new(XlsxHandler::new()),
+        Arc::new(PptxHandler::new()),
         Arc::new(PdfHandler::new()),
         Arc::new(ImageHandler::new()),
       ])
@@ -385,6 +387,7 @@ pub fn compute_text_similarity(
     text: Some(text),
     docx: None,
     xlsx: None,
+    pptx: None,
     pdf: None,
     image: None,
   });

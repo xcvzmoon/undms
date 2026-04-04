@@ -105,6 +105,7 @@ impl DocxHandler {
       text: text_metadata,
       docx: Some(docx_metadata),
       xlsx: None,
+      pptx: None,
       pdf: None,
       image: None,
     })

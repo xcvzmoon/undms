@@ -131,6 +131,7 @@ impl PdfHandler {
       text: text_metadata,
       docx: None,
       xlsx: None,
+      pptx: None,
       pdf: Some(pdf_metadata),
       image: None,
     }

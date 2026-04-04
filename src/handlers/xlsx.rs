@@ -90,6 +90,7 @@ impl XlsxHandler {
       text: text_metadata,
       docx: None,
       xlsx: Some(xlsx_metadata),
+      pptx: None,
       pdf: None,
       image: None,
     }

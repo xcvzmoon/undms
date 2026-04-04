@@ -155,6 +155,7 @@ interface MetadataPayload {
   text?: TextMetadata;
   docx?: DocxMetadata;
   xlsx?: XlsxMetadata;
+  pptx?: PptxMetadata;
   pdf?: PdfMetadata;
   image?: ImageMetadata;
 }
@@ -235,6 +236,30 @@ interface XlsxMetadata {
 | `rowCount`    | `number`   | Total rows across all sheets |
 | `columnCount` | `number`   | Maximum columns in any sheet |
 | `cellCount`   | `number`   | Total cells with content     |
+
+---
+
+### PptxMetadata
+
+PPTX-specific metadata.
+
+```ts
+interface PptxMetadata {
+  title?: string;
+  author?: string;
+  subject?: string;
+  slideCount: number;
+}
+```
+
+#### Properties
+
+| Property     | Type     | Description                   |
+| ------------ | -------- | ----------------------------- |
+| `title`      | `string` | Presentation title            |
+| `author`     | `string` | Presentation author           |
+| `subject`    | `string` | Presentation subject          |
+| `slideCount` | `number` | Total number of slides parsed |
 
 ---
 

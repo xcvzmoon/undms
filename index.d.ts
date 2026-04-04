@@ -163,6 +163,7 @@ export interface MetadataPayload {
   text?: TextMetadata
   docx?: DocxMetadata
   xlsx?: XlsxMetadata
+  pptx?: PptxMetadata
   pdf?: PdfMetadata
   image?: ImageMetadata
 }
@@ -179,6 +180,13 @@ export interface PdfMetadata {
 export interface PdfPageSize {
   width: number
   height: number
+}
+
+export interface PptxMetadata {
+  title?: string
+  author?: string
+  subject?: string
+  slideCount: number
 }
 
 export interface SimilarityMatch {

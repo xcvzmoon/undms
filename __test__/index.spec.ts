@@ -13,6 +13,7 @@ import {
   createOcrImage,
 } from './generators/image-generator.js';
 import { createCorruptedPdf, createSimplePdf } from './generators/pdf-generator.js';
+import { createCorruptedPptx, createSimplePptx } from './generators/pptx-generator.js';
 import { createCorruptedXlsx, createSimpleXlsx } from './generators/xlsx-generator.js';
 
 function makeDocument(content: string, type = 'text/plain', name = 'note.txt') {
@@ -43,6 +44,21 @@ function makeDocxDocument(
 
 function makePdfDocument(type = 'application/pdf', name = 'document.pdf') {
   const buffer = createSimplePdf();
+  return {
+    name,
+    size: buffer.length,
+    type,
+    lastModified: Date.now(),
+    webkitRelativePath: '',
+    buffer,
+  };
+}
+
+function makePptxDocument(
+  type = 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  name = 'deck.pptx',
+) {
+  const buffer = createSimplePptx();
   return {
     name,
     size: buffer.length,
@@ -460,6 +476,105 @@ test('computeDocumentSimilarity: works with pdf documents', (context) => {
       }
     | undefined;
   context.truthy(pdfMetadata?.pdf);
+});
+
+test('extract: returns metadata and text content for pptx files', (context) => {
+  const result = undms.extract([makePptxDocument()]);
+
+  context.is(result.length, 1);
+  context.is(
+    result[0].mimeType,
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  );
+  context.is(result[0].documents.length, 1);
+  context.is(result[0].documents[0].name, 'deck.pptx');
+  context.is(result[0].documents[0].encoding, 'utf-8');
+  context.true(result[0].documents[0].content.includes('HELLO'));
+  context.true(result[0].documents[0].content.includes('你好'));
+  context.true(result[0].documents[0].processingTime >= 0);
+  context.is(result[0].documents[0].error, undefined);
+  context.truthy(result[0].documents[0].metadata?.text);
+  const pptxMetadata = result[0].documents[0].metadata as
+    | {
+        pptx?: {
+          title?: string;
+          author?: string;
+          subject?: string;
+          slideCount: number;
+        };
+      }
+    | undefined;
+  context.truthy(pptxMetadata?.pptx);
+  context.is(pptxMetadata?.pptx?.title, 'PptxGenJS Presentation');
+  context.is(pptxMetadata?.pptx?.author, 'PptxGenJS');
+  context.is(pptxMetadata?.pptx?.subject, 'PptxGenJS Presentation');
+  context.is(pptxMetadata?.pptx?.slideCount, 1);
+});
+
+test('extract: returns error for corrupted pptx files', (context) => {
+  const corruptedBuffer = createCorruptedPptx();
+  const result = undms.extract([
+    {
+      name: 'corrupted.pptx',
+      size: corruptedBuffer.length,
+      type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+      lastModified: Date.now(),
+      webkitRelativePath: '',
+      buffer: corruptedBuffer,
+    },
+  ]);
+
+  context.is(result[0].documents[0].content, '');
+  context.truthy(result[0].documents[0].error);
+  context.true(result[0].documents[0].error?.includes('Failed to read PPTX'));
+});
+
+test('extract: groups pptx documents by mime type', (context) => {
+  const docs = [
+    makePptxDocument(
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+      'a.pptx',
+    ),
+    makePptxDocument(
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+      'b.pptx',
+    ),
+    makeDocument('text content', 'text/plain', 'c.txt'),
+  ];
+  const result = undms.extract(docs);
+  const pptxGroup = result.find(
+    (group) =>
+      group.mimeType ===
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  );
+  const textGroup = result.find((group) => group.mimeType === 'text/plain');
+
+  context.truthy(pptxGroup);
+  context.truthy(textGroup);
+  context.is(pptxGroup?.documents.length, 2);
+  context.is(textGroup?.documents.length, 1);
+});
+
+test('computeDocumentSimilarity: works with pptx documents', (context) => {
+  const extractResult = undms.extract([makePptxDocument()]);
+  const pptxContent = extractResult[0].documents[0].content;
+
+  const result = undms.computeDocumentSimilarity([makePptxDocument()], [pptxContent], 90, 'hybrid');
+
+  context.is(result.length, 1);
+  context.is(result[0].documents.length, 1);
+  context.truthy(result[0].documents[0].metadata?.text);
+  context.is(result[0].documents[0].similarityMatches.length, 1);
+  context.is(result[0].documents[0].similarityMatches[0].referenceIndex, 0);
+  const pptxMetadata = result[0].documents[0].metadata as
+    | {
+        pptx?: {
+          slideCount: number;
+        };
+      }
+    | undefined;
+  context.truthy(pptxMetadata?.pptx);
+  context.is(pptxMetadata?.pptx?.slideCount, 1);
 });
 
 test('extract: returns metadata and text content for xlsx files', (context) => {

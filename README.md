@@ -19,7 +19,7 @@ pnpm add undms
 
 ## Features
 
-- **Multi-format extraction** - Text, DOCX, XLSX, PDF, and images
+- **Multi-format extraction** - Text, DOCX, XLSX, PPTX, PDF, and images
 - **Similarity comparison** - Compare documents against reference texts using multiple algorithms
 - **Rich metadata** - Extract format-specific metadata (EXIF, PDF info, DOCX stats, etc.)
 - **OCR support** - Extract text from images using Tesseract
@@ -33,6 +33,7 @@ pnpm add undms
 | Text   | `text/*`, `application/json`, `application/xml`, etc.                           | Content + line/word/character counts              |
 | DOCX   | `application/vnd.openxmlformats-officedocument.wordprocessingml.document`       | Paragraphs, tables, images, hyperlinks            |
 | XLSX   | `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`             | Cell content, sheets, rows, columns               |
+| PPTX   | `application/vnd.openxmlformats-officedocument.presentationml.presentation`     | Slide text, title, author, subject, slide count   |
 | PDF    | `application/pdf`                                                               | Text, title, author, subject, producer, page info |
 | Images | `image/jpeg`, `image/png`, `image/gif`, `image/bmp`, `image/tiff`, `image/webp` | OCR text, EXIF data, GPS location                 |
 
@@ -217,6 +218,7 @@ interface MetadataPayload {
   text?: TextMetadata;
   docx?: DocxMetadata;
   xlsx?: XlsxMetadata;
+  pptx?: PptxMetadata;
   pdf?: PdfMetadata;
   image?: ImageMetadata;
 }
@@ -259,6 +261,19 @@ interface XlsxMetadata {
   rowCount: number;
   columnCount: number;
   cellCount: number;
+}
+```
+
+### PptxMetadata
+
+PPTX presentation information.
+
+```ts
+interface PptxMetadata {
+  title?: string;
+  author?: string;
+  subject?: string;
+  slideCount: number;
 }
 ```
 
