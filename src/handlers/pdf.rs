@@ -1,6 +1,7 @@
 use crate::core::handler::{DocumentHandler, ExtractionResult};
 use crate::models::metadata::{MetadataPayload, PdfMetadata, PdfPageSize, build_text_metadata};
 use lopdf::{Document, Object};
+use rayon::prelude::*;
 
 pub struct PdfHandler;
 
@@ -16,12 +17,16 @@ impl PdfHandler {
     let pages = document.get_pages();
     let page_count = pages.len() as u32;
 
+    let page_numbers = pages.keys().copied().collect::<Vec<_>>();
+    let page_texts = page_numbers
+      .par_iter()
+      .filter_map(|page_num| document.extract_text(&[*page_num]).ok())
+      .collect::<Vec<_>>();
+
     let mut text = String::new();
-    for (page_num, _) in pages.iter() {
-      if let Ok(page_text) = document.extract_text(&[*page_num]) {
-        text.push_str(&page_text);
-        text.push('\n');
-      }
+    for page_text in page_texts {
+      text.push_str(&page_text);
+      text.push('\n');
     }
 
     let mut cleaned = String::new();
