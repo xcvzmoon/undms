@@ -1,6 +1,7 @@
 use crate::core::handler::{DocumentHandler, ExtractionResult};
 use crate::models::metadata::{ImageLocation, ImageMetadata, MetadataPayload, build_text_metadata};
 use image::{DynamicImage, GenericImageView, ImageFormat, ImageReader, imageops::FilterType};
+use rayon::prelude::*;
 use rten::Model;
 use std::io::Cursor;
 use std::sync::OnceLock;
@@ -13,6 +14,12 @@ const OCR_EARLY_EXIT_SCORE: usize = 256;
 
 pub struct ImageHandler {
   model: OnceLock<Result<ocrs::OcrEngine, String>>,
+}
+
+struct OcrCandidateResult {
+  text: String,
+  score: usize,
+  error: Option<String>,
 }
 
 impl ImageHandler {
@@ -80,22 +87,14 @@ impl ImageHandler {
   }
 
   fn extract_text_from_image(&self, img: &DynamicImage) -> Result<String, String> {
+    let first_candidate_name = Self::first_ocr_candidate_name(img);
+    let first_candidate = Self::build_ocr_candidate(img, first_candidate_name);
     let mut best_text = String::new();
     let mut best_score = 0;
     let mut last_error = None;
 
-    if self.try_ocr_candidate(img, &mut best_text, &mut best_score, &mut last_error)? {
-      return Ok(best_text);
-    }
-
-    let grayscale = img.grayscale();
-    if self.try_ocr_candidate(&grayscale, &mut best_text, &mut best_score, &mut last_error)? {
-      return Ok(best_text);
-    }
-
-    let contrasted = grayscale.adjust_contrast(OCR_CONTRAST_BOOST);
     if self.try_ocr_candidate(
-      &contrasted,
+      &first_candidate,
       &mut best_text,
       &mut best_score,
       &mut last_error,
@@ -103,19 +102,35 @@ impl ImageHandler {
       return Ok(best_text);
     }
 
-    if let Some(upscaled) = Self::upscale_for_ocr(img) {
-      if self.try_ocr_candidate(&upscaled, &mut best_text, &mut best_score, &mut last_error)? {
-        return Ok(best_text);
+    let results = Self::build_remaining_ocr_candidates(img, first_candidate_name)
+      .into_par_iter()
+      .map(|candidate| match self.run_ocr_pass(&candidate) {
+        Ok(text) => {
+          let score = Self::ocr_text_score(&text);
+          OcrCandidateResult {
+            text,
+            score,
+            error: None,
+          }
+        }
+        Err(error) => OcrCandidateResult {
+          text: String::new(),
+          score: 0,
+          error: Some(error),
+        },
+      })
+      .collect::<Vec<_>>();
+
+    for result in results {
+      if result.score > best_score
+        || (result.score == best_score && result.text.len() > best_text.len())
+      {
+        best_score = result.score;
+        best_text = result.text;
       }
 
-      let upscaled_contrasted = upscaled.grayscale().adjust_contrast(OCR_CONTRAST_BOOST);
-      if self.try_ocr_candidate(
-        &upscaled_contrasted,
-        &mut best_text,
-        &mut best_score,
-        &mut last_error,
-      )? {
-        return Ok(best_text);
+      if let Some(error) = result.error {
+        last_error = Some(error);
       }
     }
 
@@ -224,6 +239,58 @@ impl ImageHandler {
         Ok(false)
       }
     }
+  }
+
+  fn first_ocr_candidate_name(img: &DynamicImage) -> &'static str {
+    let (width, height) = img.dimensions();
+    let longest_edge = width.max(height);
+
+    if longest_edge < 800 && Self::upscale_for_ocr(img).is_some() {
+      "upscaled"
+    } else {
+      "original"
+    }
+  }
+
+  fn build_ocr_candidate(img: &DynamicImage, name: &str) -> DynamicImage {
+    match name {
+      "grayscale" => img.grayscale(),
+      "contrasted" => img.grayscale().adjust_contrast(OCR_CONTRAST_BOOST),
+      "upscaled" => Self::upscale_for_ocr(img).unwrap_or_else(|| img.clone()),
+      "upscaled_contrasted" => Self::upscale_for_ocr(img)
+        .unwrap_or_else(|| img.clone())
+        .grayscale()
+        .adjust_contrast(OCR_CONTRAST_BOOST),
+      _ => img.clone(),
+    }
+  }
+
+  fn build_remaining_ocr_candidates(
+    img: &DynamicImage,
+    first_candidate_name: &str,
+  ) -> Vec<DynamicImage> {
+    let mut candidates = Vec::with_capacity(4);
+    let names = [
+      "original",
+      "grayscale",
+      "contrasted",
+      "upscaled",
+      "upscaled_contrasted",
+    ];
+
+    for name in names {
+      if name == first_candidate_name {
+        continue;
+      }
+
+      if name.starts_with("upscaled") && Self::upscale_for_ocr(img).is_none() {
+        continue;
+      }
+
+      candidates.push(Self::build_ocr_candidate(img, name));
+    }
+
+    candidates
   }
 
   fn upscale_for_ocr(img: &DynamicImage) -> Option<DynamicImage> {
