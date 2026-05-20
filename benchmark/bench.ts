@@ -6,3 +6,4 @@ console.log('  pnpm bench:text');
 console.log('  pnpm bench:similarity');
 console.log('  pnpm bench:documents');
 console.log('  pnpm bench:image');
+console.log('  pnpm bench:optimization');
