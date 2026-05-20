@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.5.1
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.5.0...v1.5.1)
+
+### 🔥 Performance
+
+- Parallelize document extraction per input document ([4bdffc8](https://github.com/xcvzmoon/undms/commit/4bdffc8))
+- Reduce similarity allocations with hashed token sets ([bc5b15d](https://github.com/xcvzmoon/undms/commit/bc5b15d))
+- Parallelize OCR preprocessing candidates ([253d103](https://github.com/xcvzmoon/undms/commit/253d103))
+- Parallelize PDF page text extraction ([87d9a63](https://github.com/xcvzmoon/undms/commit/87d9a63))
+
+### 🏡 Chore
+
+- Add ahash for faster similarity hashing ([47ba7b4](https://github.com/xcvzmoon/undms/commit/47ba7b4))
+- Add bench for optimization changes ([bef8a4a](https://github.com/xcvzmoon/undms/commit/bef8a4a))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil <mrgamilmonalbert@gmail.com>
+
 ## v1.5.0
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.4.0...v1.5.0)
