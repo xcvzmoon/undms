@@ -36,6 +36,16 @@ struct ProcessedDocument {
   size: f64,
 }
 
+struct ExtractedDocument {
+  mime_type: String,
+  document: DocumentMetadata,
+}
+
+struct ExtractedDocumentWithSimilarity {
+  mime_type: String,
+  document: DocumentMetadataWithSimilarity,
+}
+
 fn create_handler_registry() -> HandlerRegistry {
   HANDLER_REGISTRY
     .get_or_init(|| {
@@ -104,16 +114,44 @@ fn extract_document_content(
   }
 }
 
-fn group_by_mime_type(documents: &[Document]) -> HashMap<String, Vec<&Document>> {
-  documents
-    .iter()
-    .fold(HashMap::new(), |mut accumulator, document| {
-      accumulator
-        .entry(document.r#type.clone())
-        .or_insert_with(Vec::new)
-        .push(document);
-      accumulator
+fn group_extracted_documents(documents: Vec<ExtractedDocument>) -> Vec<GroupedDocuments> {
+  let mut grouped: HashMap<String, Vec<DocumentMetadata>> = HashMap::new();
+
+  for extracted in documents {
+    grouped
+      .entry(extracted.mime_type)
+      .or_default()
+      .push(extracted.document);
+  }
+
+  grouped
+    .into_iter()
+    .map(|(mime_type, documents)| GroupedDocuments {
+      mime_type,
+      documents,
     })
+    .collect()
+}
+
+fn group_extracted_documents_with_similarity(
+  documents: Vec<ExtractedDocumentWithSimilarity>,
+) -> Vec<GroupedDocumentsWithSimilarity> {
+  let mut grouped: HashMap<String, Vec<DocumentMetadataWithSimilarity>> = HashMap::new();
+
+  for extracted in documents {
+    grouped
+      .entry(extracted.mime_type)
+      .or_default()
+      .push(extracted.document);
+  }
+
+  grouped
+    .into_iter()
+    .map(|(mime_type, documents)| GroupedDocumentsWithSimilarity {
+      mime_type,
+      documents,
+    })
+    .collect()
 }
 
 /// Extracts content and metadata from input documents, grouped by MIME type.
@@ -149,35 +187,30 @@ fn group_by_mime_type(documents: &[Document]) -> HashMap<String, Vec<&Document>>
 #[napi]
 pub fn extract(documents: Vec<Document>) -> Vec<GroupedDocuments> {
   let handlers = create_handler_registry();
-  let by_type = group_by_mime_type(&documents);
 
-  by_type
-    .into_par_iter()
-    .map(|(mime_type, docs)| {
+  let extracted = documents
+    .par_iter()
+    .map(|document| {
+      let mime_type = document.r#type.clone();
       let handler = find_handler(&mime_type, &handlers);
-      let documents = docs
-        .into_iter()
-        .map(|document| {
-          let extracted = extract_document_content(document, handler);
+      let extracted = extract_document_content(document, handler);
 
-          DocumentMetadata {
-            name: document.name.clone(),
-            size: extracted.size,
-            processing_time: extracted.processing_time,
-            content: extracted.content,
-            encoding: extracted.encoding,
-            metadata: extracted.metadata,
-            error: extracted.error,
-          }
-        })
-        .collect();
-
-      GroupedDocuments {
+      ExtractedDocument {
         mime_type,
-        documents,
+        document: DocumentMetadata {
+          name: document.name.clone(),
+          size: extracted.size,
+          processing_time: extracted.processing_time,
+          content: extracted.content,
+          encoding: extracted.encoding,
+          metadata: extracted.metadata,
+          error: extracted.error,
+        },
       }
     })
-    .collect()
+    .collect();
+
+  group_extracted_documents(extracted)
 }
 
 /// Extracts documents and computes similarity against reference texts.
@@ -219,49 +252,44 @@ pub fn compute_document_similarity(
   let threshold = similarity_threshold.unwrap_or(30.0);
   let method = parse_similarity_method(similarity_method.as_deref());
   let handlers = create_handler_registry();
-  let by_type = group_by_mime_type(&documents);
   let reference_metadata: Vec<Option<TextMetadata>> = reference_texts
     .iter()
     .map(|reference_text| build_text_metadata(reference_text))
     .collect();
 
-  by_type
-    .into_par_iter()
-    .map(|(mime_type, docs)| {
+  let extracted = documents
+    .par_iter()
+    .map(|document| {
+      let mime_type = document.r#type.clone();
       let handler = find_handler(&mime_type, &handlers);
-      let documents = docs
-        .into_iter()
-        .map(|document| {
-          let extracted = extract_document_content(document, handler);
-          let similarity_matches = compute_similarity_matches(
-            &extracted.content,
-            &extracted.metadata,
-            &extracted.error,
-            &reference_texts,
-            &reference_metadata,
-            method,
-            threshold,
-          );
+      let extracted = extract_document_content(document, handler);
+      let similarity_matches = compute_similarity_matches(
+        &extracted.content,
+        &extracted.metadata,
+        &extracted.error,
+        &reference_texts,
+        &reference_metadata,
+        method,
+        threshold,
+      );
 
-          DocumentMetadataWithSimilarity {
-            name: document.name.clone(),
-            size: extracted.size,
-            processing_time: extracted.processing_time,
-            encoding: extracted.encoding,
-            content: extracted.content,
-            metadata: extracted.metadata,
-            error: extracted.error,
-            similarity_matches,
-          }
-        })
-        .collect();
-
-      GroupedDocumentsWithSimilarity {
+      ExtractedDocumentWithSimilarity {
         mime_type,
-        documents,
+        document: DocumentMetadataWithSimilarity {
+          name: document.name.clone(),
+          size: extracted.size,
+          processing_time: extracted.processing_time,
+          encoding: extracted.encoding,
+          content: extracted.content,
+          metadata: extracted.metadata,
+          error: extracted.error,
+          similarity_matches,
+        },
       }
     })
-    .collect()
+    .collect();
+
+  group_extracted_documents_with_similarity(extracted)
 }
 
 fn parse_similarity_method(method: Option<&str>) -> SimilarityMethod {
