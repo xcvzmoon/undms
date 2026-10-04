@@ -1,7 +1,7 @@
 import { defineConfig } from 'genbumppush';
 
 export default defineConfig({
-  release: 'minor',
+  release: 'patch',
   files: ['package.json', 'Cargo.toml'],
   hooks: {
     before: ['vp check', 'vp run typecheck', 'vp run test'],
