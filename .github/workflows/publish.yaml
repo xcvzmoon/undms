@@ -69,8 +69,5 @@ jobs:
           run_install: false
       - name: Verify publishing toolchain
         run: pnpm --version
-      - name: Validate and publish packages
-        env:
-          # Used only to bootstrap packages that do not yet exist on npm.
-          NPM_BOOTSTRAP_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: node scripts/publish.ts
+      - name: Validate and publish packages using OIDC only
+        run: node scripts/publish.ts --trusted-only

@@ -116,6 +116,9 @@
     ]
   },
   "ava": {
+    "files": [
+      "__test__/**/*.spec.ts"
+    ],
     "extensions": {
       "ts": "module"
     },

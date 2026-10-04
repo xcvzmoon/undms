@@ -12,7 +12,14 @@ const tag = version.includes('-') ? 'next' : 'latest';
 const dryRun = process.argv.includes('--dry-run');
 const token = process.env.NPM_BOOTSTRAP_TOKEN;
 const tokenAuth = process.argv.includes('--token-auth');
-assert(!tokenAuth || token || dryRun, '--token-auth requires the NPM_TOKEN secret');
+const trustedOnly = process.argv.includes('--trusted-only');
+assert(!(tokenAuth && trustedOnly), '--token-auth and --trusted-only are mutually exclusive');
+if (trustedOnly) {
+  for (const key of ['NPM_BOOTSTRAP_TOKEN', 'NPM_TOKEN', 'NODE_AUTH_TOKEN']) {
+    assert(!process.env[key], `--trusted-only must not receive ${key}`);
+  }
+}
+assert(!tokenAuth || Boolean(token) || dryRun, '--token-auth requires the NPM_TOKEN secret');
 const directories = (await readdir('npm', { withFileTypes: true }))
   .filter((entry) => entry.isDirectory())
   .map((entry) => `npm/${entry.name}`);
@@ -36,6 +43,7 @@ const packages = await Promise.all(
     const metadata = response.ok ? object(await response.json()) : null;
     const exists = metadata !== null;
     const published = metadata !== null && Object.hasOwn(object(metadata.versions), version);
+    assert(!trustedOnly || exists, `${name}: trusted publishing requires an existing npm package`);
     if (!exists && !dryRun) {
       assert(
         token,
