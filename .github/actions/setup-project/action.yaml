@@ -1,0 +1,22 @@
+name: Setup project
+description: Set up Vite+, Node, and pnpm and install dependencies.
+inputs:
+  node-version:
+    description: Node.js runtime for this job
+    default: '24.11.0'
+  architecture:
+    description: Node.js architecture for binding tests
+    default: ''
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ inputs.node-version }}
+        architecture: ${{ inputs.architecture }}
+    - name: Setup Vite+
+      uses: voidzero-dev/setup-vp@1b32467adbe183473499fd9d5d372c3ed9641754
+      with:
+        node-manager: false
+        cache: true
