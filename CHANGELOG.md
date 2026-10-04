@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.0
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.6.3...v2.0.0)
+
+### 🏡 Chore
+
+- **genbumppush:** Set release to major ([e2dbf2f](https://github.com/xcvzmoon/undms/commit/e2dbf2f))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil ([@xcvzmoon](https://github.com/xcvzmoon))
+
 ## v1.6.3
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.6.2...v1.6.3)
