@@ -1,0 +1,90 @@
+name: Retry npm publication
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful main-branch release CI run ID containing bindings and entry points
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+  id-token: write
+
+concurrency:
+  group: npm-publication-retry
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout recovery tooling
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Validate source CI run
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.run_id }}
+        run: |
+          [[ "$RUN_ID" =~ ^[0-9]+$ ]]
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID" > "$RUNNER_TEMP/source-run.json"
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync, appendFileSync, copyFileSync } from 'node:fs';
+          const run = JSON.parse(readFileSync(`${process.env.RUNNER_TEMP}/source-run.json`, 'utf8'));
+          assert.equal(run.conclusion, 'success');
+          assert.equal(run.event, 'push');
+          assert.equal(run.head_branch, 'main');
+          assert.equal(run.head_repository.full_name, process.env.GITHUB_REPOSITORY);
+          assert.equal(run.path, '.github/workflows/ci.yaml');
+          assert.match(run.head_sha, /^[0-9a-f]{40}$/);
+          copyFileSync('scripts/publish.ts', `${process.env.RUNNER_TEMP}/publish-recovery.ts`);
+          appendFileSync(process.env.GITHUB_OUTPUT, `sha=${run.head_sha}\n`);
+          NODE
+      - name: Checkout original release
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ steps.source.outputs.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify release tag and restore recovery script
+        run: |
+          version=$(node -p "require('./package.json').version")
+          test "$(git log -1 --format=%s)" = "chore(release): v$version"
+          test "$(git rev-parse "refs/tags/v$version^{commit}")" = "$(git rev-parse HEAD)"
+          cp "$RUNNER_TEMP/publish-recovery.ts" scripts/publish.ts
+      - name: Setup project
+        uses: ./.github/actions/setup-project
+      - name: Download release bindings
+        uses: actions/download-artifact@v8
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.run_id }}
+          pattern: bindings-*
+          path: artifacts
+      - name: Download release entry points
+        uses: actions/download-artifact@v8
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.run_id }}
+          name: package-entry-points
+          path: .
+      - name: Prepare original release packages
+        run: |
+          vp run create-npm-dirs
+          vp run version
+          vp run artifacts --output-dir ./artifacts --npm-dir ./npm
+      - name: Setup pnpm for publishing
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Publish missing versions with explicit token authentication
+        env:
+          NPM_BOOTSTRAP_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: node scripts/publish.ts --token-auth
