@@ -56,6 +56,12 @@ jobs:
         run: vp run version
       - name: Move artifacts
         run: vp run artifacts --output-dir ./artifacts --npm-dir ./npm
+      - name: Setup pnpm for publishing
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Verify publishing toolchain
+        run: pnpm --version
       - name: Publish with npm trusted publishing
         run: |
           # pnpm 12 exchanges GitHub OIDC credentials for per-package npm tokens.
