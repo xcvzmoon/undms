@@ -173,10 +173,6 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
-      - name: Setup project
-        uses: ./.github/actions/setup-project
-        with:
-          node-version: ${{ matrix.node }}
       - name: Output docker params
         id: docker
         run: |
@@ -194,19 +190,32 @@ jobs:
               console.log('IMAGE=node:${{ matrix.node }}-slim')
             }
           " >> $GITHUB_OUTPUT
-          echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
       - name: Download artifacts
         uses: actions/download-artifact@v8
         with:
           name: bindings-${{ matrix.target }}
           path: .
       - name: Test bindings
-        uses: tj-actions/docker-run@v2
-        with:
-          image: ${{ steps.docker.outputs.IMAGE }}
-          name: test-binding
-          options: -v ${{ steps.docker.outputs.PNPM_STORE_PATH }}:${{ steps.docker.outputs.PNPM_STORE_PATH }} -v ${{ github.workspace }}:${{ github.workspace }} -w ${{ github.workspace }} --platform ${{ steps.docker.outputs.PLATFORM }}
-          args: npm run test:bindings
+        env:
+          TEST_IMAGE: ${{ steps.docker.outputs.IMAGE }}
+          TEST_PLATFORM: ${{ steps.docker.outputs.PLATFORM }}
+        run: |
+          # Install dependencies inside the target libc, not on the host runner.
+          # An anonymous volume keeps host node_modules out of the container.
+          docker run --rm \
+            --platform "$TEST_PLATFORM" \
+            --volume "$GITHUB_WORKSPACE:$GITHUB_WORKSPACE" \
+            --volume "$GITHUB_WORKSPACE/node_modules" \
+            --env "PROJECT_DIR=$GITHUB_WORKSPACE" \
+            --workdir /tmp \
+            "$TEST_IMAGE" sh -eu -c '
+              package_manager=$(node -p "require(process.env.PROJECT_DIR + \"/package.json\").packageManager")
+              # Bootstrap outside the project; npm is only used to install pnpm.
+              npm install --global "$package_manager"
+              cd "$PROJECT_DIR"
+              pnpm install --frozen-lockfile
+              pnpm run test:bindings
+            '
   ci:
     name: CI
     if: always()
