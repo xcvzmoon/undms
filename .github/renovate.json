@@ -1,25 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    "group:allNonMajor",
-    ":preserveSemverRanges",
-    ":disablePeerDependencies"
-  ],
+  "extends": ["config:recommended"],
   "labels": ["dependencies"],
+  "schedule": ["before 6am on Monday"],
+  "timezone": "Asia/Manila",
   "packageRules": [
     {
-      "matchPackageNames": ["@napi/cli", "napi", "napi-build", "napi-derive"],
-      "addLabels": ["napi-rs"],
-      "groupName": "napi-rs"
+      "description": "Keep TypeScript pinned to the version selected by the project",
+      "matchPackageNames": ["typescript"],
+      "enabled": false
     },
     {
-      "matchPackagePatterns": ["^eslint", "^@typescript-eslint"],
-      "groupName": "linter"
+      "description": "Group non-major dependency updates",
+      "matchManagers": ["npm", "github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "non-major dependencies"
     }
-  ],
-  "commitMessagePrefix": "chore: ",
-  "commitMessageAction": "bump up",
-  "commitMessageTopic": "{{depName}} version",
-  "ignoreDeps": []
+  ]
 }
