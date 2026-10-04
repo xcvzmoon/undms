@@ -1,0 +1,8 @@
+{
+  "url": "https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int/eng.traineddata.gz",
+  "sha256": "45b4cb346724ac1774f1c36f42f182b887bcdb28ebe63e6fff90ac41f3fcff91",
+  "bytes": 2952873,
+  "filename": "eng.traineddata.gz",
+  "language": "eng",
+  "sourceUrl": "https://github.com/naptha/tessdata"
+}

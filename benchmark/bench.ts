@@ -1,9 +1,5 @@
 /* oxlint-disable no-console */
-
-console.log('Benchmarks are now split for faster iteration.');
-console.log('Run one of:');
-console.log('  pnpm bench:text');
-console.log('  pnpm bench:similarity');
-console.log('  pnpm bench:documents');
-console.log('  pnpm bench:image');
-console.log('  pnpm bench:optimization');
+console.log('Run pnpm bench:text, bench:documents, bench:image, or bench:optimization.');
+console.log(
+  'Each task awaits extraction and validates its outcome; fixture construction is outside timing.',
+);

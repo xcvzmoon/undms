@@ -165,5 +165,5 @@
     "builtin": true
   },
   "globals": {},
-  "ignorePatterns": ["benchmark/", "wasi-worker-browser.mjs"]
+  "ignorePatterns": ["wasi-worker-browser.mjs"]
 }

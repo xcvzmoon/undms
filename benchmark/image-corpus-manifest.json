@@ -1,0 +1,43 @@
+{
+  "documents": [
+    {
+      "id": "sroie-000",
+      "title": "SROIE receipt 000",
+      "format": "image",
+      "url": "https://raw.githubusercontent.com/zzzDavid/ICDAR-2019-SROIE/27be4271b251c256f695acbade9a801bffe85994/data/img/000.jpg",
+      "sourceUrl": "https://github.com/zzzDavid/ICDAR-2019-SROIE",
+      "license": "ICDAR2019 SROIE source terms; cached images not redistributed",
+      "sha256": "8b85d2c325c68579b53446177602709a8f8faeeec710912f62b6ad369234887c",
+      "expectedText": [],
+      "referenceText": "TAN WOON YANN\nBOOK TA .K(TAMAN DAYA) SDN BND\n789417-W\nNO.53 55,57 & 59, JALAN SAGU 18,\nTAMAN DAYA,\n81100 JOHOR BAHRU,\nJOHOR.\nDOCUMENT NO : TD01167104\nDATE:\n25/12/2018 8:13:39 PM\nCASHIER:\nMANIS\nMEMBER:\nCASH BILL\nCODE/DESC\nPRICE\nDISC\nAMOUNT\nQTY\nRM\nRM\n9556939040116\nKF MODELLING CLAY KIDDY FISH\n1 PC\n*\n9.000\n0.00\n9.00\nTOTAL:\nROUR DING ADJUSTMENT:\n0.00\nROUND D TOTAL (RM):\n9.00\nCASH\n10.00\nCHANGE\n1.00\nGOODS SOLD ARE NOT RETURNABLE OR\nEXCHANGEABLE\n***\n***\nTHANK YOU\nPLEASE COME AGAIN !\n9.00",
+      "annotationUrl": "https://raw.githubusercontent.com/zzzDavid/ICDAR-2019-SROIE/27be4271b251c256f695acbade9a801bffe85994/data/box/000.csv",
+      "annotationSha256": "6d467981bddd86522fb1dcda7c6127975fe2cec2c2d4fa87ca2d7765d4cb461a"
+    },
+    {
+      "id": "sroie-001",
+      "title": "SROIE receipt 001",
+      "format": "image",
+      "url": "https://raw.githubusercontent.com/zzzDavid/ICDAR-2019-SROIE/27be4271b251c256f695acbade9a801bffe85994/data/img/001.jpg",
+      "sourceUrl": "https://github.com/zzzDavid/ICDAR-2019-SROIE",
+      "license": "ICDAR2019 SROIE source terms; cached images not redistributed",
+      "sha256": "4e7bb7f427732e769eafc6f6eed5a92eedccf96bc0c711f46466462b98916c73",
+      "expectedText": [],
+      "referenceText": "TAN WOON YANN\nINDAH GIFT & HOME DECO\n27,JALAN DEDAP 13,\nTAMAN JOHOR JAYA,\n81100 JOHOR BAHRU,JOHOR.\nTEL:07-3507405\nFAX:07-3558160\nRECEIPT\n19/10/2018 20:49:59 #01\nCASHIER: CN\nLOCATION/SP: 05 /0531\nMB: MO26588\nROOM NO: 01\n050100035279\nDESC/ITEM\nQTY\nPRICE\nAMT(RM)\nST-PRIVILEGE CARD/GD INDAH\n88888\n1\n10.00\n10.00\nGF-TABLE LAMP/STITCH <I>\n62483\n1\n55.90\n55.90\n@DISC\n10.00%\n-5.59\n#TOTAL QTY\n2\nTOTAL AMT................. RM\n60.31\nROUNDING ADJ............\n-0.01\nRM\n60.30\nCASH.................... RM\n70.30\nCHANGE.................. RM\n10.00\nTHANK YOU ! PLEASE COME AGAIN !\nGOODS SOLD ARE NOT RETURNABLE\nTHANK YOU ! FLEASE COME AOSIN !\nGOODS SOLD ARE NOT RETURNABLE\nDEALING IN WHOLESALE AND RETAIL.",
+      "annotationUrl": "https://raw.githubusercontent.com/zzzDavid/ICDAR-2019-SROIE/27be4271b251c256f695acbade9a801bffe85994/data/box/001.csv",
+      "annotationSha256": "280229706c7b18f056d4e277f820b0b6d52cac5e53a540b54f85b0645cc6fb47"
+    },
+    {
+      "id": "sroie-002",
+      "title": "SROIE receipt 002",
+      "format": "image",
+      "url": "https://raw.githubusercontent.com/zzzDavid/ICDAR-2019-SROIE/27be4271b251c256f695acbade9a801bffe85994/data/img/002.jpg",
+      "sourceUrl": "https://github.com/zzzDavid/ICDAR-2019-SROIE",
+      "license": "ICDAR2019 SROIE source terms; cached images not redistributed",
+      "sha256": "c5995745cc13c8570fe0914567124d65e29df3ea4dd91713badb9e7217bc2db1",
+      "expectedText": [],
+      "referenceText": "TAN WOON YANN\nMR D.T.Y. (JOHOR) SDN BHD\n(CO.REG : 933109-X)\nLOT 1851-A & 1851-B, JALAN KPB 6,\nKAWASAN PERINDUSTRIAN BALAKONG,\n43300 SERI KEMBANGAN, SELANGOR\n(MR DIY TESCO TERBAU)\n-INVOICE-\nCHOPPING BOARD 35.5X25.5CM 803M#\nEZ10HD05 - 24\n8970669\n1\nX\n19.00\n19.00\nAIR PRESSURE SPRAYER SX-575-1 1.5L\nHC03-7 - 15\n9066468\n1\nX\n8.02\n8.02\nWAXCO WINDSHILED CLEANER 120ML\nWA14-3A - 48\n9557031100236\n1\nX\n3.02\n3.02\nBOPP TAPE 48MM*100M CLEAR\nFZ-04 - 36\n6935818350846\n1\nX\n3.88\n3.88\nITEM(S) : 4\nQTY(S) : 4\nTOTAL\nRM 33.92\nROUNDING ADJUSTMENT\n-RM 0.02\nTOTAL ROUNDED\nRM 33.90\nCASH\nRM 50.00\nCHANGE\nRM 16.10\n12-01-19 21:13 SH01 ZK09\nT4 R000027830\nOPERATOR TRAINEE CASHIER\nEXCHANGE ARE ALLOWED WITHIN\n7 DAYS WITH RECEIPT.\nSTRICTLY NO CASH REFUND.",
+      "annotationUrl": "https://raw.githubusercontent.com/zzzDavid/ICDAR-2019-SROIE/27be4271b251c256f695acbade9a801bffe85994/data/box/002.csv",
+      "annotationSha256": "f90aab13a8d01a1db310b46a28edbae70f124d9337be6caaf8d591711148fe14"
+    }
+  ]
+}

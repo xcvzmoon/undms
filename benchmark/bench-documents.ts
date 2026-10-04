@@ -1,36 +1,13 @@
-import { createDocumentFormatBatches, extract, runBench } from './common.js';
-
-const {
-  smallDocxBatch,
-  mediumDocxBatch,
-  smallPdfBatch,
-  mediumPdfBatch,
-  smallXlsxBatch,
-  mediumXlsxBatch,
-} = createDocumentFormatBatches();
-
-await runBench('Document format benchmarks', (bench) => {
-  bench.add('native extract 10 small docx docs', () => {
-    extract(smallDocxBatch);
-  });
-
-  bench.add('native extract 50 medium docx docs', () => {
-    extract(mediumDocxBatch);
-  });
-
-  bench.add('native extract 10 small pdf docs', () => {
-    extract(smallPdfBatch);
-  });
-
-  bench.add('native extract 50 medium pdf docs', () => {
-    extract(mediumPdfBatch);
-  });
-
-  bench.add('native extract 10 small xlsx docs', () => {
-    extract(smallXlsxBatch);
-  });
-
-  bench.add('native extract 50 medium xlsx docs', () => {
-    extract(mediumXlsxBatch);
-  });
+import { extract, extractBatch, ExtractionSelection } from '../index.js';
+import { createFormatInputs, repeatInput, runBench, verifyBatch, verifyOutcome } from './common.js';
+const documents = createFormatInputs();
+const fixtures = documents.map((document) => ({ document, batch: repeatInput(document, 16) }));
+await runBench('Document formats: single, batch, and metadata', (bench) => {
+  for (const { document, batch } of fixtures) {
+    bench.add(`${document.name}: single`, async () => verifyOutcome(await extract(document)));
+    bench.add(`${document.name}: metadata only`, async () =>
+      verifyOutcome(await extract(document, { selection: ExtractionSelection.Metadata })),
+    );
+    bench.add(`${document.name}: batch of 16`, async () => verifyBatch(await extractBatch(batch)));
+  }
 });

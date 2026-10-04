@@ -1,0 +1,84 @@
+{
+  "documents": [
+    {
+      "id": "sewage-consultation",
+      "title": "Sewage discharge consultation",
+      "format": "docx",
+      "url": "https://consult.environment-agency.gov.uk/environment-and-business/standard-rules-consultation-no-32-ssds/supporting_documents/standard-rules-permits-for-small-sewage-discharges-consultation-documentdocx-1",
+      "sourceUrl": "https://consult.environment-agency.gov.uk/environment-and-business/standard-rules-consultation-no-32-ssds/",
+      "license": "Publisher terms apply; binaries cached locally, not redistributed",
+      "sha256": "58be8e5c7e16c0191343ea4fa231ed518da6fd2ab22665cff2d7384c1fe960a6",
+      "expectedText": ["sewage", "consultation"]
+    },
+    {
+      "id": "sewage-risk",
+      "title": "Sewage discharge risk assessment",
+      "format": "docx",
+      "url": "https://consult.environment-agency.gov.uk/environment-and-business/standard-rules-consultation-no-32-ssds/supporting_documents/draft-generic-risk-assessment-2-to-5-cubic-metres-to-ground-sr2025-no-5docx",
+      "sourceUrl": "https://consult.environment-agency.gov.uk/environment-and-business/standard-rules-consultation-no-32-ssds/",
+      "license": "Publisher terms apply; binaries cached locally, not redistributed",
+      "sha256": "7ccd30a76f2fb29ff1abd512ae6c3e9ad1b2b0f5c31f1744b40db4acb68d125c",
+      "expectedText": ["risk", "ground"]
+    },
+    {
+      "id": "public-budgets",
+      "title": "Departmental public spending budgets",
+      "format": "xlsx",
+      "url": "https://assets.publishing.service.gov.uk/media/68763b0ea8d0255f9fe28eb5/PSS_July_2025_Chapter_1.xlsx",
+      "sourceUrl": "https://www.gov.uk/government/statistics/public-spending-statistics-release-july-2025",
+      "license": "Publisher terms apply; binaries cached locally, not redistributed",
+      "sha256": "25520d14b2c1bba35a347a625c2715fe13bc17c30bd50204c95f7caff7332723",
+      "expectedText": ["department", "2025"]
+    },
+    {
+      "id": "mortality-data",
+      "title": "Deaths by age, sex and deprivation 1991–2024",
+      "format": "xlsx",
+      "url": "https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/adhocs/3316numberofdeathsbysingleyearofagesexandimddecileenglandandwalesdeathsregisteredbetween1991and2024/syoaseximd1.xlsx",
+      "sourceUrl": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/adhocs/3316numberofdeathsbysingleyearofagesexandimddecileenglandandwalesdeathsregisteredbetween1991and2024",
+      "license": "Publisher terms apply; binaries cached locally, not redistributed",
+      "sha256": "a54de82e7e79ca5a49ddf4faffcb53ae32f5eb3ec9b0e4cda829cc9078d2de61",
+      "expectedText": ["2024", "1991"]
+    },
+    {
+      "id": "satellites-slides",
+      "title": "Satellites and seawater teaching slides",
+      "format": "pptx",
+      "url": "https://assets.publishing.service.gov.uk/media/659d79077e3968000da81a90/Satellites_and_sea_water_-_slides.pptx",
+      "sourceUrl": "https://www.gov.uk/government/publications/space-education-resources-satellites-and-seawater",
+      "license": "Publisher terms apply; binaries cached locally, not redistributed",
+      "sha256": "d582b5038ba1f9b8b93157ec5d7dd4ae80673fcafe447d0e14317d3d842e5bf8",
+      "expectedText": ["satellites", "water"]
+    },
+    {
+      "id": "procurement-slides",
+      "title": "Procurement Act training webinar",
+      "format": "pptx",
+      "url": "https://cdn.websitebuilder.service.justice.gov.uk/uploads/sites/47/2025/02/V1.3-LAA-webinar-Procurement-Act-Feb-and-March-2025.pptx",
+      "sourceUrl": "https://legalaidlearning.justice.gov.uk/procurement-act-2023/",
+      "license": "Publisher terms apply; binaries cached locally, not redistributed",
+      "sha256": "aa07316f306f7396ca5f52a2fd00a7da01012b7ee7fe460dfb66466334f0c990",
+      "expectedText": ["procurement", "2023"]
+    },
+    {
+      "id": "planning-report",
+      "title": "Planning applications statistical report",
+      "format": "pdf",
+      "url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/972909/Planning_Application_Statistics_-_October_to_December_2020_-_Statistical_Release.pdf",
+      "sourceUrl": "https://www.gov.uk/government/statistics/planning-applications-in-england-october-to-december-2020",
+      "license": "Publisher terms apply; binaries cached locally, not redistributed",
+      "sha256": "54ea6c4f1c9f0aeca3bf38c64b0d48830475b2cd2c755fa8d83782535bce740c",
+      "expectedText": ["planning", "2020"]
+    },
+    {
+      "id": "planning-notes",
+      "title": "Planning statistics technical notes",
+      "format": "pdf",
+      "url": "https://assets.publishing.service.gov.uk/media/60d466d5e90e0743a02cb1ba/Planning_Application_Statistics_-_January_to_March_2021_-_Technical_Notes.pdf",
+      "sourceUrl": "https://www.gov.uk/government/statistics/planning-applications-in-england-january-to-march-2021",
+      "license": "Publisher terms apply; binaries cached locally, not redistributed",
+      "sha256": "6a2fd7fdcf25dd3a8c9e680d840db26231beeded0e377f314f3b94f2340802df",
+      "expectedText": ["planning", "2021"]
+    }
+  ]
+}

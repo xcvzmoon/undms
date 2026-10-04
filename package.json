@@ -91,7 +91,11 @@
     "prepare": "husky",
     "changelog": "changelogen",
     "changelog:bump": "changelogen --bump",
-    "changelog:release": "changelogen --release"
+    "changelog:release": "changelogen --release",
+    "bench:report": "node --import @oxc-node/core/register benchmark/bench-report.ts",
+    "bench:ocr": "pnpm run bench:packages --only image",
+    "bench:packages": "pnpm run build && node --import @oxc-node/core/register benchmark/bench-packages.ts",
+    "bench:compare": "pnpm run build && node --import @oxc-node/core/register benchmark/bench-compare.ts"
   },
   "devDependencies": {
     "@napi-rs/cli": "^3.5.1",
@@ -114,10 +118,10 @@
   },
   "lint-staged": {
     "*.{js,ts}": [
-      "oxlint --fix"
+      "oxlint --fix --no-ignore"
     ],
     "*.{js,ts,json,jsonc,md,yml,yaml}": [
-      "oxfmt ."
+      "oxfmt"
     ],
     "*.toml": [
       "taplo format"
