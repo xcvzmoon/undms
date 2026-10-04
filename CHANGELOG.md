@@ -1,5 +1,65 @@
 # Changelog
 
+## v1.6.0
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.5.1...v1.6.0)
+
+### 🚀 Enhancements
+
+- **skills:** Add undms consumer integration guidance ([ee74794](https://github.com/xcvzmoon/undms/commit/ee74794))
+
+### 🔥 Performance
+
+- **bench:** Add realistic package and OCR resource benchmarks ([c721250](https://github.com/xcvzmoon/undms/commit/c721250))
+
+### 🩹 Fixes
+
+- **lint:** Clean up extraction tests and benchmarks ([d7b837e](https://github.com/xcvzmoon/undms/commit/d7b837e))
+- **hooks:** Allow staged files excluded by tool ignore rules ([f2382cc](https://github.com/xcvzmoon/undms/commit/f2382cc))
+- **ci:** Run Linux binding tests with container-local pnpm ([78d69f0](https://github.com/xcvzmoon/undms/commit/78d69f0))
+
+### 💅 Refactors
+
+- **core:** ⚠️  Replace comparison API with async document extraction ([80a2e2d](https://github.com/xcvzmoon/undms/commit/80a2e2d))
+
+### 📖 Documentation
+
+- **api:** Document async extraction and benchmark workflows ([e73f00b](https://github.com/xcvzmoon/undms/commit/e73f00b))
+- **bench:** Publish document and receipt OCR measurements ([72ac021](https://github.com/xcvzmoon/undms/commit/72ac021))
+- **plan:** Record refactor decisions and performance validation ([a44d319](https://github.com/xcvzmoon/undms/commit/a44d319))
+- Remove the bundled documentation site ([8506e82](https://github.com/xcvzmoon/undms/commit/8506e82))
+
+### 🏡 Chore
+
+- **agents:** Add skills ([7055761](https://github.com/xcvzmoon/undms/commit/7055761))
+- **tooling:** Adopt Vite+ and pnpm-based formatting ([4d81296](https://github.com/xcvzmoon/undms/commit/4d81296))
+- **bindings:** Refresh generated native package loaders ([8bf43ab](https://github.com/xcvzmoon/undms/commit/8bf43ab))
+- **editor:** Configure Vite+ and Oxc integration ([4225902](https://github.com/xcvzmoon/undms/commit/4225902))
+- **github:** Add structured issue templates ([12e9daa](https://github.com/xcvzmoon/undms/commit/12e9daa))
+- **skills:** Add genbumppush release guidance ([72b1b92](https://github.com/xcvzmoon/undms/commit/72b1b92))
+- **brain:** Remove historical plans and notes ([b17c56e](https://github.com/xcvzmoon/undms/commit/b17c56e))
+- **genbumppush:** Set release to minor ([2af9da9](https://github.com/xcvzmoon/undms/commit/2af9da9))
+
+### ✅ Tests
+
+- **api:** Cover async extraction contracts and resource limits ([dc406f1](https://github.com/xcvzmoon/undms/commit/dc406f1))
+
+### 🎨 Styles
+
+- **benchmarks:** Format published comparison reports ([aeaeac6](https://github.com/xcvzmoon/undms/commit/aeaeac6))
+
+### 🤖 CI
+
+- Use Vite+ and improve native build caching ([62e4d22](https://github.com/xcvzmoon/undms/commit/62e4d22))
+- **release:** Publish tested packages with npm OIDC ([e67d613](https://github.com/xcvzmoon/undms/commit/e67d613))
+
+#### ⚠️ Breaking Changes
+
+- **core:** ⚠️  Replace comparison API with async document extraction ([80a2e2d](https://github.com/xcvzmoon/undms/commit/80a2e2d))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil ([@xcvzmoon](https://github.com/xcvzmoon))
 
 ## v1.5.1
 
