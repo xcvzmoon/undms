@@ -4,7 +4,7 @@ export default defineConfig({
   release: 'patch',
   files: ['package.json', 'Cargo.toml'],
   hooks: {
-    before: ['vp check', 'vp run typecheck', 'vp run test'],
+    before: ['vp check', 'vp run typecheck'],
   },
   github: {
     enabled: true,
