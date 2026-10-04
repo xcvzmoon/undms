@@ -4,6 +4,7 @@
   "version": "1.5.1",
   "main": "index.js",
   "types": "index.d.ts",
+  "license": "MIT",
   "exports": {
     ".": {
       "types": "./index.d.ts",
@@ -22,7 +23,6 @@
     "email": "mrgamilmonalbert@gmail.com",
     "url": "https://github.com/xcvzmoon/"
   },
-  "license": "MIT",
   "keywords": [
     "document",
     "pdf",
@@ -37,18 +37,6 @@
     "index.js",
     "index.mjs"
   ],
-  "napi": {
-    "binaryName": "undms",
-    "packageName": "@xcvzmoon/undms",
-    "targets": [
-      "x86_64-pc-windows-msvc",
-      "x86_64-apple-darwin",
-      "x86_64-unknown-linux-gnu",
-      "x86_64-unknown-linux-musl",
-      "aarch64-unknown-linux-gnu",
-      "aarch64-apple-darwin"
-    ]
-  },
   "engines": {
     "node": ">=20"
   },
@@ -56,38 +44,27 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "optionalDependencies": {
-    "@xcvzmoon/undms-darwin-arm64": "1.5.1",
-    "@xcvzmoon/undms-darwin-x64": "1.5.1",
-    "@xcvzmoon/undms-linux-arm64-gnu": "1.5.1",
-    "@xcvzmoon/undms-linux-x64-gnu": "1.5.1",
-    "@xcvzmoon/undms-linux-x64-musl": "1.5.1",
-    "@xcvzmoon/undms-win32-x64-msvc": "1.5.1"
-  },
   "scripts": {
-    "artifacts": "napi artifacts",
+    "artifacts": "node scripts/napi.ts artifacts",
     "bench": "node --import @oxc-node/core/register benchmark/bench.ts",
     "bench:text": "node --import @oxc-node/core/register benchmark/bench-text.ts",
     "bench:documents": "node --import @oxc-node/core/register benchmark/bench-documents.ts",
     "bench:image": "node --import @oxc-node/core/register benchmark/bench-image.ts",
     "bench:optimization": "node --import @oxc-node/core/register benchmark/bench-optimization.ts",
-    "build": "pnpm run build:cjs && pnpm run build:esm",
-    "build:cjs": "napi build --platform --release --js index.js",
-    "build:esm": "napi build --platform --release --esm --js index.mjs",
-    "build:debug": "napi build --platform",
-    "docs": "vitepress dev docs --port 3000",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs --port 4173",
-    "format": "run-p format:oxfmt format:rs format:toml",
-    "format:oxfmt": "oxfmt && oxfmt --check",
-    "format:toml": "taplo format",
-    "format:rs": "cargo fmt",
-    "lint": "oxlint --type-aware",
+    "build": "node scripts/napi.ts build-all",
+    "build:cjs": "node scripts/napi.ts build --platform --release --js index.js",
+    "build:esm": "node scripts/napi.ts build --platform --release --esm --js index.mjs",
+    "build:debug": "node scripts/napi.ts build --platform",
+    "fmt": "run-p --npm-path pnpm fmt:oxfmt fmt:rs fmt:toml",
+    "fmt:oxfmt": "vp fmt && vp fmt --check",
+    "fmt:toml": "taplo format",
+    "fmt:rs": "cargo fmt",
+    "lint": "vp lint --type-aware",
     "prepublishOnly": "echo 'Publishing split packages via CI workflow'",
     "test": "pnpm run build && ava",
     "test:bindings": "ava",
     "preversion": "pnpm run build:cjs && pnpm run build:esm && git add .",
-    "version": "napi version",
+    "version": "node scripts/napi.ts version",
     "prepare": "husky",
     "changelog": "changelogen",
     "changelog:bump": "changelogen --bump",
@@ -95,7 +72,11 @@
     "bench:report": "node --import @oxc-node/core/register benchmark/bench-report.ts",
     "bench:ocr": "pnpm run bench:packages --only image",
     "bench:packages": "pnpm run build && node --import @oxc-node/core/register benchmark/bench-packages.ts",
-    "bench:compare": "pnpm run build && node --import @oxc-node/core/register benchmark/bench-compare.ts"
+    "bench:compare": "pnpm run build && node --import @oxc-node/core/register benchmark/bench-compare.ts",
+    "create-npm-dirs": "node scripts/napi.ts create-npm-dirs",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p __test__/tsconfig.json",
+    "check": "vp check",
+    "release": "genbumppush --yes"
   },
   "devDependencies": {
     "@napi-rs/cli": "^3.5.1",
@@ -106,22 +87,29 @@
     "chalk": "^5.6.2",
     "changelogen": "^0.6.2",
     "consola": "^3.4.2",
+    "genbumppush": "^0.0.8",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "npm-run-all2": "^8.0.4",
-    "oxfmt": "^0.31.0",
-    "oxlint": "^1.49.0",
-    "oxlint-tsgolint": "^0.12.2",
+    "oxc-minify": "^0.152.0",
     "tinybench": "^6.0.0",
     "typescript": "^5.9.3",
-    "vitepress": "2.0.0-alpha.16"
+    "vite-plus": "catalog:"
+  },
+  "optionalDependencies": {
+    "@undms/darwin-arm64": "1.5.1",
+    "@undms/darwin-x64": "1.5.1",
+    "@undms/linux-arm64-gnu": "1.5.1",
+    "@undms/linux-x64-gnu": "1.5.1",
+    "@undms/linux-x64-musl": "1.5.1",
+    "@undms/win32-x64-msvc": "1.5.1"
   },
   "lint-staged": {
     "*.{js,ts}": [
-      "oxlint --fix --no-ignore"
+      "vp lint --fix"
     ],
     "*.{js,ts,json,jsonc,md,yml,yaml}": [
-      "oxfmt"
+      "vp fmt"
     ],
     "*.toml": [
       "taplo format"
@@ -141,5 +129,12 @@
       "@oxc-node/core/register"
     ]
   },
-  "packageManager": "pnpm@10.30.1"
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.6.0",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.6.0"
 }
