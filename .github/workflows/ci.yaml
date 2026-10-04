@@ -122,6 +122,16 @@ jobs:
             ${{ env.APP_NAME }}.*.node
             ${{ env.APP_NAME }}.*.wasm
           if-no-files-found: error
+      - name: Upload generated package entry points
+        if: matrix.settings.target == 'x86_64-unknown-linux-gnu'
+        uses: actions/upload-artifact@v7
+        with:
+          name: package-entry-points
+          path: |
+            index.js
+            index.mjs
+            index.d.ts
+          if-no-files-found: error
   # Temporarily disabled to skip binding tests on main.
   test-macOS-windows-binding:
     if: ${{ false }}
