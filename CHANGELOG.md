@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.6.3
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.6.2...v1.6.3)
+
+### 🩹 Fixes
+
+- **publish:** Validate packages and support bootstrap and retries ([3837017](https://github.com/xcvzmoon/undms/commit/3837017))
+- **ci:** Upload fresh generated release entry points ([217b462](https://github.com/xcvzmoon/undms/commit/217b462))
+- **ci:** Integrate validated publishing and fresh release loaders ([0aa29ca](https://github.com/xcvzmoon/undms/commit/0aa29ca))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil ([@xcvzmoon](https://github.com/xcvzmoon))
+
 ## v1.6.2
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.6.1...v1.6.2)
