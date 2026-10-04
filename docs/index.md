@@ -1,112 +1,48 @@
 ---
 layout: home
 title: undms
-titleTemplate: Document Text & Metadata Extraction Library
-
+titleTemplate: Document text and metadata extraction
 hero:
   name: undms
-  text: Document Text & Metadata Extraction
-  tagline: High-performance document processing with built-in similarity comparison
+  text: Async document extraction
+  tagline: Text, metadata, and image OCR through one Rust engine
   image:
     src: /undms.png
     alt: undms logo
   actions:
     - theme: brand
-      text: Get Started
+      text: Get started
       link: /guide/getting-started
     - theme: alt
-      text: View API
+      text: API reference
       link: /api/extract
+features:
+  - title: Document formats
+    details: Plain text, DOCX, XLSX, PPTX, PDF, and images.
+  - title: Ordered batches
+    details: Bounded concurrency with an outcome for every input document.
+  - title: Typed results
+    details: Tagged outcomes and format metadata with reusable options.
+  - title: Image OCR
+    details: Embedded ocrs/rten models, initialized when OCR is requested.
 ---
 
-<script setup>
-const features = [
-  {
-    icon: '📄',
-    title: 'Multi-Format Support',
-    details: 'Extract text from PDF, DOCX, XLSX, PPTX, images, and plain text files with a unified API',
-  },
-  {
-    icon: '🔍',
-    title: 'Similarity Comparison',
-    details: 'Compare documents against reference texts using Jaccard, N-gram, Levenshtein, or hybrid algorithms',
-  },
-  {
-    icon: '📊',
-    title: 'Rich Metadata',
-    details: 'Extract format-specific metadata including EXIF data, PDF properties, DOCX statistics, and more',
-  },
-  {
-    icon: '🖼️',
-    title: 'OCR Support',
-    details: 'Extract text from images using Tesseract OCR with automatic language detection',
-  },
-  {
-    icon: '⚡',
-    title: 'Parallel Processing',
-    details: 'Documents are processed concurrently using Rayon for maximum performance',
-  },
-  {
-    icon: '💎',
-    title: 'TypeScript Support',
-    details: 'Full type definitions included with intelligent autocomplete and type safety',
-  },
-]
-</script>
-
-<div class="features">
-  <div v-for="feature in features" class="feature">
-    <div class="feature-icon">{{ feature.icon }}</div>
-    <h3>{{ feature.title }}</h3>
-    <p>{{ feature.details }}</p>
-  </div>
-</div>
-
-## Quick Example
-
-Extract text and metadata from documents with a simple function call:
+## Example
 
 ```ts
-import { extract, computeDocumentSimilarity } from 'undms';
+import { readFile } from 'node:fs/promises';
+import { extract } from 'undms';
 
-const documents = [
-  {
-    name: 'report.pdf',
-    size: 1024,
-    type: 'application/pdf',
-    lastModified: Date.now(),
-    webkitRelativePath: '',
-    buffer: Buffer.from(pdfData),
-  },
-];
+const outcome = await extract({
+  data: await readFile('report.pdf'),
+  name: 'report.pdf',
+});
 
-const result = extract(documents);
-console.log(result[0].documents[0].content);
-console.log(result[0].documents[0].metadata);
+if (outcome.status === 'error') {
+  console.error(outcome.error.code, outcome.error.message);
+} else {
+  console.log(outcome.result.text);
+  console.log(outcome.result.metadata);
+  console.log(outcome.result.warnings);
+}
 ```
-
-## Performance
-
-Built with Rust using [napi-rs](https://napi.rs/) for native Node.js performance:
-
-| Operation         | Time   |
-| ----------------- | ------ |
-| Extract 10 PDFs   | ~50ms  |
-| Extract 10 DOCX   | ~30ms  |
-| Extract 10 Images | ~120ms |
-| Similarity Check  | ~5ms   |
-
-## Supported Platforms
-
-<div class="platforms">
-
-- Node.js 12.22+ (except 13.x)
-- Node.js 14.17+, 15.12+, 16+
-- Bun
-- Web browsers (via browser.js)
-
-</div>
-
-## License
-
-MIT License - [View on GitHub](https://github.com/xcvzmoon/undms)

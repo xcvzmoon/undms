@@ -3,8 +3,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   base: '/undms/',
   title: 'undms',
-  description:
-    'High-performance document text and metadata extraction library with similarity comparison',
+  description: 'Async document text and metadata extraction library',
   appearance: 'dark',
   lastUpdated: true,
   cleanUrls: true,
@@ -63,10 +62,6 @@ export default defineConfig({
               text: 'Architecture',
               link: '/guide/architecture',
             },
-            {
-              text: 'Similarity Algorithms',
-              link: '/guide/similarity',
-            },
           ],
         },
       ],
@@ -78,14 +73,7 @@ export default defineConfig({
               text: 'extract',
               link: '/api/extract',
             },
-            {
-              text: 'computeDocumentSimilarity',
-              link: '/api/compute-document-similarity',
-            },
-            {
-              text: 'computeTextSimilarity',
-              link: '/api/compute-text-similarity',
-            },
+            { text: 'extractBatch', link: '/api/extract-batch' },
             {
               text: 'Type Definitions',
               link: '/api/types',
@@ -115,10 +103,6 @@ export default defineConfig({
           text: 'Advanced',
           items: [
             {
-              text: 'Similarity Comparison',
-              link: '/examples/similarity-comparison',
-            },
-            {
               text: 'Batch Processing',
               link: '/examples/batch-processing',
             },
@@ -136,10 +120,6 @@ export default defineConfig({
             {
               text: 'Performance Optimization',
               link: '/advanced/performance',
-            },
-            {
-              text: 'Browser Usage',
-              link: '/advanced/browser-usage',
             },
             {
               text: 'Extensibility',
