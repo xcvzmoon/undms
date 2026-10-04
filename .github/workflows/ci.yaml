@@ -24,9 +24,9 @@ on:
 
 concurrency:
   group: >-
-    ${{ github.workflow }}-${{ startsWith(github.event.head_commit.message, 'release: v') && github.sha || github.ref }}
+    ${{ github.workflow }}-${{ startsWith(github.event.head_commit.message, 'chore(release): v') && github.sha || github.ref }}
   cancel-in-progress: >-
-    ${{ !startsWith(github.event.head_commit.message, 'release: v') }}
+    ${{ !startsWith(github.event.head_commit.message, 'chore(release): v') }}
 
 jobs:
   lint:
@@ -53,9 +53,10 @@ jobs:
         run: cargo fmt -- --check
       - name: Clippy
         run: cargo clippy
-  # Temporarily disabled to keep main CI fast while release validation is green.
+  # Run expensive native builds only for release commits; normal main CI stays fast.
   build:
-    if: ${{ false }}
+    if: >-
+      startsWith(github.event.head_commit.message, 'chore(release): v')
     strategy:
       fail-fast: false
       matrix:
@@ -225,17 +226,32 @@ jobs:
   ci:
     name: CI
     if: always()
-    needs: [lint]
+    needs: [lint, build, test-macOS-windows-binding, test-linux-binding]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: Check job results
         env:
-          RESULTS: ${{ join(needs.*.result, ',') }}
+          IS_RELEASE: >-
+            ${{ startsWith(github.event.head_commit.message, 'chore(release): v') }}
+          LINT_RESULT: ${{ needs.lint.result }}
+          BUILD_RESULT: ${{ needs.build.result }}
+          MACOS_WINDOWS_TEST_RESULT: ${{ needs.test-macOS-windows-binding.result }}
+          LINUX_TEST_RESULT: ${{ needs.test-linux-binding.result }}
         run: |
-          case "$RESULTS" in
-            *failure*|*cancelled*|*skipped*)
-              echo "One or more required jobs did not pass."
+          if [ "$LINT_RESULT" != "success" ]; then
+            echo "Lint job did not pass: $LINT_RESULT"
+            exit 1
+          fi
+
+          if [ "$IS_RELEASE" = "true" ] && [ "$BUILD_RESULT" != "success" ]; then
+            echo "Release build job did not pass: $BUILD_RESULT"
+            exit 1
+          fi
+
+          case "$BUILD_RESULT,$MACOS_WINDOWS_TEST_RESULT,$LINUX_TEST_RESULT" in
+            *failure*|*cancelled*)
+              echo "One or more optional jobs failed or were cancelled."
               exit 1
               ;;
           esac

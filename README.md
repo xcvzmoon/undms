@@ -1,6 +1,6 @@
 # UNDMS
 
-[![CI](https://img.shields.io/github/actions/workflow/status/xcvzmoon/undms/CI.yaml?branch=main)](https://github.com/xcvzmoon/undms/actions/workflows/CI.yaml)
+[![CI](https://img.shields.io/github/actions/workflow/status/xcvzmoon/undms/ci.yaml?branch=main)](https://github.com/xcvzmoon/undms/actions/workflows/ci.yaml)
 [![npm version](https://img.shields.io/npm/v/undms)](https://www.npmjs.com/package/undms)
 
 Async document text and metadata extraction for Node.js, built in Rust with napi-rs. Supports plain text, DOCX, XLSX, PPTX, PDF, and images. Image OCR uses ocrs and rten with embedded models.

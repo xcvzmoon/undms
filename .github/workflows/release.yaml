@@ -16,7 +16,7 @@ jobs:
   create-release:
     name: Create Release
     if: >-
-      startsWith(github.event.head_commit.message, 'release: v')
+      startsWith(github.event.head_commit.message, 'chore(release): v')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -29,13 +29,12 @@ jobs:
       - name: Verify release commit and tag
         run: |
           version=$(node -p "require('./package.json').version")
-          test "$(git log -1 --format=%s)" = "release: v$version"
+          test "$(git log -1 --format=%s)" = "chore(release): v$version"
           test "$(git rev-parse "refs/tags/v$version^{commit}")" = "$(git rev-parse HEAD)"
-      - name: Check, build, and test
+      - name: Check release metadata
         run: |
           vp check
           vp run typecheck
-          vp run test
       - name: Create or sync GitHub release
         env:
           GENBUMPPUSH_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

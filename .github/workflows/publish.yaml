@@ -22,7 +22,7 @@ jobs:
       github.event.workflow_run.event == 'push' &&
       github.event.workflow_run.head_branch == 'main' &&
       github.event.workflow_run.head_repository.full_name == github.repository &&
-      startsWith(github.event.workflow_run.head_commit.message, 'release: v')
+      startsWith(github.event.workflow_run.head_commit.message, 'chore(release): v')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -39,7 +39,7 @@ jobs:
       - name: Verify release commit and tag
         run: |
           version=$(node -p "require('./package.json').version")
-          test "$(git log -1 --format=%s)" = "release: v$version"
+          test "$(git log -1 --format=%s)" = "chore(release): v$version"
           test "$(git rev-parse "refs/tags/v$version^{commit}")" = "$(git rev-parse HEAD)"
       - name: Setup project
         uses: ./.github/actions/setup-project
