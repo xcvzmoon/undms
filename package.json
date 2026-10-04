@@ -106,10 +106,10 @@
   },
   "lint-staged": {
     "*.{js,ts}": [
-      "vp lint --fix"
+      "vp lint --fix --no-error-on-unmatched-pattern"
     ],
     "*.{js,ts,json,jsonc,md,yml,yaml}": [
-      "vp fmt"
+      "vp fmt --no-error-on-unmatched-pattern"
     ],
     "*.toml": [
       "taplo format"
