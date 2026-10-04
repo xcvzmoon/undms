@@ -1,7 +1,7 @@
 {
   "name": "undms",
+  "description": "Asynchronous document text and metadata extraction with bounded single and batch processing",
   "version": "1.5.1",
-  "description": "Text and Metadata Extraction Library for Document Files with Text Similarity Comparison",
   "main": "index.js",
   "types": "index.d.ts",
   "exports": {
@@ -23,7 +23,6 @@
     "url": "https://github.com/xcvzmoon/"
   },
   "license": "MIT",
-  "browser": "browser.js",
   "keywords": [
     "document",
     "pdf",
@@ -31,14 +30,12 @@
     "docs",
     "excel",
     "text-extraction",
-    "metadata-extraction",
-    "text-similarity-comparision"
+    "metadata-extraction"
   ],
   "files": [
     "index.d.ts",
     "index.js",
-    "index.mjs",
-    "browser.js"
+    "index.mjs"
   ],
   "napi": {
     "binaryName": "undms",
@@ -71,7 +68,6 @@
     "artifacts": "napi artifacts",
     "bench": "node --import @oxc-node/core/register benchmark/bench.ts",
     "bench:text": "node --import @oxc-node/core/register benchmark/bench-text.ts",
-    "bench:similarity": "node --import @oxc-node/core/register benchmark/bench-similarity.ts",
     "bench:documents": "node --import @oxc-node/core/register benchmark/bench-documents.ts",
     "bench:image": "node --import @oxc-node/core/register benchmark/bench-image.ts",
     "bench:optimization": "node --import @oxc-node/core/register benchmark/bench-optimization.ts",
@@ -98,12 +94,9 @@
     "changelog:release": "changelogen --release"
   },
   "devDependencies": {
-    "@emnapi/core": "^1.8.1",
-    "@emnapi/runtime": "^1.8.1",
     "@napi-rs/cli": "^3.5.1",
     "@oxc-node/core": "^0.0.35",
     "@taplo/cli": "^0.7.0",
-    "@tybys/wasm-util": "^0.10.1",
     "@types/node": "^25.3.0",
     "ava": "^6.4.1",
     "chalk": "^5.6.2",
