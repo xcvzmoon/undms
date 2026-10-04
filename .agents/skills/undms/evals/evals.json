@@ -1,0 +1,77 @@
+{
+  "skill_name": "undms",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm adding undms to a Node TypeScript app. Write an async function that reads report.pdf and returns its text and metadata. Keep usable partial output and show how the caller distinguishes a corrupt document from a rejected request. Use the current public API and don't modify the library.",
+      "expected_output": "Type-safe consumer code using readFile, Buffer input, awaited extract, explicit outcome narrowing and partial warnings, plus separate rejected-request handling.",
+      "files": [],
+      "expectations": [
+        "Uses extract with an object containing data from a Buffer rather than passing a path directly.",
+        "Narrows status before reading result and preserves partial output and warnings.",
+        "Handles Promise rejection separately from a resolved error outcome.",
+        "Does not invent API fields or edit generated bindings."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I have a mixed batch of PDF, DOCX, and text upload Buffers, some corrupt, and IDs can repeat. Use undms to process up to 100 uploads at concurrency 2, with an 8 MiB per-file input cap and 32 MiB total input cap. Preserve original order and report successes, partials, and errors independently. Avoid unbounded Promise.all.",
+      "expected_output": "A bounded extractBatch integration with nested extraction.limits, top-level batch budgets, index-based order/identity, per-document outcomes, summary counts, and whole-request rejection handling.",
+      "files": [],
+      "expectations": [
+        "Uses extractBatch with concurrency 2 and maxDocuments 100.",
+        "Places maxInputBytes under extraction.limits and maxTotalInputBytes at the batch top level with correct MiB values.",
+        "Preserves item indexes and order without a duplicate-ID map that loses results.",
+        "Reports all three outcome statuses and handles batch rejection separately."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Use undms to get JPEG dimensions and camera metadata without running OCR. Then explain how I would get text from a scanned PDF in a browser. If undms cannot do that directly, tell me rather than inventing an option. I don't want to download OCR models manually.",
+      "expected_output": "Metadata-only image extraction with OcrMode.Disabled, no statistics:true, image-kind narrowing, and an accurate explanation of native Node-only execution, embedded models, and separate scanned-PDF rendering/image OCR.",
+      "files": [],
+      "expectations": [
+        "Uses ExtractionSelection.Metadata and OcrMode.Disabled without enabling text statistics.",
+        "Narrows successful/partial outcome and metadata.format.kind before reading image details.",
+        "Explains that browser execution and direct scanned-PDF OCR are not supported by this API.",
+        "Explains embedded OCR models and proposes separate rendering to images in a Node-side pipeline rather than inventing a model-path or PDF-OCR option."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "undms returns UNSUPPORTED_FORMAT for Buffer.from([0x63, 0x61, 0x66, 0xe9]) even though I set name to cafe.txt and text.encoding to windows-1252. Explain why and write a corrected TypeScript call that extracts café without replacement decoding.",
+      "expected_output": "Explains that name is identity metadata and encoding does not select the format; supplies mimeType text/plain and strict Windows-1252 decoding with outcome narrowing.",
+      "files": [],
+      "expectations": [
+        "Explains that filename extensions do not drive format detection.",
+        "Supplies mimeType text/plain on the input and windows-1252 under text.encoding.",
+        "Uses DecodingPolicy.Strict and narrows outcome before reading text.",
+        "Does not recommend renaming the file or enabling replacement decoding as the fix."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "My undms wrapper is extract(input, options).catch(handleError), but it misses errors when selection is Text and statistics is true. Rewrite it safely in TypeScript, explain the two failure channels, and show tests for synchronous invalid-option throws and Promise rejection without treating document error outcomes as exceptions.",
+      "expected_output": "An async try/await/catch wrapper, correct statistics/selection constraints, synchronous-throw and rejected-Promise tests, and distinct resolved error handling.",
+      "files": [],
+      "expectations": [
+        "Places the extract invocation inside try/catch with await so synchronous throws and rejections are both caught.",
+        "Explains that statistics true requires Metadata or Both selection.",
+        "Includes separate tests for a synchronous throw and a rejected Promise; mocks, if needed, are labeled as simulated infrastructure failures.",
+        "Preserves resolved error outcomes as document failures rather than describing all failures as Promise rejection."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Write undms extractBatch boundary tests for concurrency 0, 1, 32, and 33 using tiny local Buffers. Then explain whether concurrency 32 gives me 32-way CPU extraction or parallel image OCR. Include a test for text-only selection with statistics true.",
+      "expected_output": "Executable tests showing concurrency 1 and 32 accepted, 0 and 33 throwing, incompatible statistics selection throwing, and accurate CPU cap/serial OCR guidance.",
+      "files": [],
+      "expectations": [
+        "Tests acceptance of concurrency 1 and 32 and invalid-argument throws for 0 and 33.",
+        "Tests text-only selection with statistics true as an invalid option combination.",
+        "Explains that effective CPU concurrency is capped by the worker pool rather than equaling 32.",
+        "Explains that image OCR uses a serial lane and does not invent parallel OCR or cancellation options."
+      ]
+    }
+  ]
+}
