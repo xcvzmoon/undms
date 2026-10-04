@@ -132,6 +132,4 @@ Cargo.lock
 artifacts/
 benchmark/results/
 
-.vitepress
-
 benchmark/corpus-cache/

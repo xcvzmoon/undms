@@ -79,17 +79,9 @@ The default selection is both text and metadata, including text statistics. Meta
 
 Outcomes are a tagged union: `success`, `partial`, or `error`. Successful and partial results contain source identity, optional text/encoding/metadata, warnings, and optional timing metrics. Metadata separates common `properties`, optional `statistics`, and tagged `format` details.
 
-Native work uses bounded CPU workers and a separate image/OCR worker. Per-document and batch limits constrain inputs, outputs, ZIP expansion, archive entry counts, and image pixels. Calamine and lopdf allocate internally; these limits are not a hard process-memory or timeout sandbox. See [performance and limits](docs/advanced/performance.md).
+Native work uses bounded CPU workers and a separate image/OCR worker. Per-document and batch limits constrain inputs, outputs, ZIP expansion, archive entry counts, and image pixels. Calamine and lopdf allocate internally; these limits are not a hard process-memory or timeout sandbox.
 
 This package supports native Node.js extraction. Browser and WebAssembly support are outside the scope of this refactor.
-
-## Documentation
-
-- [Getting started](docs/guide/getting-started.md)
-- [Single extraction](docs/api/extract.md)
-- [Batch extraction](docs/api/extract-batch.md)
-- [Types and options](docs/api/types.md)
-- [Supported formats](docs/guide/supported-formats.md)
 
 ## Benchmarks
 
@@ -141,12 +133,16 @@ pnpm install
 pnpm build
 pnpm test
 pnpm lint
-pnpm format
+vp run fmt
 ```
 
 Compare this workspace with the active published release using `pnpm bench:compare`, or with other Node.js extraction packages using `pnpm bench:packages`. See [benchmark instructions](benchmark/README.md) for version selection, OCR, workload filtering, and generated reports.
 
-Generated bindings and TypeScript declarations come from the Rust API; edit the Rust source to change them. Native targets cover macOS, Windows, and Linux as configured in `package.json`.
+Generated bindings and TypeScript declarations come from the Rust API; edit the Rust source to change them. Native targets cover macOS, Windows, and Linux as configured in `scripts/napi.config.ts`. The TypeScript wrapper in `scripts/napi.ts` passes a temporary JSON config to napi and generates platform packages named `@undms/<platform>`. Use `pnpm run create-npm-dirs` to generate package manifests; build, artifact, and version scripts use the same wrapper.
+
+## Release
+
+Run `pnpm release --dry-run` to preview the configured major release, then `pnpm release` to bump the Node package and Rust crate, write the changelog, commit, tag, and push. GitHub release creation is enabled; provide `GENBUMPPUSH_GITHUB_TOKEN` through the environment. Release commits using `release: v<version>` trigger CI; `.github/workflows/publish.yaml` publishes the tested native packages using npm trusted publishing after CI succeeds. Configure each package's trusted publisher before releasing; see [.github/RELEASING.md](.github/RELEASING.md).
 
 ## License
 
