@@ -50,6 +50,13 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           pattern: bindings-*
           path: artifacts
+      - name: Download generated package entry points
+        uses: actions/download-artifact@v8
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+          name: package-entry-points
+          path: .
       - name: Create npm dirs
         run: vp run create-npm-dirs
       - name: Synchronize platform dependency versions
@@ -62,18 +69,8 @@ jobs:
           run_install: false
       - name: Verify publishing toolchain
         run: pnpm --version
-      - name: Publish with npm trusted publishing
-        run: |
-          # pnpm 12 exchanges GitHub OIDC credentials for per-package npm tokens.
-          # All seven packages must trust publish.yaml in their npm settings.
-          package_version=$(node -p "require('./package.json').version")
-          case "$package_version" in
-            *-*) TAG=next ;;
-            *) TAG=latest ;;
-          esac
-
-          for pkg in ./npm/*; do
-            pnpm publish "$pkg" --tag "$TAG" --access public --provenance
-          done
-
-          pnpm publish --tag "$TAG" --access public --provenance
+      - name: Validate and publish packages
+        env:
+          # Used only to bootstrap packages that do not yet exist on npm.
+          NPM_BOOTSTRAP_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: node scripts/publish.ts
