@@ -36,3 +36,11 @@ Do not configure a global npm auth token or project `.npmrc`; token-based authen
 The publish script validates package versions, nonempty native bindings, and generated loader versions before uploading. It skips versions already present on npm so a partial publication can be retried. This does not repair incorrect dist-tags or verify private trusted-publisher settings.
 
 Release CI must upload both `bindings-*` and `package-entry-points`. Older CI runs without entry-point artifacts cannot be published with this workflow; use a release commit containing these workflow/script changes. Do not repeatedly bump versions to diagnose publishing errors.
+
+## Retry without changing the version
+
+An OIDC token exchange failure for an existing package usually means its npm trusted publisher is missing or does not match this repository and `publish.yaml`. Package existence alone does not mean trusted publishing is configured. The normal workflow deliberately does not fall back to a token.
+
+For token-based recovery, push the recovery tooling to `main`, then run **Retry npm publication** (`publish-retry.yaml`) from the Actions tab. Supply the successful original release CI run ID, not the failed Publish run ID. The workflow verifies that the run is a successful main-branch push from this repository, checks out its release commit, verifies its version tag, and downloads its original bindings and entry points. It uses the updated publishing script with `--token-auth` and skips versions already published. It does not bump versions, move tags, or rebuild bindings.
+
+Set the GitHub `NPM_TOKEN` secret to a valid npm token with write access to all seven packages and permission to publish non-interactively (including bypassing 2FA where required). Tokens cannot override a package policy that disallows token-based publication. Artifacts must still be available from the original CI run. Restore trusted publisher settings before returning to automatic OIDC publishing; revoke the recovery token when no longer needed.
