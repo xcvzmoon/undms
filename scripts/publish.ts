@@ -11,6 +11,8 @@ const dependencies = object(root.optionalDependencies);
 const tag = version.includes('-') ? 'next' : 'latest';
 const dryRun = process.argv.includes('--dry-run');
 const token = process.env.NPM_BOOTSTRAP_TOKEN;
+const tokenAuth = process.argv.includes('--token-auth');
+assert(!tokenAuth || token || dryRun, '--token-auth requires the NPM_TOKEN secret');
 const directories = (await readdir('npm', { withFileTypes: true }))
   .filter((entry) => entry.isDirectory())
   .map((entry) => `npm/${entry.name}`);
@@ -68,7 +70,7 @@ try {
       mode: 0o600,
     });
   }
-  if (!dryRun && packages.some((pkg) => !pkg.exists)) {
+  if (!dryRun && (tokenAuth || packages.some((pkg) => !pkg.exists))) {
     const authentication = spawnSync(
       'pnpm',
       ['whoami', '--registry', registry, '--npmrc-auth-file', authFile],
@@ -77,7 +79,7 @@ try {
     if (authentication.error) throw authentication.error;
     assert.equal(authentication.status, 0, 'NPM_TOKEN authentication failed before publication');
   }
-  if (!dryRun && packages.some((pkg) => pkg.exists && !pkg.published)) {
+  if (!dryRun && !tokenAuth && packages.some((pkg) => pkg.exists && !pkg.published)) {
     assert(
       process.env.ACTIONS_ID_TOKEN_REQUEST_URL && process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN,
       'Trusted publishing requires GitHub Actions id-token: write',
@@ -89,7 +91,7 @@ try {
       continue;
     }
     console.info(
-      `${pkg.name}@${version}: ${pkg.exists ? 'trusted publishing' : 'initial token publication'}`,
+      `${pkg.name}@${version}: ${tokenAuth ? 'explicit token publication' : pkg.exists ? 'trusted publishing' : 'initial token publication'}`,
     );
     const args = [
       'publish',
@@ -104,10 +106,10 @@ try {
       registry,
     ];
     if (dryRun) args.push('--dry-run');
-    else if (!pkg.exists) args.push('--npmrc-auth-file', authFile);
-    // Existing packages use OIDC, not the bootstrap token.
+    else if (tokenAuth || !pkg.exists) args.push('--npmrc-auth-file', authFile);
+    // Token recovery is explicit; never silently downgrade failed OIDC authentication.
     const environment = { ...process.env };
-    if (pkg.exists || dryRun) delete environment.NPM_BOOTSTRAP_TOKEN;
+    if ((!tokenAuth && pkg.exists) || dryRun) delete environment.NPM_BOOTSTRAP_TOKEN;
     const result = spawnSync('pnpm', args, { stdio: 'inherit', env: environment });
     if (result.error) throw result.error;
     assert.equal(result.status, 0, `Publishing ${pkg.name} failed`);
