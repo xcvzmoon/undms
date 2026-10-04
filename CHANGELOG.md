@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.6.2
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.6.1...v1.6.2)
+
+### 🩹 Fixes
+
+- **ci:** Install pnpm before publishing ([9f66193](https://github.com/xcvzmoon/undms/commit/9f66193))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil ([@xcvzmoon](https://github.com/xcvzmoon))
+
 ## v1.6.1
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.6.0...v1.6.1)
