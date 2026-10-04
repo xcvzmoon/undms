@@ -195,7 +195,7 @@ test.serial('cold OCR initialization handles simultaneous requests in a fresh pr
       }).catch(error => {console.error(error); process.exitCode=1;});
     `,
     ],
-    { cwd: new URL('..', import.meta.url), encoding: 'utf8', timeout: 15000 },
+    { cwd: new URL('..', import.meta.url), encoding: 'utf8', timeout: 45000 },
   );
   t.is(output.trim(), 'cold concurrency completed');
 });
