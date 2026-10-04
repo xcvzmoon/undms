@@ -35,4 +35,8 @@ undms.wasi.cjs                   linguist-detectable=false
 wasi-worker-browser.mjs          linguist-detectable=false
 wasi-worker.mjs                  linguist-detectable=false
 
+# Exclude benchmarks and tooling from GitHub language statistics
+benchmark/**                     linguist-detectable=false
+scripts/**                       linguist-detectable=false
+
 .agents/** linguist-vendored
