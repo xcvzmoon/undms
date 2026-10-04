@@ -67,50 +67,54 @@ CPU uses OS process user + system counters during sustained extraction, wall-tim
 ### SROIE receipt 000
 
 image / single; 1 documents: sroie-000.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 515.13 | 506.25 | 313.71 | 528 |
-| tesseract.js | 0 | 517.45 | 730.37 | 7.30 | 499 |
-| tesseract.js | 1 | 517.59 | 731.36 | 4.67 | 499 |
-| undms | 1 | 510.90 | 541.87 | 8.50 | 528 |
-| undms | 2 | 530.39 | 495.80 | 4.09 | 528 |
-| tesseract.js | 2 | 516.30 | 730.95 | 7.30 | 499 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |           515.13 |  506.25 |  313.71 | 528                 |
+| tesseract.js |     0 |           517.45 |  730.37 |    7.30 | 499                 |
+| tesseract.js |     1 |           517.59 |  731.36 |    4.67 | 499                 |
+| undms        |     1 |           510.90 |  541.87 |    8.50 | 528                 |
+| undms        |     2 |           530.39 |  495.80 |    4.09 | 528                 |
+| tesseract.js |     2 |           516.30 |  730.95 |    7.30 | 499                 |
 
 ### SROIE receipt 001
 
 image / single; 1 documents: sroie-001.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 546.65 | 498.91 | 4.52 | 550 |
-| tesseract.js | 0 | 652.20 | 867.23 | 7.39 | 612 |
-| tesseract.js | 1 | 654.45 | 874.75 | 4.41 | 612 |
-| undms | 1 | 537.19 | 536.72 | 8.07 | 550 |
-| undms | 2 | 566.89 | 540.91 | 4.48 | 550 |
-| tesseract.js | 2 | 653.21 | 870.04 | 6.94 | 612 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |           546.65 |  498.91 |    4.52 | 550                 |
+| tesseract.js |     0 |           652.20 |  867.23 |    7.39 | 612                 |
+| tesseract.js |     1 |           654.45 |  874.75 |    4.41 | 612                 |
+| undms        |     1 |           537.19 |  536.72 |    8.07 | 550                 |
+| undms        |     2 |           566.89 |  540.91 |    4.48 | 550                 |
+| tesseract.js |     2 |           653.21 |  870.04 |    6.94 | 612                 |
 
 ### SROIE receipt 002
 
 image / single; 1 documents: sroie-002.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 683.45 | 935.47 | 8.25 | 709 |
-| tesseract.js | 0 | 732.52 | 979.46 | 7.04 | 734 |
-| tesseract.js | 1 | 733.48 | 949.34 | 7.19 | 734 |
-| undms | 1 | 638.93 | 619.54 | 8.25 | 709 |
-| undms | 2 | 667.55 | 619.42 | 4.42 | 709 |
-| tesseract.js | 2 | 731.59 | 1005.64 | 8.88 | 734 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |           683.45 |  935.47 |    8.25 | 709                 |
+| tesseract.js |     0 |           732.52 |  979.46 |    7.04 | 734                 |
+| tesseract.js |     1 |           733.48 |  949.34 |    7.19 | 734                 |
+| undms        |     1 |           638.93 |  619.54 |    8.25 | 709                 |
+| undms        |     2 |           667.55 |  619.42 |    4.42 | 709                 |
+| tesseract.js |     2 |           731.59 | 1005.64 |    8.88 | 734                 |
 
 ### IMAGE inbox (3 unique documents)
 
 image / batch; 3 documents: sroie-000, sroie-001, sroie-002.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 1815.22 | 1704.81 | 5.49 | 528, 550, 709 |
-| tesseract.js | 0 | 856.27 | 1120.89 | 7.76 | 499, 612, 734 |
-| tesseract.js | 1 | 853.39 | 1096.13 | 4.51 | 499, 612, 734 |
-| undms | 1 | 1855.25 | 1775.26 | 8.54 | 528, 550, 709 |
-| undms | 2 | 1915.51 | 1870.91 | 4.78 | 528, 550, 709 |
-| tesseract.js | 2 | 876.98 | 1158.08 | 8.08 | 499, 612, 734 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |          1815.22 | 1704.81 |    5.49 | 528, 550, 709       |
+| tesseract.js |     0 |           856.27 | 1120.89 |    7.76 | 499, 612, 734       |
+| tesseract.js |     1 |           853.39 | 1096.13 |    4.51 | 499, 612, 734       |
+| undms        |     1 |          1855.25 | 1775.26 |    8.54 | 528, 550, 709       |
+| undms        |     2 |          1915.51 | 1870.91 |    4.78 | 528, 550, 709       |
+| tesseract.js |     2 |           876.98 | 1158.08 |    8.08 | 499, 612, 734       |
 
 </details>
 

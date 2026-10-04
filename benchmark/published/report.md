@@ -77,176 +77,189 @@ CPU uses OS process user + system counters during sustained extraction, wall-tim
 ### Sewage discharge consultation
 
 docx / single; 1 documents: sewage-consultation.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 3.14 | 5.40 | 377.70 | 32356 |
-| officeparser | 0 | 127.84 | 282.54 | 80.69 | 35368 |
-| mammoth | 0 | 72.91 | 125.06 | 61.82 | 32713 |
-| officeparser | 1 | 126.38 | 221.79 | 71.13 | 35368 |
-| mammoth | 1 | 71.70 | 127.19 | 31.09 | 32713 |
-| undms | 1 | 3.17 | 6.25 | 8.26 | 32356 |
-| mammoth | 2 | 73.86 | 127.31 | 32.19 | 32713 |
-| undms | 2 | 3.15 | 3.44 | 3.95 | 32356 |
-| officeparser | 2 | 125.81 | 219.23 | 46.53 | 35368 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |             3.14 |    5.40 |  377.70 | 32356               |
+| officeparser |     0 |           127.84 |  282.54 |   80.69 | 35368               |
+| mammoth      |     0 |            72.91 |  125.06 |   61.82 | 32713               |
+| officeparser |     1 |           126.38 |  221.79 |   71.13 | 35368               |
+| mammoth      |     1 |            71.70 |  127.19 |   31.09 | 32713               |
+| undms        |     1 |             3.17 |    6.25 |    8.26 | 32356               |
+| mammoth      |     2 |            73.86 |  127.31 |   32.19 | 32713               |
+| undms        |     2 |             3.15 |    3.44 |    3.95 | 32356               |
+| officeparser |     2 |           125.81 |  219.23 |   46.53 | 35368               |
 
 ### Sewage discharge risk assessment
 
 docx / single; 1 documents: sewage-risk.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 0.96 | 1.18 | 3.95 | 18779 |
-| officeparser | 0 | 31.15 | 101.44 | 48.44 | 18917 |
-| mammoth | 0 | 18.25 | 50.31 | 59.72 | 18975 |
-| officeparser | 1 | 31.01 | 100.04 | 47.08 | 18917 |
-| mammoth | 1 | 18.26 | 50.92 | 30.95 | 18975 |
-| undms | 1 | 0.93 | 3.36 | 9.33 | 18779 |
-| mammoth | 2 | 18.78 | 51.03 | 30.59 | 18975 |
-| undms | 2 | 0.95 | 1.17 | 4.07 | 18779 |
-| officeparser | 2 | 31.87 | 117.10 | 76.92 | 18917 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |             0.96 |    1.18 |    3.95 | 18779               |
+| officeparser |     0 |            31.15 |  101.44 |   48.44 | 18917               |
+| mammoth      |     0 |            18.25 |   50.31 |   59.72 | 18975               |
+| officeparser |     1 |            31.01 |  100.04 |   47.08 | 18917               |
+| mammoth      |     1 |            18.26 |   50.92 |   30.95 | 18975               |
+| undms        |     1 |             0.93 |    3.36 |    9.33 | 18779               |
+| mammoth      |     2 |            18.78 |   51.03 |   30.59 | 18975               |
+| undms        |     2 |             0.95 |    1.17 |    4.07 | 18779               |
+| officeparser |     2 |            31.87 |  117.10 |   76.92 | 18917               |
 
 ### Departmental public spending budgets
 
 xlsx / single; 1 documents: public-budgets.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 4.71 | 5.84 | 4.45 | 54320 |
-| officeparser | 0 | 20.92 | 85.69 | 47.51 | 52695 |
-| officeparser | 1 | 21.47 | 88.31 | 50.80 | 52695 |
-| undms | 1 | 4.73 | 7.13 | 8.31 | 54320 |
-| undms | 2 | 4.80 | 5.17 | 4.04 | 54320 |
-| officeparser | 2 | 20.99 | 100.40 | 80.45 | 52695 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |             4.71 |    5.84 |    4.45 | 54320               |
+| officeparser |     0 |            20.92 |   85.69 |   47.51 | 52695               |
+| officeparser |     1 |            21.47 |   88.31 |   50.80 | 52695               |
+| undms        |     1 |             4.73 |    7.13 |    8.31 | 54320               |
+| undms        |     2 |             4.80 |    5.17 |    4.04 | 54320               |
+| officeparser |     2 |            20.99 |  100.40 |   80.45 | 52695               |
 
 ### Deaths by age, sex and deprivation 1991–2024
 
 xlsx / single; 1 documents: mortality-data.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 118.88 | 123.46 | 4.68 | 465745 |
-| officeparser | 0 | 543.04 | 760.55 | 52.55 | 465200 |
-| officeparser | 1 | 527.67 | 718.08 | 93.64 | 465200 |
-| undms | 1 | 118.43 | 121.68 | 8.19 | 465745 |
-| undms | 2 | 117.09 | 117.56 | 4.91 | 465745 |
-| officeparser | 2 | 532.71 | 683.27 | 72.84 | 465200 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |           118.88 |  123.46 |    4.68 | 465745              |
+| officeparser |     0 |           543.04 |  760.55 |   52.55 | 465200              |
+| officeparser |     1 |           527.67 |  718.08 |   93.64 | 465200              |
+| undms        |     1 |           118.43 |  121.68 |    8.19 | 465745              |
+| undms        |     2 |           117.09 |  117.56 |    4.91 | 465745              |
+| officeparser |     2 |           532.71 |  683.27 |   72.84 | 465200              |
 
 ### Satellites and seawater teaching slides
 
 pptx / single; 1 documents: satellites-slides.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 0.55 | 3.44 | 7.93 | 1301 |
-| officeparser | 0 | 8.62 | 63.00 | 88.14 | 2889 |
-| officeparser | 1 | 8.42 | 50.87 | 47.71 | 2889 |
-| undms | 1 | 0.55 | 1.14 | 4.68 | 1301 |
-| undms | 2 | 0.57 | 1.38 | 4.68 | 1301 |
-| officeparser | 2 | 8.55 | 51.94 | 48.97 | 2889 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |             0.55 |    3.44 |    7.93 | 1301                |
+| officeparser |     0 |             8.62 |   63.00 |   88.14 | 2889                |
+| officeparser |     1 |             8.42 |   50.87 |   47.71 | 2889                |
+| undms        |     1 |             0.55 |    1.14 |    4.68 | 1301                |
+| undms        |     2 |             0.57 |    1.38 |    4.68 | 1301                |
+| officeparser |     2 |             8.55 |   51.94 |   48.97 | 2889                |
 
 ### Procurement Act training webinar
 
 pptx / single; 1 documents: procurement-slides.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 0.92 | 1.41 | 4.14 | 5897 |
-| officeparser | 0 | 20.23 | 67.27 | 46.93 | 6434 |
-| officeparser | 1 | 20.35 | 69.04 | 48.02 | 6434 |
-| undms | 1 | 0.91 | 1.36 | 4.05 | 5897 |
-| undms | 2 | 0.92 | 1.51 | 4.80 | 5897 |
-| officeparser | 2 | 20.03 | 76.77 | 72.32 | 6434 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |             0.92 |    1.41 |    4.14 | 5897                |
+| officeparser |     0 |            20.23 |   67.27 |   46.93 | 6434                |
+| officeparser |     1 |            20.35 |   69.04 |   48.02 | 6434                |
+| undms        |     1 |             0.91 |    1.36 |    4.05 | 5897                |
+| undms        |     2 |             0.92 |    1.51 |    4.80 | 5897                |
+| officeparser |     2 |            20.03 |   76.77 |   72.32 | 6434                |
 
 ### Planning applications statistical report
 
 pdf / single; 1 documents: planning-report.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 48.38 | 50.99 | 4.05 | 55067 |
-| officeparser | 0 | 202.68 | 1002.40 | 48.24 | 56985 |
-| pdf-parse | 0 | 55.54 | 132.84 | 159.42 | 54175 |
-| officeparser | 1 | 195.17 | 624.36 | 50.03 | 56985 |
-| pdf-parse | 1 | 55.66 | 147.96 | 194.74 | 54175 |
-| undms | 1 | 48.50 | 54.07 | 7.74 | 55067 |
-| pdf-parse | 2 | 55.51 | 138.83 | 168.94 | 54175 |
-| undms | 2 | 48.08 | 48.91 | 3.91 | 55067 |
-| officeparser | 2 | 204.86 | 684.64 | 71.78 | 56985 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |            48.38 |   50.99 |    4.05 | 55067               |
+| officeparser |     0 |           202.68 | 1002.40 |   48.24 | 56985               |
+| pdf-parse    |     0 |            55.54 |  132.84 |  159.42 | 54175               |
+| officeparser |     1 |           195.17 |  624.36 |   50.03 | 56985               |
+| pdf-parse    |     1 |            55.66 |  147.96 |  194.74 | 54175               |
+| undms        |     1 |            48.50 |   54.07 |    7.74 | 55067               |
+| pdf-parse    |     2 |            55.51 |  138.83 |  168.94 | 54175               |
+| undms        |     2 |            48.08 |   48.91 |    3.91 | 55067               |
+| officeparser |     2 |           204.86 |  684.64 |   71.78 | 56985               |
 
 ### Planning statistics technical notes
 
 pdf / single; 1 documents: planning-notes.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 26.45 | 26.96 | 4.44 | 31452 |
-| officeparser | 0 | 130.77 | 599.94 | 86.08 | 39252 |
-| pdf-parse | 0 | 32.98 | 107.86 | 160.69 | 31094 |
-| officeparser | 1 | 132.66 | 529.69 | 46.65 | 39252 |
-| pdf-parse | 1 | 33.16 | 104.69 | 146.08 | 31094 |
-| undms | 1 | 26.52 | 29.47 | 8.89 | 31452 |
-| pdf-parse | 2 | 33.19 | 103.29 | 138.24 | 31094 |
-| undms | 2 | 26.44 | 27.74 | 4.00 | 31452 |
-| officeparser | 2 | 131.19 | 552.66 | 73.54 | 39252 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |            26.45 |   26.96 |    4.44 | 31452               |
+| officeparser |     0 |           130.77 |  599.94 |   86.08 | 39252               |
+| pdf-parse    |     0 |            32.98 |  107.86 |  160.69 | 31094               |
+| officeparser |     1 |           132.66 |  529.69 |   46.65 | 39252               |
+| pdf-parse    |     1 |            33.16 |  104.69 |  146.08 | 31094               |
+| undms        |     1 |            26.52 |   29.47 |    8.89 | 31452               |
+| pdf-parse    |     2 |            33.19 |  103.29 |  138.24 | 31094               |
+| undms        |     2 |            26.44 |   27.74 |    4.00 | 31452               |
+| officeparser |     2 |           131.19 |  552.66 |   73.54 | 39252               |
 
 ### DOCX inbox (2 unique documents)
 
 docx / batch; 2 documents: sewage-consultation, sewage-risk.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 3.21 | 5.52 | 4.10 | 32356, 18779 |
-| officeparser | 0 | 158.29 | 259.59 | 47.88 | 35368, 18917 |
-| mammoth | 0 | 90.12 | 153.49 | 66.81 | 32713, 18975 |
-| officeparser | 1 | 172.64 | 611.06 | 81.89 | 35368, 18917 |
-| mammoth | 1 | 103.06 | 155.31 | 59.85 | 32713, 18975 |
-| undms | 1 | 3.20 | 5.61 | 7.59 | 32356, 18779 |
-| mammoth | 2 | 90.99 | 160.96 | 60.56 | 32713, 18975 |
-| undms | 2 | 3.21 | 4.00 | 6.50 | 32356, 18779 |
-| officeparser | 2 | 157.86 | 289.11 | 75.18 | 35368, 18917 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |             3.21 |    5.52 |    4.10 | 32356, 18779        |
+| officeparser |     0 |           158.29 |  259.59 |   47.88 | 35368, 18917        |
+| mammoth      |     0 |            90.12 |  153.49 |   66.81 | 32713, 18975        |
+| officeparser |     1 |           172.64 |  611.06 |   81.89 | 35368, 18917        |
+| mammoth      |     1 |           103.06 |  155.31 |   59.85 | 32713, 18975        |
+| undms        |     1 |             3.20 |    5.61 |    7.59 | 32356, 18779        |
+| mammoth      |     2 |            90.99 |  160.96 |   60.56 | 32713, 18975        |
+| undms        |     2 |             3.21 |    4.00 |    6.50 | 32356, 18779        |
+| officeparser |     2 |           157.86 |  289.11 |   75.18 | 35368, 18917        |
 
 ### XLSX inbox (2 unique documents)
 
 xlsx / batch; 2 documents: public-budgets, mortality-data.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 117.68 | 118.81 | 4.04 | 54320, 465745 |
-| officeparser | 0 | 503.62 | 683.55 | 48.05 | 52695, 465200 |
-| officeparser | 1 | 528.42 | 681.09 | 69.97 | 52695, 465200 |
-| undms | 1 | 117.01 | 119.98 | 7.89 | 54320, 465745 |
-| undms | 2 | 117.51 | 118.49 | 4.06 | 54320, 465745 |
-| officeparser | 2 | 536.43 | 714.32 | 57.32 | 52695, 465200 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |           117.68 |  118.81 |    4.04 | 54320, 465745       |
+| officeparser |     0 |           503.62 |  683.55 |   48.05 | 52695, 465200       |
+| officeparser |     1 |           528.42 |  681.09 |   69.97 | 52695, 465200       |
+| undms        |     1 |           117.01 |  119.98 |    7.89 | 54320, 465745       |
+| undms        |     2 |           117.51 |  118.49 |    4.06 | 54320, 465745       |
+| officeparser |     2 |           536.43 |  714.32 |   57.32 | 52695, 465200       |
 
 ### PPTX inbox (2 unique documents)
 
 pptx / batch; 2 documents: satellites-slides, procurement-slides.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 1.17 | 4.32 | 8.35 | 1301, 5897 |
-| officeparser | 0 | 33.20 | 84.42 | 75.18 | 2889, 6434 |
-| officeparser | 1 | 32.41 | 78.79 | 47.03 | 2889, 6434 |
-| undms | 1 | 1.16 | 1.86 | 5.48 | 1301, 5897 |
-| undms | 2 | 1.17 | 1.85 | 4.36 | 1301, 5897 |
-| officeparser | 2 | 28.85 | 79.09 | 48.05 | 2889, 6434 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |             1.17 |    4.32 |    8.35 | 1301, 5897          |
+| officeparser |     0 |            33.20 |   84.42 |   75.18 | 2889, 6434          |
+| officeparser |     1 |            32.41 |   78.79 |   47.03 | 2889, 6434          |
+| undms        |     1 |             1.16 |    1.86 |    5.48 | 1301, 5897          |
+| undms        |     2 |             1.17 |    1.85 |    4.36 | 1301, 5897          |
+| officeparser |     2 |            28.85 |   79.09 |   48.05 | 2889, 6434          |
 
 ### PDF inbox (2 unique documents)
 
 pdf / batch; 2 documents: planning-report, planning-notes.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 57.78 | 62.86 | 4.15 | 55067, 31452 |
-| officeparser | 0 | 248.07 | 1106.02 | 47.59 | 56985, 39252 |
-| pdf-parse | 0 | 89.08 | 186.22 | 223.34 | 54175, 31094 |
-| officeparser | 1 | 233.72 | 675.81 | 110.33 | 56985, 39252 |
-| pdf-parse | 1 | 88.83 | 217.93 | 151.62 | 54175, 31094 |
-| undms | 1 | 58.74 | 62.12 | 9.67 | 55067, 31452 |
-| pdf-parse | 2 | 88.90 | 183.47 | 140.96 | 54175, 31094 |
-| undms | 2 | 59.38 | 59.60 | 4.17 | 55067, 31452 |
-| officeparser | 2 | 231.88 | 762.10 | 72.58 | 56985, 39252 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
+| ------------ | ----: | ---------------: | ------: | ------: | ------------------- |
+| undms        |     0 |            57.78 |   62.86 |    4.15 | 55067, 31452        |
+| officeparser |     0 |           248.07 | 1106.02 |   47.59 | 56985, 39252        |
+| pdf-parse    |     0 |            89.08 |  186.22 |  223.34 | 54175, 31094        |
+| officeparser |     1 |           233.72 |  675.81 |  110.33 | 56985, 39252        |
+| pdf-parse    |     1 |            88.83 |  217.93 |  151.62 | 54175, 31094        |
+| undms        |     1 |            58.74 |   62.12 |    9.67 | 55067, 31452        |
+| pdf-parse    |     2 |            88.90 |  183.47 |  140.96 | 54175, 31094        |
+| undms        |     2 |            59.38 |   59.60 |    4.17 | 55067, 31452        |
+| officeparser |     2 |           231.88 |  762.10 |   72.58 | 56985, 39252        |
 
 ### Mixed inbox (8 unique documents)
 
 mixed / batch; 8 documents: sewage-consultation, sewage-risk, public-budgets, mortality-data, satellites-slides, procurement-slides, planning-report, planning-notes.
-| Package | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units |
-| --- | ---: | ---: | ---: | ---: | --- |
-| undms | 0 | 139.69 | 132.50 | 4.62 | 32356, 18779, 54320, 465745, 1301, 5897, 55067, 31452 |
-| officeparser | 0 | 1047.69 | 1817.50 | 77.51 | 35368, 18917, 52695, 465200, 2889, 6434, 56985, 39252 |
-| officeparser | 1 | 1073.72 | 1724.27 | 83.24 | 35368, 18917, 52695, 465200, 2889, 6434, 56985, 39252 |
-| undms | 1 | 130.80 | 129.11 | 8.65 | 32356, 18779, 54320, 465745, 1301, 5897, 55067, 31452 |
-| undms | 2 | 129.43 | 129.26 | 4.34 | 32356, 18779, 54320, 465745, 1301, 5897, 55067, 31452 |
-| officeparser | 2 | 1050.31 | 1662.85 | 72.56 | 35368, 18917, 52695, 465200, 2889, 6434, 56985, 39252 |
+
+| Package      | Round | Warm p50 ms/call | Cold ms | Load ms | Output UTF-16 units                                   |
+| ------------ | ----: | ---------------: | ------: | ------: | ----------------------------------------------------- |
+| undms        |     0 |           139.69 |  132.50 |    4.62 | 32356, 18779, 54320, 465745, 1301, 5897, 55067, 31452 |
+| officeparser |     0 |          1047.69 | 1817.50 |   77.51 | 35368, 18917, 52695, 465200, 2889, 6434, 56985, 39252 |
+| officeparser |     1 |          1073.72 | 1724.27 |   83.24 | 35368, 18917, 52695, 465200, 2889, 6434, 56985, 39252 |
+| undms        |     1 |           130.80 |  129.11 |    8.65 | 32356, 18779, 54320, 465745, 1301, 5897, 55067, 31452 |
+| undms        |     2 |           129.43 |  129.26 |    4.34 | 32356, 18779, 54320, 465745, 1301, 5897, 55067, 31452 |
+| officeparser |     2 |          1050.31 | 1662.85 |   72.56 | 35368, 18917, 52695, 465200, 2889, 6434, 56985, 39252 |
 
 </details>
 
