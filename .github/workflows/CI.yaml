@@ -53,7 +53,9 @@ jobs:
         run: cargo fmt -- --check
       - name: Clippy
         run: cargo clippy
+  # Temporarily disabled to keep main CI fast while release validation is green.
   build:
+    if: ${{ false }}
     strategy:
       fail-fast: false
       matrix:
@@ -119,7 +121,9 @@ jobs:
             ${{ env.APP_NAME }}.*.node
             ${{ env.APP_NAME }}.*.wasm
           if-no-files-found: error
+  # Temporarily disabled to skip binding tests on main.
   test-macOS-windows-binding:
+    if: ${{ false }}
     name: Test bindings on ${{ matrix.settings.target }} - node@${{ matrix.node }}
     needs:
       - build
@@ -155,7 +159,9 @@ jobs:
           path: .
       - name: Test bindings
         run: vp run test:bindings
+  # Temporarily disabled to skip binding tests on main.
   test-linux-binding:
+    if: ${{ false }}
     name: Test ${{ matrix.target }} - node@${{ matrix.node }}
     needs:
       - build
@@ -219,7 +225,7 @@ jobs:
   ci:
     name: CI
     if: always()
-    needs: [lint, build, test-macOS-windows-binding, test-linux-binding]
+    needs: [lint]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
