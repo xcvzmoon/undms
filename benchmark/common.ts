@@ -1,11 +1,11 @@
-/* oxlint-disable no-console */
-import type { ExtractionInput, ExtractionOutcome, BatchResult } from '../index.js';
 import { Bench } from 'tinybench';
 import { createDocxWithTables, createSimpleDocx } from '../__test__/generators/docx-generator.js';
 import { createOcrImage } from '../__test__/generators/image-generator.js';
 import { createSimplePdf } from '../__test__/generators/pdf-generator.js';
 import { createSimplePptx } from '../__test__/generators/pptx-generator.js';
 import { createSimpleXlsx } from '../__test__/generators/xlsx-generator.js';
+/* oxlint-disable no-console */
+import type { ExtractionInput, ExtractionOutcome, BatchResult } from '../index.js';
 
 export function input(name: string, data: Buffer, mimeType: string): ExtractionInput {
   return { name, data, mimeType };

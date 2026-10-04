@@ -1,6 +1,3 @@
-import type { BatchOptions, ExtractionOptions, ExtractionInput } from '../index.js';
-import type { CorpusDocument } from './corpus.js';
-import type { Report, Sample, Workload } from './package-report.js';
 /* oxlint-disable no-console */
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -13,8 +10,11 @@ import { setImmediate as immediate, setTimeout as delay } from 'node:timers/prom
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import { Bench } from 'tinybench';
+import type { BatchOptions, ExtractionOptions, ExtractionInput } from '../index.js';
+import type { CorpusDocument } from './corpus.js';
 import { loadCorpus } from './corpus.js';
 import { ocrQuality, prepareTesseractModel, tesseractAdapter } from './ocr.js';
+import type { Report, Sample, Workload } from './package-report.js';
 import { compactTerminal, writePackageReport } from './package-report.js';
 
 const execute = promisify(execFile);
@@ -27,7 +27,7 @@ const versions = {
   'tesseract.js': '7.0.0',
 };
 const cache = join(root, 'node_modules', '.cache', 'undms-package-benchmark');
-const packages = ['undms', 'officeparser', 'mammoth', 'pdf-parse', 'tesseract.js'];
+const packages = new Set(['undms', 'officeparser', 'mammoth', 'pdf-parse', 'tesseract.js']);
 interface Prepared {
   config: Report['config'];
   corpus: CorpusDocument[];
@@ -240,8 +240,7 @@ async function bounded(
 }
 async function worker() {
   const [, , , name, id, roundArg, preparedPath] = process.argv;
-  if (!name || !packages.includes(name) || !preparedPath)
-    throw new Error('Invalid worker arguments');
+  if (!name || !packages.has(name) || !preparedPath) throw new Error('Invalid worker arguments');
   const parsed: unknown = JSON.parse(await readFile(preparedPath, 'utf8'));
   if (!prepared(parsed)) throw new Error('Invalid prepared corpus/configuration');
   const work = parsed.workloads.find((value) => value.id === id);
@@ -361,7 +360,7 @@ async function worker() {
     });
     await bench.run();
     const result = bench.tasks[0]?.result;
-    if (!result || result.state !== 'completed' || !result.latency.samples)
+    if (result?.state !== 'completed' || !result.latency.samples)
       throw new Error('Tinybench did not complete');
     if (hash(validate(last, count)) !== hash(first))
       throw new Error('Text changed during timed sampling');

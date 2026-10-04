@@ -1,8 +1,8 @@
-import type { ExtractionInput, ExtractionOutcome, ExtractionResult } from '../index';
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { setImmediate as immediate } from 'node:timers/promises';
 import test from 'ava';
+import type { ExtractionInput, ExtractionOutcome, ExtractionResult } from '../index';
 import * as undms from '../index';
 import {
   DecodingPolicy,

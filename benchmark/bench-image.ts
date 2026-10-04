@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import { extract, extractBatch, ExtractionSelection, OcrMode } from '../index.js';
 import { createImageInput, repeatInput, runBench, verifyBatch, verifyOutcome } from './common.js';
+
 const document = createImageInput();
 if (process.argv.includes('--cold')) {
   const start = performance.now();
@@ -26,16 +27,16 @@ if (process.argv.includes('--cold')) {
     'Warm OCR: sequential candidate policies and metadata',
     (bench) => {
       for (const ocr of [OcrMode.Fast, OcrMode.Balanced, OcrMode.Accurate]) {
-        bench.add(`warm single OCR: ${ocr}`, async () =>
-          verifyOutcome(await extract(document, { ocr })),
-        );
+        bench.add(`warm single OCR: ${ocr}`, async () => {
+          verifyOutcome(await extract(document, { ocr }));
+        });
       }
-      bench.add('metadata only: no OCR', async () =>
-        verifyOutcome(await extract(document, { selection: ExtractionSelection.Metadata })),
-      );
-      bench.add('warm OCR batch of 4', async () =>
-        verifyBatch(await extractBatch(batch, { extraction: { ocr: OcrMode.Fast } })),
-      );
+      bench.add('metadata only: no OCR', async () => {
+        verifyOutcome(await extract(document, { selection: ExtractionSelection.Metadata }));
+      });
+      bench.add('warm OCR batch of 4', async () => {
+        verifyBatch(await extractBatch(batch, { extraction: { ocr: OcrMode.Fast } }));
+      });
     },
     0,
     8,

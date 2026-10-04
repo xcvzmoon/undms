@@ -21,11 +21,13 @@ export async function prepareTesseractModel(
     throw new Error('Invalid OCR model manifest');
   const languagePath = join(cache, 'tessdata');
   const path = join(languagePath, 'eng.traineddata.gz');
-  let data: Buffer;
+  let data: Buffer | undefined;
   try {
     data = await readFile(path);
   } catch (error) {
     if (!record(error) || error.code !== 'ENOENT') throw error;
+  }
+  if (data === undefined) {
     const response = await fetch(manifest.url, { signal: AbortSignal.timeout(60000) });
     if (!response.ok || !response.body)
       throw new Error(`OCR model download failed: ${response.status}`);

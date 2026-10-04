@@ -90,7 +90,7 @@ interface Row {
   idleCpu: number;
 }
 function median(values: number[]): number {
-  const sorted = [...values].sort((a, b) => a - b);
+  const sorted = values.toSorted((a, b) => a - b);
   const middle = Math.floor(sorted.length / 2);
   return sorted.length
     ? ((sorted[middle] ?? 0) + (sorted[Math.max(0, Math.ceil(sorted.length / 2) - 1)] ?? 0)) / 2
@@ -226,7 +226,7 @@ function conclusions(report: Report, values: Row[]): string {
   for (const group of new Set(values.map((row) => row.group))) {
     const selected = values
       .filter((row) => row.group === group)
-      .sort((a, b) => a.latency - b.latency);
+      .toSorted((a, b) => a.latency - b.latency);
     const first = selected[0];
     const second = selected[1];
     if (!first || !second || selected.some((row) => !row.complete)) continue;
@@ -236,7 +236,7 @@ function conclusions(report: Report, values: Row[]): string {
   let exact = 0;
   let whitespace = 0;
   let different = 0;
-  for (const sample of report.samples.filter((sample) => sample.package !== 'undms')) {
+  for (const sample of report.samples.filter((candidate) => candidate.package !== 'undms')) {
     const reference = report.samples.find(
       (value) =>
         value.package === 'undms' &&
@@ -263,17 +263,18 @@ export function compactTerminal(report: Report): string {
   const values = rows(report);
   const packages = [...new Set(report.workloads.flatMap((workload) => workload.packages))];
   const columns = ['Workload', ...packages];
-  const cells = [...new Set(values.map((row) => row.group))].map((group) => [
-    group,
-    ...packages.map((name) => {
-      const row = values.find((value) => value.group === group && value.package === name);
-      return row?.complete
-        ? `${number(row.latency)} ms / ${row.cpu.toFixed(0)}%`
-        : row
-          ? 'incomplete'
-          : '—';
-    }),
-  ]);
+  const cells = [...new Set(values.map((row) => row.group))].map((group) =>
+    [group].concat(
+      packages.map((name) => {
+        const row = values.find((value) => value.group === group && value.package === name);
+        return row?.complete
+          ? `${number(row.latency)} ms / ${row.cpu.toFixed(0)}%`
+          : row
+            ? 'incomplete'
+            : '—';
+      }),
+    ),
+  );
   const widths = columns.map((label, index) =>
     Math.max(label.length, ...cells.map((cell) => (cell[index] ?? '').length)),
   );

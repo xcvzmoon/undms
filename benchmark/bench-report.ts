@@ -36,7 +36,7 @@ for (let iteration = 0; iteration < iterations; iteration += 1) {
 const wallTimeMs = performance.now() - start;
 loop.disable();
 function percentile(values: number[], fraction: number): number | null {
-  const sorted = [...values].sort((a, b) => a - b);
+  const sorted = values.toSorted((a, b) => a - b);
   return sorted[Math.max(0, Math.ceil(sorted.length * fraction) - 1)] ?? null;
 }
 console.log(

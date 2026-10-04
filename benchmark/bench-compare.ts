@@ -299,7 +299,7 @@ async function pnpm(args: string[], cwd: string) {
   return execute(command, commandArgs, { cwd, timeout: 180000, maxBuffer: 8 * 1024 * 1024 });
 }
 function percentile(values: number[], fraction: number): number {
-  const sorted = [...values].sort((a, b) => a - b);
+  const sorted = values.toSorted((a, b) => a - b);
   const value = sorted[Math.max(0, Math.ceil(sorted.length * fraction) - 1)];
   if (value === undefined) throw new Error('No timing samples');
   return value;

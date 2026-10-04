@@ -40,7 +40,7 @@ export function packageConclusion(
         return `| ${format.toUpperCase()} × ${count} | Incomplete comparison | — | — | — | — |`;
       }
       completeWorkloads++;
-      const ranked = [...values].sort((a, b) => a.p50Ms - b.p50Ms);
+      const ranked = values.toSorted((a, b) => a.p50Ms - b.p50Ms);
       const fastest = lowest(values, (row) => row.p50Ms);
       const winner = ranked[0];
       const second = ranked[1];
@@ -51,7 +51,7 @@ export function packageConclusion(
       return `| ${format.toUpperCase()} × ${count} | ${fastest} | ${ratio} | ${lowest(values, (row) => row.cpuMsPerCall)} | ${lowest(values, (row) => row.peakRssMiB)} | ${lowest(values, (row) => row.timerP95Ms)} |`;
     }),
   );
-  const leaders = [...wins].sort((a, b) => b[1] - a[1]);
+  const leaders = [...wins].toSorted((a, b) => b[1] - a[1]);
   const summary = leaders.length
     ? `Warm median latency wins: ${leaders.map(([name, count]) => `${name} ${count}/${completeWorkloads}`).join(', ')} fully measured workloads. Ties are not counted as wins.`
     : 'No unique latency winner could be established from complete comparisons.';

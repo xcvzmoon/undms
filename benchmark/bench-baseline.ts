@@ -1,7 +1,7 @@
-/* oxlint-disable no-console */
-import type { ExtractionOutcome } from '../index.js';
 import { readFileSync } from 'node:fs';
 import { performance } from 'node:perf_hooks';
+/* oxlint-disable no-console */
+import type { ExtractionOutcome } from '../index.js';
 import { extract, extractBatch } from '../index.js';
 import { input, repeatInput, verifyBatch, verifyOutcome } from './common.js';
 

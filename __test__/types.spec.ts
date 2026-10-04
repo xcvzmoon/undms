@@ -1,5 +1,5 @@
-import type { ExtractionOutcome, FormatMetadata } from '../index';
 import test from 'ava';
+import type { ExtractionOutcome, FormatMetadata } from '../index';
 import { DocumentFormat, ErrorCode, extract } from '../index';
 
 function exhaustive(value: never): never {
