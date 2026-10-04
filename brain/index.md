@@ -1,0 +1,4 @@
+# Brain
+
+- [[plans/index]]
+- [[todos]]

@@ -1,0 +1,37 @@
+{
+  "node": "v24.21.0",
+  "platform": "darwin-arm64",
+  "iterations": 10,
+  "concurrentBatches": 3,
+  "documentsPerBatch": 8,
+  "singleRequestsPerRound": 1,
+  "bytesPerDocument": 1020000,
+  "wallTimeMs": 109.76474999999999,
+  "documentsPerSecond": 2277.5982271175403,
+  "roundLatencyMs": {
+    "p50": 10.292750000000012,
+    "p95": 14.66987499999999
+  },
+  "singleLatencyMs": {
+    "p50": 3.6572080000000255,
+    "p95": 11.517667000000017
+  },
+  "queueTimeMs": {
+    "p50": 2.1912920000000002,
+    "p95": 4.99125
+  },
+  "eventLoopDelayP95Ms": 14.802943,
+  "initialRssBytes": 111427584,
+  "rssAfterTextBytes": 293863424,
+  "heapAfterTextBytes": 155975288,
+  "forcedGcAvailable": true,
+  "rssAfterGcBytes": 166936576,
+  "heapAfterGcBytes": 30375192,
+  "rssAfterOcrBytes": 410583040,
+  "processLifetimeMaxRssBytes": 450084864,
+  "cpuWhileOcr": {
+    "documents": 20,
+    "cpuWhileOcrMs": 7.1819169999999986,
+    "cpuCompletedBeforeOcr": true
+  }
+}

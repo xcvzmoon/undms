@@ -1,0 +1,25 @@
+{
+  "node": "v24.21.0",
+  "platform": "darwin-arm64",
+  "concurrency": 2,
+  "iterations": 100,
+  "documentsPerBatch": 24,
+  "inputBytesPerBatch": 1138552,
+  "wallTimeMs": 436.12925000000007,
+  "documentsPerSecond": 5502.955832473974,
+  "batchLatencyMs": {
+    "p50": 4.044624999999996,
+    "p95": 4.582791999999998
+  },
+  "queueTimeMs": {
+    "p50": 2.524209,
+    "p95": 3.601583
+  },
+  "processingTimeMs": {
+    "p50": 0.293834,
+    "p95": 0.6049589999999999
+  },
+  "eventLoopDelayP95Ms": 11.059199,
+  "rssDeltaBytes": 29540352,
+  "processLifetimeMaxRssBytes": 124338176
+}
