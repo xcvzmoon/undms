@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.6.1
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v1.6.0...v1.6.1)
+
+### 🏡 Chore
+
+- **genbumppush:** Update release to just patch ([57836e7](https://github.com/xcvzmoon/undms/commit/57836e7))
+- **genbumppush:** Remove test runner in before hooks ([4b6e998](https://github.com/xcvzmoon/undms/commit/4b6e998))
+
+### ✅ Tests
+
+- **ocr:** Allow slower cold startup on macOS ([611fe98](https://github.com/xcvzmoon/undms/commit/611fe98))
+
+### 🤖 CI
+
+- Disable binding test matrix temporarily ([516cd90](https://github.com/xcvzmoon/undms/commit/516cd90))
+- Build release bindings without tests and align release triggers ([3636fad](https://github.com/xcvzmoon/undms/commit/3636fad))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil ([@xcvzmoon](https://github.com/xcvzmoon))
+
 ## v1.6.0
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.5.1...v1.6.0)

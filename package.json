@@ -1,7 +1,7 @@
 {
   "name": "undms",
   "description": "Asynchronous document text and metadata extraction with bounded single and batch processing",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "main": "index.js",
   "types": "index.d.ts",
   "license": "MIT",
