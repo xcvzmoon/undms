@@ -47,15 +47,19 @@ jobs:
           key: lint
       - name: Check formatting, lint, and types
         run: vp check
+      - name: Test publishing tooling
+        run: node --test scripts/publish.test.ts
       - name: Typecheck tests
         run: vp run typecheck
       - name: Cargo fmt
         run: cargo fmt -- --check
       - name: Clippy
         run: cargo clippy
-  # Run expensive native builds only for release commits; normal main CI stays fast.
+  # Test native bindings on PRs, manual runs, and releases.
   build:
     if: >-
+      github.event_name == 'pull_request' ||
+      github.event_name == 'workflow_dispatch' ||
       startsWith(github.event.head_commit.message, 'chore(release): v')
     strategy:
       fail-fast: false
@@ -132,9 +136,7 @@ jobs:
             index.mjs
             index.d.ts
           if-no-files-found: error
-  # Temporarily disabled to skip binding tests on main.
   test-macOS-windows-binding:
-    if: ${{ false }}
     name: Test bindings on ${{ matrix.settings.target }} - node@${{ matrix.node }}
     needs:
       - build
@@ -170,9 +172,7 @@ jobs:
           path: .
       - name: Test bindings
         run: vp run test:bindings
-  # Temporarily disabled to skip binding tests on main.
   test-linux-binding:
-    if: ${{ false }}
     name: Test ${{ matrix.target }} - node@${{ matrix.node }}
     needs:
       - build
@@ -257,6 +257,13 @@ jobs:
           if [ "$IS_RELEASE" = "true" ] && [ "$BUILD_RESULT" != "success" ]; then
             echo "Release build job did not pass: $BUILD_RESULT"
             exit 1
+          fi
+
+          if [ "$BUILD_RESULT" = "success" ]; then
+            if [ "$MACOS_WINDOWS_TEST_RESULT" != "success" ] || [ "$LINUX_TEST_RESULT" != "success" ]; then
+              echo "Native binding tests must pass after a successful build."
+              exit 1
+            fi
           fi
 
           case "$BUILD_RESULT,$MACOS_WINDOWS_TEST_RESULT,$LINUX_TEST_RESULT" in
