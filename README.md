@@ -1,381 +1,148 @@
 # UNDMS
 
-[![CI](https://img.shields.io/github/actions/workflow/status/xcvzmoon/undms/CI.yaml?branch=main&color=black)](https://github.com/xcvzmoon/undms/actions/workflows/CI.yaml)
-[![license](https://img.shields.io/github/license/xcvzmoon/undms?color=black)](https://github.com/xcvzmoon/undms/blob/main/LICENSE)
-[![npm version](https://img.shields.io/npm/v/undms?color=black)](https://www.npmjs.com/package/undms)
-[![npm downloads](https://img.shields.io/npm/dm/undms?color=black)](https://www.npmjs.com/package/undms)
+[![CI](https://img.shields.io/github/actions/workflow/status/xcvzmoon/undms/CI.yaml?branch=main)](https://github.com/xcvzmoon/undms/actions/workflows/CI.yaml)
+[![npm version](https://img.shields.io/npm/v/undms)](https://www.npmjs.com/package/undms)
 
-<div align="center">
-  <img src="./undms.png" alt="undms" height="300" />
-</div>
+Async document text and metadata extraction for Node.js, built in Rust with napi-rs. Supports plain text, DOCX, XLSX, PPTX, PDF, and images. Image OCR uses ocrs and rten with embedded models.
 
-High-performance document text and metadata extraction library with similarity comparison, built with napi-rs for Node.js and Bun.
+## Install
 
-## Installation
+Requires Node.js 20 or later.
 
-```bash
+```sh
 pnpm add undms
 ```
 
-## Features
-
-- **Multi-format extraction** - Text, DOCX, XLSX, PPTX, PDF, and images
-- **Similarity comparison** - Compare documents against reference texts using multiple algorithms
-- **Rich metadata** - Extract format-specific metadata (EXIF, PDF info, DOCX stats, etc.)
-- **OCR support** - Extract text from images using Tesseract
-- **Parallel processing** - Documents are processed concurrently for performance
-- **TypeScript support** - Full type definitions included
-
-## Supported Formats
-
-| Format | MIME Type                                                                       | Features                                          |
-| ------ | ------------------------------------------------------------------------------- | ------------------------------------------------- |
-| Text   | `text/*`, `application/json`, `application/xml`, etc.                           | Content + line/word/character counts              |
-| DOCX   | `application/vnd.openxmlformats-officedocument.wordprocessingml.document`       | Paragraphs, tables, images, hyperlinks            |
-| XLSX   | `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`             | Cell content, sheets, rows, columns               |
-| PPTX   | `application/vnd.openxmlformats-officedocument.presentationml.presentation`     | Slide text, title, author, subject, slide count   |
-| PDF    | `application/pdf`                                                               | Text, title, author, subject, producer, page info |
-| Images | `image/jpeg`, `image/png`, `image/gif`, `image/bmp`, `image/tiff`, `image/webp` | OCR text, EXIF data, GPS location                 |
-
-## Quick Start
+## Extract a document
 
 ```ts
-import { extract, computeDocumentSimilarity, computeTextSimilarity } from 'undms';
+import { readFile } from 'node:fs/promises';
+import { extract } from 'undms';
 
-const documents = [
-  {
-    name: 'report.txt',
-    size: 1024,
-    type: 'text/plain',
-    lastModified: Date.now(),
-    webkitRelativePath: '',
-    buffer: Buffer.from('Document content here...'),
-  },
-];
+const outcome = await extract({
+  data: await readFile('report.pdf'),
+  name: 'report.pdf',
+});
 
-const result = extract(documents);
-console.log(result[0].documents[0].content);
+if (outcome.status === 'error') {
+  console.error(outcome.error.code, outcome.error.message);
+} else {
+  console.log(outcome.result.text);
+  console.log(outcome.result.metadata);
+  console.log(outcome.result.warnings);
+}
 ```
 
-## API Reference
+`extract(input, options?)` returns `Promise<ExtractionOutcome>`. Document failures resolve with `status: 'error'`. Invalid arguments, scheduler overload, and infrastructure failures throw or reject. Handle both through `try`/`catch` when needed.
 
-### `extract(documents)`
+Inputs contain `data: Buffer` and optional `id`, `name`, and `mimeType`. Bytes are copied before processing, so later Buffer mutations cannot change the document. SharedArrayBuffer-backed Buffers are rejected.
 
-Extracts text and metadata from input documents. Results are grouped by MIME type.
-
-**Parameters:**
-
-- `documents` - Array of `Document` objects
-
-**Returns:** `GroupedDocuments[]`
+## Process a batch
 
 ```ts
-const result = extract([
-  {
-    name: 'document.pdf',
-    size: 1024,
-    type: 'application/pdf',
-    lastModified: Date.now(),
-    webkitRelativePath: '',
-    buffer: Buffer.from(pdfData),
-  },
-]);
+import { extractBatch } from 'undms';
+
+const batch = await extractBatch(
+  [
+    { data: Buffer.from('first'), id: 'a', mimeType: 'text/plain' },
+    { data: Buffer.from('second'), id: 'b', mimeType: 'text/plain' },
+  ],
+  { concurrency: 2 },
+);
+
+for (const { index, outcome } of batch.items) {
+  console.log(index, outcome.status);
+}
+console.log(batch.summary);
 ```
 
-### `computeDocumentSimilarity(documents, referenceTexts, threshold?, method?)`
+Results stay in input order, including duplicate IDs. Each document has its own outcome; a failed document does not discard successful items. Batch budget and infrastructure failures reject the whole request.
 
-Extracts documents and computes similarity against reference texts.
-
-**Parameters:**
-
-- `documents` - Array of `Document` objects
-- `referenceTexts` - Candidate reference texts to compare against
-- `threshold` - Minimum score (0-100) to include a match (default: 30)
-- `method` - Similarity algorithm: `'jaccard'`, `'ngram'`, `'levenshtein'`, or `'hybrid'` (default)
-
-**Returns:** `GroupedDocumentsWithSimilarity[]`
+## Select work
 
 ```ts
-const result = computeDocumentSimilarity(
-  documents,
-  ['reference text A', 'reference text B'],
-  70,
-  'hybrid',
+import { ExtractionSelection, OcrMode, extract } from 'undms';
+
+const outcome = await extract(
+  { data: imageBuffer },
+  {
+    selection: ExtractionSelection.Metadata,
+    ocr: OcrMode.Disabled,
+    metrics: true,
+  },
 );
 ```
 
-### `computeTextSimilarity(sourceText, referenceTexts, threshold?, method?)`
+The default selection is both text and metadata, including text statistics. Metadata-only selection skips text extraction and OCR unless `statistics: true` requests text statistics. Text-only selection omits metadata. Import `ExtractionSelection`, `OcrMode`, and `DecodingPolicy` for typed option values.
 
-Computes similarity for plain text without file extraction.
+## Results and limits
 
-**Parameters:**
+Outcomes are a tagged union: `success`, `partial`, or `error`. Successful and partial results contain source identity, optional text/encoding/metadata, warnings, and optional timing metrics. Metadata separates common `properties`, optional `statistics`, and tagged `format` details.
 
-- `sourceText` - Source text to compare
-- `referenceTexts` - Candidate reference texts
-- `threshold` - Minimum score (0-100) to include a match (default: 30)
-- `method` - Similarity algorithm (default: `'hybrid'`)
+Native work uses bounded CPU workers and a separate image/OCR worker. Per-document and batch limits constrain inputs, outputs, ZIP expansion, archive entry counts, and image pixels. Calamine and lopdf allocate internally; these limits are not a hard process-memory or timeout sandbox.
 
-**Returns:** `SimilarityMatch[]`
+This package supports native Node.js extraction. Browser and WebAssembly support are outside the scope of this refactor.
 
-```ts
-const matches = computeTextSimilarity(
-  'alpha beta gamma',
-  ['alpha beta gamma', 'different text'],
-  80,
-  'jaccard',
-);
-```
+## Benchmarks
 
-## Type Definitions
+Tinybench compares eight real government reports, statistical workbooks and training slide decks against officeparser, Mammoth and pdf-parse. The recorded run uses Apple M1, Node v24.21.0, three fresh process rounds per workload, and a separate sustained CPU phase.
 
-### Document
+Warm milliseconds per document; lower is faster. Singles average the per-file medians equally. Batches contain distinct files and report amortized cost.
 
-Input document interface.
+| Format / mode | undms | officeparser | mammoth | pdf-parse |
+| ------------- | ----: | -----------: | ------: | --------: |
+| DOCX · single |  2.04 |        79.31 |   45.48 |         — |
+| XLSX · single | 61.56 |       278.41 |       — |         — |
+| PPTX · single |  0.74 |        14.39 |       — |         — |
+| PDF · single  | 37.34 |       165.73 |       — |     44.39 |
+| DOCX · batch  |  1.60 |        81.16 |   47.29 |         — |
+| XLSX · batch  | 58.70 |       261.73 |       — |         — |
+| PPTX · batch  |  0.58 |        15.83 |       — |         — |
+| PDF · batch   | 29.18 |       117.88 |       — |     44.45 |
+| MIXED · batch | 16.44 |       131.92 |       — |         — |
 
-```ts
-interface Document {
-  name: string;
-  size: number;
-  type: string; // MIME type
-  lastModified: number;
-  webkitRelativePath: string;
-  buffer: Buffer;
-}
-```
+![Real-document batch extraction latency](benchmark/published/latency.svg)
 
-### DocumentMetadata
+CPU utilization is measured from OS process counters: 100% means one occupied core. [CPU, memory, methodology and provenance](benchmark/published/report.md) · [Raw measurements](benchmark/published/results.json). This is a small corpus; output policies differ and the results do not establish an accuracy ranking.
 
-Extracted document result.
+Reproduce with `pnpm bench:packages`, or use `--corpus manifest.json` for your own documents. See [benchmark instructions](benchmark/README.md).
 
-```ts
-interface DocumentMetadata {
-  name: string;
-  size: number;
-  processingTime: number;
-  encoding: string;
-  content: string;
-  metadata?: MetadataPayload;
-  error?: string;
-}
-```
+### Image OCR
 
-### GroupedDocuments
+Three real SROIE receipt scans are compared against Tesseract.js using reusable workers and reference transcriptions. This run uses ocrs balanced mode and Tesseract English LSTM best_int, with three fresh process rounds per workload.
 
-Documents grouped by MIME type.
+Warm milliseconds per image; batch values are amortized across the three distinct receipts.
 
-```ts
-interface GroupedDocuments {
-  mimeType: string;
-  documents: DocumentMetadata[];
-}
-```
+| Format / mode  |  undms | tesseract.js |
+| -------------- | -----: | -----------: |
+| IMAGE · single | 576.90 |       634.14 |
+| IMAGE · batch  | 622.49 |       286.98 |
 
-### GroupedDocumentsWithSimilarity
+![Receipt OCR batch latency](benchmark/published/images/latency.svg)
 
-Grouped documents with similarity matches.
+On these receipts, undms has lower average single-image latency; Tesseract.js has lower batch latency and lower character/word error rates on all three images. Native OCR uses a serial lane while Tesseract reuses up to three workers for this batch. The configurations differ, and this small corpus does not establish a general OCR ranking.
 
-```ts
-interface GroupedDocumentsWithSimilarity {
-  mimeType: string;
-  documents: DocumentMetadataWithSimilarity[];
-}
-```
+[Per-image accuracy, CPU, memory, cold starts and cleanup](benchmark/published/images/report.md) · [Raw measurements](benchmark/published/images/results.json). Reproduce with `pnpm bench:ocr`; use `pnpm bench:packages --images` to include images alongside the document suite.
 
-### DocumentMetadataWithSimilarity
+## Develop
 
-Document metadata with similarity results.
+Use pnpm and a stable Rust toolchain.
 
-```ts
-interface DocumentMetadataWithSimilarity {
-  name: string;
-  size: number;
-  processingTime: number;
-  encoding: string;
-  content: string;
-  metadata?: MetadataPayload;
-  error?: string;
-  similarityMatches: SimilarityMatch[];
-}
-```
-
-### SimilarityMatch
-
-Similarity comparison result.
-
-```ts
-interface SimilarityMatch {
-  referenceIndex: number;
-  similarityPercentage: number;
-}
-```
-
-### MetadataPayload
-
-Complete metadata payload with format-specific fields.
-
-```ts
-interface MetadataPayload {
-  text?: TextMetadata;
-  docx?: DocxMetadata;
-  xlsx?: XlsxMetadata;
-  pptx?: PptxMetadata;
-  pdf?: PdfMetadata;
-  image?: ImageMetadata;
-}
-```
-
-### TextMetadata
-
-Text content statistics.
-
-```ts
-interface TextMetadata {
-  lineCount: number;
-  wordCount: number;
-  characterCount: number;
-  nonWhitespaceCharacterCount: number;
-}
-```
-
-### DocxMetadata
-
-DOCX document statistics.
-
-```ts
-interface DocxMetadata {
-  paragraphCount: number;
-  tableCount: number;
-  imageCount: number;
-  hyperlinkCount: number;
-}
-```
-
-### XlsxMetadata
-
-XLSX spreadsheet statistics.
-
-```ts
-interface XlsxMetadata {
-  sheetCount: number;
-  sheetNames: string[];
-  rowCount: number;
-  columnCount: number;
-  cellCount: number;
-}
-```
-
-### PptxMetadata
-
-PPTX presentation information.
-
-```ts
-interface PptxMetadata {
-  title?: string;
-  author?: string;
-  subject?: string;
-  slideCount: number;
-}
-```
-
-### PdfMetadata
-
-PDF document information.
-
-```ts
-interface PdfMetadata {
-  title?: string;
-  author?: string;
-  subject?: string;
-  producer?: string;
-  pageSize?: PdfPageSize;
-  pageCount: number;
-}
-
-interface PdfPageSize {
-  width: number;
-  height: number;
-}
-```
-
-### ImageMetadata
-
-Image file information.
-
-```ts
-interface ImageMetadata {
-  width: number;
-  height: number;
-  format?: string;
-  cameraMake?: string;
-  cameraModel?: string;
-  datetimeOriginal?: string;
-  location: ImageLocation;
-}
-
-interface ImageLocation {
-  latitude?: number;
-  longitude?: number;
-}
-```
-
-## Similarity Methods
-
-| Method        | Description                                   |
-| ------------- | --------------------------------------------- |
-| `jaccard`     | Set-based similarity using Jaccard index      |
-| `ngram`       | N-gram token matching (default: trigrams)     |
-| `levenshtein` | Edit distance-based similarity                |
-| `hybrid`      | Weighted combination of all methods (default) |
-
-The similarity score is computed as a weighted blend of content similarity (80%) and metadata similarity (20%).
-
-## Error Handling
-
-All functions handle errors gracefully:
-
-- **Extraction errors** - Returned in the `error` field of `DocumentMetadata`
-- **Unsupported formats** - Returns empty content with `application/octet-stream` encoding
-- **Similarity errors** - Returns empty matches array
-
-```ts
-const result = extract(documents);
-if (result[0].documents[0].error) {
-  console.error('Extraction failed:', result[0].documents[0].error);
-}
-```
-
-## Troubleshooting
-
-- **OCR is slow** - Large images take time; consider resizing before processing
-- **Missing GPS data** - Not all images contain EXIF location; `location` object exists but fields may be undefined
-- **Empty PDF text** - Some PDFs are image-based; OCR is not currently applied to PDFs
-- **Unicode handling** - All similarity methods support Unicode text
-
-## Development
-
-### Requirements
-
-- Rust (latest stable)
-- Node.js 18+
-- pnpm
-
-### Build
-
-```bash
+```sh
+pnpm install
 pnpm build
-```
-
-### Test
-
-```bash
 pnpm test
+pnpm lint
+vp run fmt
 ```
 
-### Benchmark
+Compare this workspace with the active published release using `pnpm bench:compare`, or with other Node.js extraction packages using `pnpm bench:packages`. See [benchmark instructions](benchmark/README.md) for version selection, OCR, workload filtering, and generated reports.
 
-```bash
-pnpm bench
-```
+Generated bindings and TypeScript declarations come from the Rust API; edit the Rust source to change them. Native targets cover macOS, Windows, and Linux as configured in `scripts/napi.config.ts`. The TypeScript wrapper in `scripts/napi.ts` passes a temporary JSON config to napi and generates platform packages named `@undms/<platform>`. Use `pnpm run create-npm-dirs` to generate package manifests; build, artifact, and version scripts use the same wrapper.
+
+## Release
+
+Run `pnpm release --dry-run` to preview the configured major release, then `pnpm release` to bump the Node package and Rust crate, write the changelog, commit, tag, and push. GitHub release creation is enabled; provide `GENBUMPPUSH_GITHUB_TOKEN` through the environment. Release commits using `release: v<version>` trigger CI; `.github/workflows/publish.yaml` publishes the tested native packages using npm trusted publishing after CI succeeds. Configure each package's trusted publisher before releasing; see [.github/RELEASING.md](.github/RELEASING.md).
 
 ## License
 

@@ -130,5 +130,6 @@ Cargo.lock
 /npm
 
 artifacts/
+benchmark/results/
 
-.vitepress
+benchmark/corpus-cache/

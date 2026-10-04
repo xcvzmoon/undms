@@ -1,21 +1,17 @@
-import { createTextBatches, extract, extractJs, runBench } from './common.js';
+import { extract, extractBatch, ExtractionSelection } from '../index.js';
+import { createTextInputs, runBench, verifyBatch, verifyOutcome } from './common.js';
 
-const { smallBatch, mediumBatch } = createTextBatches();
-
-await runBench('Text extraction benchmarks', (bench) => {
-  bench.add('native extract 10 small text docs', () => {
-    extract(smallBatch);
-  });
-
-  bench.add('js extract 10 small text docs', () => {
-    extractJs(smallBatch);
-  });
-
-  bench.add('native extract 100 medium text docs', () => {
-    extract(mediumBatch);
-  });
-
-  bench.add('js extract 100 medium text docs', () => {
-    extractJs(mediumBatch);
+const { small, medium, unicode, batch } = createTextInputs();
+await runBench('Prepared text inputs: completed async extraction', (bench) => {
+  for (const document of [small, medium, unicode]) {
+    bench.add(`single ${document.name}: text and statistics`, async () => {
+      verifyOutcome(await extract(document));
+    });
+    bench.add(`single ${document.name}: text only`, async () => {
+      verifyOutcome(await extract(document, { selection: ExtractionSelection.Text }));
+    });
+  }
+  bench.add('batch: 32 medium documents', async () => {
+    verifyBatch(await extractBatch(batch));
   });
 });

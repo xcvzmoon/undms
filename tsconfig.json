@@ -2,13 +2,17 @@
   "compilerOptions": {
     "target": "ESNext",
     "strict": true,
-    "moduleResolution": "node",
-    "module": "CommonJS",
+    "moduleResolution": "Bundler",
+    "module": "Preserve",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "types": ["node"]
   },
-  "include": ["."],
-  "exclude": ["node_modules", "bench", "__test__"]
+  "include": ["vite.config.ts", "scripts/**/*.ts", "benchmark/**/*.ts", "genbumppush.config.ts"],
+  "exclude": ["node_modules", "target", ".agents"]
 }

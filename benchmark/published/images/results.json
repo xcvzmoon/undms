@@ -1,0 +1,4170 @@
+{
+  "timestamp": "2026-10-04T10:47:32.865Z",
+  "node": "v24.21.0",
+  "platform": "darwin-arm64",
+  "hardware": {
+    "cpuModel": "Apple M1",
+    "logicalCpus": 8,
+    "memoryBytes": 8589934592
+  },
+  "versions": {
+    "officeparser": "8.1.0",
+    "mammoth": "1.13.0",
+    "pdf-parse": "2.4.5",
+    "tesseract.js": "7.0.0",
+    "tinybench": "6.2.0",
+    "undms": "workspace"
+  },
+  "workspace": {
+    "commit": "7055761231f197a210b5ce81af79509a3f71041b",
+    "dirty": true
+  },
+  "config": {
+    "ocrMode": "balanced",
+    "rounds": 3,
+    "durationMs": 1000,
+    "resourceDurationMs": 2000,
+    "concurrency": 4,
+    "tesseractModelSha256": "45b4cb346724ac1774f1c36f42f182b887bcdb28ebe63e6fff90ac41f3fcff91"
+  },
+  "corpus": [
+    {
+      "id": "sroie-000",
+      "title": "SROIE receipt 000",
+      "format": "image",
+      "path": "../../corpus-cache/sroie-000-8b85d2c325c68579.image",
+      "sha256": "8b85d2c325c68579b53446177602709a8f8faeeec710912f62b6ad369234887c",
+      "bytes": 98120,
+      "sourceUrl": "https://github.com/zzzDavid/ICDAR-2019-SROIE",
+      "license": "ICDAR2019 SROIE source terms; cached images not redistributed",
+      "expectedText": [],
+      "referenceText": "TAN WOON YANN\nBOOK TA .K(TAMAN DAYA) SDN BND\n789417-W\nNO.53 55,57 & 59, JALAN SAGU 18,\nTAMAN DAYA,\n81100 JOHOR BAHRU,\nJOHOR.\nDOCUMENT NO : TD01167104\nDATE:\n25/12/2018 8:13:39 PM\nCASHIER:\nMANIS\nMEMBER:\nCASH BILL\nCODE/DESC\nPRICE\nDISC\nAMOUNT\nQTY\nRM\nRM\n9556939040116\nKF MODELLING CLAY KIDDY FISH\n1 PC\n*\n9.000\n0.00\n9.00\nTOTAL:\nROUR DING ADJUSTMENT:\n0.00\nROUND D TOTAL (RM):\n9.00\nCASH\n10.00\nCHANGE\n1.00\nGOODS SOLD ARE NOT RETURNABLE OR\nEXCHANGEABLE\n***\n***\nTHANK YOU\nPLEASE COME AGAIN !\n9.00"
+    },
+    {
+      "id": "sroie-001",
+      "title": "SROIE receipt 001",
+      "format": "image",
+      "path": "../../corpus-cache/sroie-001-4e7bb7f427732e76.image",
+      "sha256": "4e7bb7f427732e769eafc6f6eed5a92eedccf96bc0c711f46466462b98916c73",
+      "bytes": 85804,
+      "sourceUrl": "https://github.com/zzzDavid/ICDAR-2019-SROIE",
+      "license": "ICDAR2019 SROIE source terms; cached images not redistributed",
+      "expectedText": [],
+      "referenceText": "TAN WOON YANN\nINDAH GIFT & HOME DECO\n27,JALAN DEDAP 13,\nTAMAN JOHOR JAYA,\n81100 JOHOR BAHRU,JOHOR.\nTEL:07-3507405\nFAX:07-3558160\nRECEIPT\n19/10/2018 20:49:59 #01\nCASHIER: CN\nLOCATION/SP: 05 /0531\nMB: MO26588\nROOM NO: 01\n050100035279\nDESC/ITEM\nQTY\nPRICE\nAMT(RM)\nST-PRIVILEGE CARD/GD INDAH\n88888\n1\n10.00\n10.00\nGF-TABLE LAMP/STITCH <I>\n62483\n1\n55.90\n55.90\n@DISC\n10.00%\n-5.59\n#TOTAL QTY\n2\nTOTAL AMT................. RM\n60.31\nROUNDING ADJ............\n-0.01\nRM\n60.30\nCASH.................... RM\n70.30\nCHANGE.................. RM\n10.00\nTHANK YOU ! PLEASE COME AGAIN !\nGOODS SOLD ARE NOT RETURNABLE\nTHANK YOU ! FLEASE COME AOSIN !\nGOODS SOLD ARE NOT RETURNABLE\nDEALING IN WHOLESALE AND RETAIL."
+    },
+    {
+      "id": "sroie-002",
+      "title": "SROIE receipt 002",
+      "format": "image",
+      "path": "../../corpus-cache/sroie-002-c5995745cc13c857.image",
+      "sha256": "c5995745cc13c8570fe0914567124d65e29df3ea4dd91713badb9e7217bc2db1",
+      "bytes": 124971,
+      "sourceUrl": "https://github.com/zzzDavid/ICDAR-2019-SROIE",
+      "license": "ICDAR2019 SROIE source terms; cached images not redistributed",
+      "expectedText": [],
+      "referenceText": "TAN WOON YANN\nMR D.T.Y. (JOHOR) SDN BHD\n(CO.REG : 933109-X)\nLOT 1851-A & 1851-B, JALAN KPB 6,\nKAWASAN PERINDUSTRIAN BALAKONG,\n43300 SERI KEMBANGAN, SELANGOR\n(MR DIY TESCO TERBAU)\n-INVOICE-\nCHOPPING BOARD 35.5X25.5CM 803M#\nEZ10HD05 - 24\n8970669\n1\nX\n19.00\n19.00\nAIR PRESSURE SPRAYER SX-575-1 1.5L\nHC03-7 - 15\n9066468\n1\nX\n8.02\n8.02\nWAXCO WINDSHILED CLEANER 120ML\nWA14-3A - 48\n9557031100236\n1\nX\n3.02\n3.02\nBOPP TAPE 48MM*100M CLEAR\nFZ-04 - 36\n6935818350846\n1\nX\n3.88\n3.88\nITEM(S) : 4\nQTY(S) : 4\nTOTAL\nRM 33.92\nROUNDING ADJUSTMENT\n-RM 0.02\nTOTAL ROUNDED\nRM 33.90\nCASH\nRM 50.00\nCHANGE\nRM 16.10\n12-01-19 21:13 SH01 ZK09\nT4 R000027830\nOPERATOR TRAINEE CASHIER\nEXCHANGE ARE ALLOWED WITHIN\n7 DAYS WITH RECEIPT.\nSTRICTLY NO CASH REFUND."
+    }
+  ],
+  "workloads": [
+    {
+      "id": "single-sroie-000",
+      "label": "SROIE receipt 000",
+      "format": "image",
+      "mode": "single",
+      "documentIds": ["sroie-000"],
+      "packages": ["undms", "tesseract.js"]
+    },
+    {
+      "id": "single-sroie-001",
+      "label": "SROIE receipt 001",
+      "format": "image",
+      "mode": "single",
+      "documentIds": ["sroie-001"],
+      "packages": ["undms", "tesseract.js"]
+    },
+    {
+      "id": "single-sroie-002",
+      "label": "SROIE receipt 002",
+      "format": "image",
+      "mode": "single",
+      "documentIds": ["sroie-002"],
+      "packages": ["undms", "tesseract.js"]
+    },
+    {
+      "id": "batch-image",
+      "label": "IMAGE inbox (3 unique documents)",
+      "format": "image",
+      "mode": "batch",
+      "documentIds": ["sroie-000", "sroie-001", "sroie-002"],
+      "packages": ["undms", "tesseract.js"]
+    }
+  ],
+  "samples": [
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 262,
+          "referenceCharacters": 485,
+          "wordEdits": 64,
+          "referenceWords": 85
+        }
+      ],
+      "package": "undms",
+      "workload": "single-sroie-000",
+      "round": 0,
+      "latencyMs": [
+        483.3752919999997, 495.9009579999997, 498.32520799999975, 507.76737500000036,
+        514.2937909999996, 515.9718750000002, 522.2428749999999, 535.752375, 553.6395410000005,
+        575.5606670000006
+      ],
+      "coldMs": 506.24987500000003,
+      "loadMs": 313.710833,
+      "textHash": "4503e17c7c3e838c73d0cc6839b9276cb7cdf20f5e741015a2c10553be6bf07d",
+      "normalizedHash": "fcc612f6eed8cc749f1380c72c4bc660a00e07d9c6c7c4ed01fc873874c20929",
+      "textLengths": [528],
+      "resource": {
+        "wallMs": 2119.981208,
+        "userMs": 7968.152,
+        "systemMs": 154.444,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 383.1447170073217,
+        "machineCpuPercent": 47.89308962591521,
+        "documentsPerSecond": 1.886809177791542,
+        "peakRssMiB": 339.796875,
+        "rssAfterGcMiB": 323.71875,
+        "heapAfterGcMiB": 6.520057678222656,
+        "idleCpuPercent": 0.10382383343879695,
+        "series": [
+          {
+            "elapsedMs": 102.43362499999967,
+            "cpuPercent": 340.3716308975701,
+            "rssMiB": 323.015625
+          },
+          {
+            "elapsedMs": 203.69404099999974,
+            "cpuPercent": 403.9130157237352,
+            "rssMiB": 323.046875
+          },
+          {
+            "elapsedMs": 305.9456249999994,
+            "cpuPercent": 389.71621212244634,
+            "rssMiB": 323.046875
+          },
+          {
+            "elapsedMs": 408.1135829999994,
+            "cpuPercent": 385.1540225556823,
+            "rssMiB": 323.078125
+          },
+          {
+            "elapsedMs": 510.25995799999964,
+            "cpuPercent": 389.5889599606437,
+            "rssMiB": 323.078125
+          },
+          {
+            "elapsedMs": 610.8430410000001,
+            "cpuPercent": 300.18467419615547,
+            "rssMiB": 323.515625
+          },
+          {
+            "elapsedMs": 713.0959159999993,
+            "cpuPercent": 371.83404378605775,
+            "rssMiB": 323.515625
+          },
+          {
+            "elapsedMs": 814.1822079999993,
+            "cpuPercent": 384.87711073624126,
+            "rssMiB": 323.515625
+          },
+          {
+            "elapsedMs": 916.4708330000003,
+            "cpuPercent": 403.56002439175984,
+            "rssMiB": 323.53125
+          },
+          {
+            "elapsedMs": 1016.0092500000001,
+            "cpuPercent": 404.7693464926221,
+            "rssMiB": 323.53125
+          },
+          {
+            "elapsedMs": 1118.4383749999988,
+            "cpuPercent": 379.9290485006142,
+            "rssMiB": 323.53125
+          },
+          {
+            "elapsedMs": 1220.679916,
+            "cpuPercent": 378.8117786683158,
+            "rssMiB": 323.546875
+          },
+          {
+            "elapsedMs": 1321.100207999999,
+            "cpuPercent": 404.8613999250316,
+            "rssMiB": 323.5625
+          },
+          {
+            "elapsedMs": 1423.1222079999998,
+            "cpuPercent": 378.7339985493293,
+            "rssMiB": 323.5625
+          },
+          {
+            "elapsedMs": 1525.261458,
+            "cpuPercent": 391.3989969575842,
+            "rssMiB": 323.5625
+          },
+          {
+            "elapsedMs": 1627.1662079999996,
+            "cpuPercent": 391.5116812513658,
+            "rssMiB": 323.5625
+          },
+          {
+            "elapsedMs": 1729.3501659999993,
+            "cpuPercent": 374.08220182663257,
+            "rssMiB": 323.5625
+          },
+          {
+            "elapsedMs": 1829.718749999999,
+            "cpuPercent": 390.85935495513286,
+            "rssMiB": 323.5625
+          },
+          {
+            "elapsedMs": 1931.876374999999,
+            "cpuPercent": 401.75464141810335,
+            "rssMiB": 323.5625
+          },
+          {
+            "elapsedMs": 2033.773624999999,
+            "cpuPercent": 396.2069633871376,
+            "rssMiB": 323.5625
+          },
+          {
+            "elapsedMs": 2119.9819159999997,
+            "cpuPercent": 384.25306447612655,
+            "rssMiB": 323.59375
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 81,
+          "referenceCharacters": 485,
+          "wordEdits": 41,
+          "referenceWords": 85
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.9022920000006707,
+        "rssMiB": 199.59375,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "single-sroie-000",
+      "round": 0,
+      "latencyMs": [
+        514.5677920000007, 514.9570420000005, 515.4146250000003, 517.028667, 517.2727910000003,
+        517.6325420000003, 517.8751670000001, 518.8531250000005, 519.5108749999999,
+        551.4590419999995
+      ],
+      "coldMs": 730.37125,
+      "loadMs": 7.303916000000001,
+      "textHash": "923fc7fe9314ba9ba53dc81922fc16957a7700ae4a6877e885d84777664ca523",
+      "normalizedHash": "b6ab62511be846c5db8e422a281b9cf4bdf3be0d3343bb9c9a8336e8eef4d557",
+      "textLengths": [499],
+      "resource": {
+        "wallMs": 2060.8882090000006,
+        "userMs": 2083.577,
+        "systemMs": 5.915,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 101.38793510851707,
+        "machineCpuPercent": 12.673491888564634,
+        "documentsPerSecond": 1.9409107114746944,
+        "peakRssMiB": 206.328125,
+        "rssAfterGcMiB": 206.125,
+        "heapAfterGcMiB": 6.6818695068359375,
+        "idleCpuPercent": 0.11109364545604412,
+        "series": [
+          {
+            "elapsedMs": 101.67241699999977,
+            "cpuPercent": 108.08241137810293,
+            "rssMiB": 205.609375
+          },
+          {
+            "elapsedMs": 203.88729200000034,
+            "cpuPercent": 100.67027915457454,
+            "rssMiB": 205.625
+          },
+          {
+            "elapsedMs": 303.1248340000002,
+            "cpuPercent": 101.9684667320762,
+            "rssMiB": 205.625
+          },
+          {
+            "elapsedMs": 403.60304199999973,
+            "cpuPercent": 100.15604577661304,
+            "rssMiB": 205.640625
+          },
+          {
+            "elapsedMs": 505.23162500000035,
+            "cpuPercent": 94.35337694317691,
+            "rssMiB": 205.65625
+          },
+          {
+            "elapsedMs": 607.2474590000002,
+            "cpuPercent": 106.78636416382206,
+            "rssMiB": 205.6875
+          },
+          {
+            "elapsedMs": 708.3201669999999,
+            "cpuPercent": 100.28523229040258,
+            "rssMiB": 205.6875
+          },
+          {
+            "elapsedMs": 810.7997090000008,
+            "cpuPercent": 99.72136682656043,
+            "rssMiB": 205.703125
+          },
+          {
+            "elapsedMs": 910.8171669999992,
+            "cpuPercent": 108.02614079634145,
+            "rssMiB": 205.78125
+          },
+          {
+            "elapsedMs": 1010.3500839999997,
+            "cpuPercent": 102.7398805161106,
+            "rssMiB": 205.78125
+          },
+          {
+            "elapsedMs": 1110.9807920000003,
+            "cpuPercent": 98.8892972908423,
+            "rssMiB": 205.828125
+          },
+          {
+            "elapsedMs": 1212.6825840000001,
+            "cpuPercent": 100.48987140757575,
+            "rssMiB": 205.84375
+          },
+          {
+            "elapsedMs": 1313.3457500000004,
+            "cpuPercent": 99.15841510488526,
+            "rssMiB": 205.84375
+          },
+          {
+            "elapsedMs": 1415.5736670000006,
+            "cpuPercent": 104.76296802565177,
+            "rssMiB": 205.859375
+          },
+          {
+            "elapsedMs": 1515.957875,
+            "cpuPercent": 100.15718807085723,
+            "rssMiB": 205.875
+          },
+          {
+            "elapsedMs": 1615.492542,
+            "cpuPercent": 100.65437803695079,
+            "rssMiB": 205.921875
+          },
+          {
+            "elapsedMs": 1716.2675419999996,
+            "cpuPercent": 96.37310840982421,
+            "rssMiB": 205.921875
+          },
+          {
+            "elapsedMs": 1816.8884589999998,
+            "cpuPercent": 101.4073445583882,
+            "rssMiB": 205.9375
+          },
+          {
+            "elapsedMs": 1917.360917,
+            "cpuPercent": 102.3713384219184,
+            "rssMiB": 205.953125
+          },
+          {
+            "elapsedMs": 2019.8306670000002,
+            "cpuPercent": 99.77090799967776,
+            "rssMiB": 205.953125
+          },
+          {
+            "elapsedMs": 2060.8887090000007,
+            "cpuPercent": 103.75799216143675,
+            "rssMiB": 205.984375
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 81,
+          "referenceCharacters": 485,
+          "wordEdits": 41,
+          "referenceWords": 85
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.4546669999999722,
+        "rssMiB": 197.96875,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "single-sroie-000",
+      "round": 1,
+      "latencyMs": [
+        513.7411249999996, 515.0616660000005, 515.2220830000006, 516.5903750000002,
+        517.2953750000006, 517.8943339999996, 519.2273329999998, 520.1067499999999,
+        524.6484169999999, 542.7706669999998
+      ],
+      "coldMs": 731.363667,
+      "loadMs": 4.666792000000001,
+      "textHash": "923fc7fe9314ba9ba53dc81922fc16957a7700ae4a6877e885d84777664ca523",
+      "normalizedHash": "b6ab62511be846c5db8e422a281b9cf4bdf3be0d3343bb9c9a8336e8eef4d557",
+      "textLengths": [499],
+      "resource": {
+        "wallMs": 2072.9738749999997,
+        "userMs": 2096.86,
+        "systemMs": 6.565,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 101.46895845467424,
+        "machineCpuPercent": 12.68361980683428,
+        "documentsPerSecond": 1.9295949882629373,
+        "peakRssMiB": 200.59375,
+        "rssAfterGcMiB": 200.515625,
+        "heapAfterGcMiB": 6.512908935546875,
+        "idleCpuPercent": 0.12626060930798613,
+        "series": [
+          {
+            "elapsedMs": 102.18316700000014,
+            "cpuPercent": 103.5552166826067,
+            "rssMiB": 200.421875
+          },
+          {
+            "elapsedMs": 205.03641700000026,
+            "cpuPercent": 105.92470340023274,
+            "rssMiB": 200.421875
+          },
+          {
+            "elapsedMs": 304.5215840000001,
+            "cpuPercent": 101.2291611271057,
+            "rssMiB": 200.421875
+          },
+          {
+            "elapsedMs": 404.18095900000026,
+            "cpuPercent": 100.17020475996344,
+            "rssMiB": 200.421875
+          },
+          {
+            "elapsedMs": 507.076,
+            "cpuPercent": 99.16901631828908,
+            "rssMiB": 200.421875
+          },
+          {
+            "elapsedMs": 608.9695840000004,
+            "cpuPercent": 99.4606294347244,
+            "rssMiB": 200.421875
+          },
+          {
+            "elapsedMs": 709.4282500000008,
+            "cpuPercent": 100.15362935438496,
+            "rssMiB": 200.421875
+          },
+          {
+            "elapsedMs": 811.9103749999995,
+            "cpuPercent": 99.9237671935485,
+            "rssMiB": 200.421875
+          },
+          {
+            "elapsedMs": 911.135209,
+            "cpuPercent": 113.36778855180485,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 1013.7310420000013,
+            "cpuPercent": 100.17073500441171,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 1114.0599999999995,
+            "cpuPercent": 100.95589749870797,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 1215.2674590000006,
+            "cpuPercent": 100.33944237252206,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 1315.6623749999999,
+            "cpuPercent": 102.87572729280508,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 1417.3760419999999,
+            "cpuPercent": 100.30018876421005,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 1519.5763750000006,
+            "cpuPercent": 100.18949742560947,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 1620.5675840000004,
+            "cpuPercent": 100.05326305183672,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 1722.2155839999996,
+            "cpuPercent": 100.7112781363143,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 1823.6654589999998,
+            "cpuPercent": 100.191350654695,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 1923.7416250000006,
+            "cpuPercent": 98.96861956122426,
+            "rssMiB": 200.46875
+          },
+          {
+            "elapsedMs": 2025.3350420000006,
+            "cpuPercent": 101.71820483211029,
+            "rssMiB": 200.484375
+          },
+          {
+            "elapsedMs": 2072.974250000001,
+            "cpuPercent": 101.80479910581109,
+            "rssMiB": 200.5
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 262,
+          "referenceCharacters": 485,
+          "wordEdits": 64,
+          "referenceWords": 85
+        }
+      ],
+      "package": "undms",
+      "workload": "single-sroie-000",
+      "round": 1,
+      "latencyMs": [
+        492.3822500000001, 494.0078749999998, 503.17837499999996, 506.2682910000003,
+        510.2905840000003, 511.50945800000045, 514.6908330000006, 519.0988749999997, 531.097917,
+        553.3560829999997
+      ],
+      "coldMs": 541.8734579999999,
+      "loadMs": 8.499375,
+      "textHash": "4503e17c7c3e838c73d0cc6839b9276cb7cdf20f5e741015a2c10553be6bf07d",
+      "normalizedHash": "fcc612f6eed8cc749f1380c72c4bc660a00e07d9c6c7c4ed01fc873874c20929",
+      "textLengths": [528],
+      "resource": {
+        "wallMs": 2154.8692499999997,
+        "userMs": 8123.114,
+        "systemMs": 116.027,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 382.34992679950307,
+        "machineCpuPercent": 47.79374084993788,
+        "documentsPerSecond": 1.8562611165387415,
+        "peakRssMiB": 363.890625,
+        "rssAfterGcMiB": 363.03125,
+        "heapAfterGcMiB": 6.519218444824219,
+        "idleCpuPercent": 0.13649769630061678,
+        "series": [
+          {
+            "elapsedMs": 102.38525000000027,
+            "cpuPercent": 349.50346851719274,
+            "rssMiB": 362.34375
+          },
+          {
+            "elapsedMs": 203.63525000000027,
+            "cpuPercent": 406.5333333333333,
+            "rssMiB": 362.359375
+          },
+          {
+            "elapsedMs": 305.8020830000005,
+            "cpuPercent": 389.1409651505974,
+            "rssMiB": 362.359375
+          },
+          {
+            "elapsedMs": 408.0280420000008,
+            "cpuPercent": 403.4435128165427,
+            "rssMiB": 362.390625
+          },
+          {
+            "elapsedMs": 509.740417,
+            "cpuPercent": 391.23066391872504,
+            "rssMiB": 362.40625
+          },
+          {
+            "elapsedMs": 612.1434170000002,
+            "cpuPercent": 342.02025331289036,
+            "rssMiB": 362.40625
+          },
+          {
+            "elapsedMs": 713.4467500000001,
+            "cpuPercent": 385.0100371327374,
+            "rssMiB": 362.40625
+          },
+          {
+            "elapsedMs": 814.7623330000006,
+            "cpuPercent": 380.2919438365153,
+            "rssMiB": 362.421875
+          },
+          {
+            "elapsedMs": 917.0611250000002,
+            "cpuPercent": 348.3003005548701,
+            "rssMiB": 362.4375
+          },
+          {
+            "elapsedMs": 1017.880000000001,
+            "cpuPercent": 415.7227503282461,
+            "rssMiB": 362.4375
+          },
+          {
+            "elapsedMs": 1120.1962080000012,
+            "cpuPercent": 369.6423151256733,
+            "rssMiB": 362.4375
+          },
+          {
+            "elapsedMs": 1222.3688330000004,
+            "cpuPercent": 370.03845208048904,
+            "rssMiB": 362.4375
+          },
+          {
+            "elapsedMs": 1322.561667,
+            "cpuPercent": 398.5993649006894,
+            "rssMiB": 362.4375
+          },
+          {
+            "elapsedMs": 1423.2950419999997,
+            "cpuPercent": 403.30327460983096,
+            "rssMiB": 362.4375
+          },
+          {
+            "elapsedMs": 1524.125417000001,
+            "cpuPercent": 403.72060502600976,
+            "rssMiB": 362.578125
+          },
+          {
+            "elapsedMs": 1625.3321670000005,
+            "cpuPercent": 364.4608684697436,
+            "rssMiB": 362.578125
+          },
+          {
+            "elapsedMs": 1727.537792000001,
+            "cpuPercent": 347.1394064661296,
+            "rssMiB": 362.578125
+          },
+          {
+            "elapsedMs": 1828.3746250000004,
+            "cpuPercent": 406.59944169409056,
+            "rssMiB": 362.59375
+          },
+          {
+            "elapsedMs": 1929.1399170000004,
+            "cpuPercent": 384.5143424980099,
+            "rssMiB": 362.59375
+          },
+          {
+            "elapsedMs": 2031.337125,
+            "cpuPercent": 416.23739857942275,
+            "rssMiB": 362.59375
+          },
+          {
+            "elapsedMs": 2133.4709170000006,
+            "cpuPercent": 380.3276000953709,
+            "rssMiB": 362.625
+          },
+          {
+            "elapsedMs": 2154.8695829999997,
+            "cpuPercent": 265.6567470140535,
+            "rssMiB": 362.625
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 262,
+          "referenceCharacters": 485,
+          "wordEdits": 64,
+          "referenceWords": 85
+        }
+      ],
+      "package": "undms",
+      "workload": "single-sroie-000",
+      "round": 2,
+      "latencyMs": [
+        520.5649170000002, 521.781583, 522.432542, 525.4860829999998, 526.1010420000002, 534.68775,
+        539.4200409999994, 542.5062079999998, 547.0924999999997, 548.8481250000004
+      ],
+      "coldMs": 495.795084,
+      "loadMs": 4.085499999999996,
+      "textHash": "4503e17c7c3e838c73d0cc6839b9276cb7cdf20f5e741015a2c10553be6bf07d",
+      "normalizedHash": "fcc612f6eed8cc749f1380c72c4bc660a00e07d9c6c7c4ed01fc873874c20929",
+      "textLengths": [528],
+      "resource": {
+        "wallMs": 2158.584040999999,
+        "userMs": 8192.487,
+        "systemMs": 131.797,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 385.6363172287533,
+        "machineCpuPercent": 48.20453965359416,
+        "documentsPerSecond": 1.8530666047854847,
+        "peakRssMiB": 358.6875,
+        "rssAfterGcMiB": 358.046875,
+        "heapAfterGcMiB": 6.5189666748046875,
+        "idleCpuPercent": 0.10745793940850834,
+        "series": [
+          {
+            "elapsedMs": 102.38104099999964,
+            "cpuPercent": 347.522350353911,
+            "rssMiB": 354.296875
+          },
+          {
+            "elapsedMs": 203.199208,
+            "cpuPercent": 397.2736381926073,
+            "rssMiB": 354.3125
+          },
+          {
+            "elapsedMs": 305.43070799999987,
+            "cpuPercent": 398.59730122320474,
+            "rssMiB": 354.3125
+          },
+          {
+            "elapsedMs": 406.6571249999997,
+            "cpuPercent": 401.38632981546766,
+            "rssMiB": 354.3125
+          },
+          {
+            "elapsedMs": 507.3580000000002,
+            "cpuPercent": 397.68274108839495,
+            "rssMiB": 354.3125
+          },
+          {
+            "elapsedMs": 609.4793749999999,
+            "cpuPercent": 335.95611104923034,
+            "rssMiB": 354.3125
+          },
+          {
+            "elapsedMs": 708.8517499999998,
+            "cpuPercent": 395.188300571462,
+            "rssMiB": 354.3125
+          },
+          {
+            "elapsedMs": 809.4784160000008,
+            "cpuPercent": 417.55134767159603,
+            "rssMiB": 354.3125
+          },
+          {
+            "elapsedMs": 910.7275409999993,
+            "cpuPercent": 394.7737819956529,
+            "rssMiB": 354.359375
+          },
+          {
+            "elapsedMs": 1012.9344580000006,
+            "cpuPercent": 393.2268106668306,
+            "rssMiB": 354.390625
+          },
+          {
+            "elapsedMs": 1115.1395409999996,
+            "cpuPercent": 339.11327091237104,
+            "rssMiB": 354.390625
+          },
+          {
+            "elapsedMs": 1217.3445409999995,
+            "cpuPercent": 366.44684702314004,
+            "rssMiB": 354.40625
+          },
+          {
+            "elapsedMs": 1319.5304999999998,
+            "cpuPercent": 414.9581842256806,
+            "rssMiB": 354.40625
+          },
+          {
+            "elapsedMs": 1421.7023749999998,
+            "cpuPercent": 388.7870316562165,
+            "rssMiB": 354.4375
+          },
+          {
+            "elapsedMs": 1523.8747080000003,
+            "cpuPercent": 410.82256583100457,
+            "rssMiB": 357.78125
+          },
+          {
+            "elapsedMs": 1625.6503330000005,
+            "cpuPercent": 367.17239515846666,
+            "rssMiB": 357.78125
+          },
+          {
+            "elapsedMs": 1725.858083,
+            "cpuPercent": 362.1466403546647,
+            "rssMiB": 357.78125
+          },
+          {
+            "elapsedMs": 1828.0154159999993,
+            "cpuPercent": 394.67357668783615,
+            "rssMiB": 357.78125
+          },
+          {
+            "elapsedMs": 1930.1760409999997,
+            "cpuPercent": 399.37304612222005,
+            "rssMiB": 357.78125
+          },
+          {
+            "elapsedMs": 2031.7241249999997,
+            "cpuPercent": 403.3192787763479,
+            "rssMiB": 357.78125
+          },
+          {
+            "elapsedMs": 2133.8827499999998,
+            "cpuPercent": 384.9425342206788,
+            "rssMiB": 357.828125
+          },
+          {
+            "elapsedMs": 2158.5846250000004,
+            "cpuPercent": 337.69096475469087,
+            "rssMiB": 357.828125
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 81,
+          "referenceCharacters": 485,
+          "wordEdits": 41,
+          "referenceWords": 85
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.4592499999998836,
+        "rssMiB": 204.453125,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "single-sroie-000",
+      "round": 2,
+      "latencyMs": [
+        514.7517090000001, 514.8411249999999, 514.9084160000002, 515.8144590000002,
+        516.2132499999998, 516.3789590000001, 518.3239590000003, 520.4759999999997,
+        521.3752089999998, 522.2202910000001
+      ],
+      "coldMs": 730.9544579999999,
+      "loadMs": 7.298791999999992,
+      "textHash": "923fc7fe9314ba9ba53dc81922fc16957a7700ae4a6877e885d84777664ca523",
+      "normalizedHash": "b6ab62511be846c5db8e422a281b9cf4bdf3be0d3343bb9c9a8336e8eef4d557",
+      "textLengths": [499],
+      "resource": {
+        "wallMs": 2060.943792,
+        "userMs": 2084.859,
+        "systemMs": 5.408,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 101.42280483892011,
+        "machineCpuPercent": 12.677850604865014,
+        "documentsPerSecond": 1.9408583657287826,
+        "peakRssMiB": 207.078125,
+        "rssAfterGcMiB": 207,
+        "heapAfterGcMiB": 6.517021179199219,
+        "idleCpuPercent": 0.09754860907538139,
+        "series": [
+          {
+            "elapsedMs": 102.08904199999961,
+            "cpuPercent": 101.15189444132544,
+            "rssMiB": 206.84375
+          },
+          {
+            "elapsedMs": 204.03337499999998,
+            "cpuPercent": 109.23412486302657,
+            "rssMiB": 206.84375
+          },
+          {
+            "elapsedMs": 304.48795900000005,
+            "cpuPercent": 98.86059555032345,
+            "rssMiB": 206.84375
+          },
+          {
+            "elapsedMs": 405.19624999999996,
+            "cpuPercent": 101.5646268885648,
+            "rssMiB": 206.84375
+          },
+          {
+            "elapsedMs": 507.5552090000001,
+            "cpuPercent": 98.3089325869364,
+            "rssMiB": 206.84375
+          },
+          {
+            "elapsedMs": 609.3353339999994,
+            "cpuPercent": 102.75188795454977,
+            "rssMiB": 206.84375
+          },
+          {
+            "elapsedMs": 710.316166999999,
+            "cpuPercent": 97.9175919453946,
+            "rssMiB": 206.84375
+          },
+          {
+            "elapsedMs": 811.778624999999,
+            "cpuPercent": 99.63192494311545,
+            "rssMiB": 206.84375
+          },
+          {
+            "elapsedMs": 912.8250840000001,
+            "cpuPercent": 108.28583315324178,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 1012.7430000000004,
+            "cpuPercent": 102.66126847561519,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 1114.4452920000003,
+            "cpuPercent": 100.09410604040276,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 1216.1304999999993,
+            "cpuPercent": 104.63173758763524,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 1316.2588340000002,
+            "cpuPercent": 100.26932037039495,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 1417.592666999999,
+            "cpuPercent": 97.31991486002624,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 1518.2328340000004,
+            "cpuPercent": 101.00738405968524,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 1619.241458999999,
+            "cpuPercent": 103.53670293007302,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 1720.1406669999997,
+            "cpuPercent": 95.30897408035086,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 1820.5537499999991,
+            "cpuPercent": 103.90478698876377,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 1921.124667,
+            "cpuPercent": 101.50349926708839,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 2023.7483339999999,
+            "cpuPercent": 99.06584219018423,
+            "rssMiB": 206.890625
+          },
+          {
+            "elapsedMs": 2060.944125,
+            "cpuPercent": 105.38020282993821,
+            "rssMiB": 206.890625
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 272,
+          "referenceCharacters": 684,
+          "wordEdits": 62,
+          "referenceWords": 102
+        }
+      ],
+      "package": "undms",
+      "workload": "single-sroie-001",
+      "round": 0,
+      "latencyMs": [
+        532.0045, 538.0329999999999, 539.323292, 540.364916, 542.1939590000002, 551.113292,
+        555.3932080000004, 558.365667, 576.3832080000002, 581.746333
+      ],
+      "coldMs": 498.910792,
+      "loadMs": 4.516666999999998,
+      "textHash": "25276c7be649e88d091d97e6dda52f9b4da82ca612bf0d4f3ee23fb01c27b607",
+      "normalizedHash": "c61539097a39afb0c7346277fd3169531ff912b22e865f8d1ad191742fe035fb",
+      "textLengths": [550],
+      "resource": {
+        "wallMs": 2204.1977080000006,
+        "userMs": 8395.789,
+        "systemMs": 131.947,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 386.8861658393485,
+        "machineCpuPercent": 48.36077072991856,
+        "documentsPerSecond": 1.8147192447765665,
+        "peakRssMiB": 351.859375,
+        "rssAfterGcMiB": 351.203125,
+        "heapAfterGcMiB": 6.5193023681640625,
+        "idleCpuPercent": 0.07078527831597207,
+        "series": [
+          {
+            "elapsedMs": 101.34233300000051,
+            "cpuPercent": 339.8125835528163,
+            "rssMiB": 350.84375
+          },
+          {
+            "elapsedMs": 203.62637499999983,
+            "cpuPercent": 401.70489156070187,
+            "rssMiB": 350.859375
+          },
+          {
+            "elapsedMs": 303.8483329999999,
+            "cpuPercent": 405.08388391294415,
+            "rssMiB": 350.859375
+          },
+          {
+            "elapsedMs": 405.63516700000037,
+            "cpuPercent": 395.5324909702941,
+            "rssMiB": 350.859375
+          },
+          {
+            "elapsedMs": 506.2925000000005,
+            "cpuPercent": 406.2287245381313,
+            "rssMiB": 350.859375
+          },
+          {
+            "elapsedMs": 608.8560000000007,
+            "cpuPercent": 347.7289679076857,
+            "rssMiB": 350.859375
+          },
+          {
+            "elapsedMs": 709.5106249999999,
+            "cpuPercent": 377.70643922224434,
+            "rssMiB": 350.859375
+          },
+          {
+            "elapsedMs": 811.6300419999998,
+            "cpuPercent": 396.74041617374337,
+            "rssMiB": 350.859375
+          },
+          {
+            "elapsedMs": 913.9450420000003,
+            "cpuPercent": 406.3314274544279,
+            "rssMiB": 350.90625
+          },
+          {
+            "elapsedMs": 1015.0464999999995,
+            "cpuPercent": 405.1712093014557,
+            "rssMiB": 350.90625
+          },
+          {
+            "elapsedMs": 1116.887667,
+            "cpuPercent": 364.79255977103855,
+            "rssMiB": 350.90625
+          },
+          {
+            "elapsedMs": 1219.0307079999993,
+            "cpuPercent": 343.21770388645683,
+            "rssMiB": 350.90625
+          },
+          {
+            "elapsedMs": 1321.2244999999994,
+            "cpuPercent": 392.04240508073116,
+            "rssMiB": 350.90625
+          },
+          {
+            "elapsedMs": 1422.1238330000006,
+            "cpuPercent": 420.1405374998811,
+            "rssMiB": 350.90625
+          },
+          {
+            "elapsedMs": 1522.5052079999996,
+            "cpuPercent": 389.1947086797763,
+            "rssMiB": 350.90625
+          },
+          {
+            "elapsedMs": 1624.6448750000009,
+            "cpuPercent": 404.17695898694757,
+            "rssMiB": 350.90625
+          },
+          {
+            "elapsedMs": 1726.3877079999993,
+            "cpuPercent": 355.65551826142445,
+            "rssMiB": 350.96875
+          },
+          {
+            "elapsedMs": 1828.5316250000005,
+            "cpuPercent": 390.9102095624502,
+            "rssMiB": 350.96875
+          },
+          {
+            "elapsedMs": 1930.664667,
+            "cpuPercent": 395.9149674597982,
+            "rssMiB": 350.96875
+          },
+          {
+            "elapsedMs": 2032.2835829999995,
+            "cpuPercent": 403.2280761585788,
+            "rssMiB": 350.96875
+          },
+          {
+            "elapsedMs": 2134.461625000001,
+            "cpuPercent": 402.70785380678416,
+            "rssMiB": 350.96875
+          },
+          {
+            "elapsedMs": 2204.1981669999996,
+            "cpuPercent": 359.6091701822619,
+            "rssMiB": 350.96875
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 164,
+          "referenceCharacters": 684,
+          "wordEdits": 44,
+          "referenceWords": 102
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.8699579999993148,
+        "rssMiB": 129.3125,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "single-sroie-001",
+      "round": 0,
+      "latencyMs": [
+        650.4451669999999, 651.3040830000004, 651.603000000001, 651.6607500000009,
+        652.1717080000008, 652.2207079999998, 652.870167, 657.18725, 657.212125, 667.0983329999999
+      ],
+      "coldMs": 867.232208,
+      "loadMs": 7.389375000000001,
+      "textHash": "a3894fa973ce9d8a3f564b3abb1e9740d1e3fb77014e0f7a5f5b69724356fed5",
+      "normalizedHash": "9a82eee68aa973e70cd5074fd390f959195895c41ff57e1506936ac7a3b141a6",
+      "textLengths": [612],
+      "resource": {
+        "wallMs": 2605.5401249999995,
+        "userMs": 2623.426,
+        "systemMs": 6.131,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 100.92176185542337,
+        "machineCpuPercent": 12.615220231927921,
+        "documentsPerSecond": 1.5351903283393116,
+        "peakRssMiB": 204.578125,
+        "rssAfterGcMiB": 128.84375,
+        "heapAfterGcMiB": 6.51446533203125,
+        "idleCpuPercent": 0.08896216049071365,
+        "series": [
+          {
+            "elapsedMs": 102.22283399999833,
+            "cpuPercent": 103.45829386808208,
+            "rssMiB": 128.09375
+          },
+          {
+            "elapsedMs": 203.24454199999855,
+            "cpuPercent": 102.7234661286857,
+            "rssMiB": 128.09375
+          },
+          {
+            "elapsedMs": 305.49045899999874,
+            "cpuPercent": 103.80952424731034,
+            "rssMiB": 128.109375
+          },
+          {
+            "elapsedMs": 407.0908339999987,
+            "cpuPercent": 98.92187897928527,
+            "rssMiB": 128.109375
+          },
+          {
+            "elapsedMs": 509.26087499999994,
+            "cpuPercent": 101.34281927125659,
+            "rssMiB": 128.125
+          },
+          {
+            "elapsedMs": 610.920709,
+            "cpuPercent": 98.13708725906434,
+            "rssMiB": 128.125
+          },
+          {
+            "elapsedMs": 712.7728339999994,
+            "cpuPercent": 106.50538709918973,
+            "rssMiB": 128.21875
+          },
+          {
+            "elapsedMs": 812.4330839999984,
+            "cpuPercent": 100.31180937234355,
+            "rssMiB": 128.21875
+          },
+          {
+            "elapsedMs": 914.6698749999996,
+            "cpuPercent": 100.2163692716048,
+            "rssMiB": 128.234375
+          },
+          {
+            "elapsedMs": 1014.2055839999994,
+            "cpuPercent": 100.68446892762901,
+            "rssMiB": 128.234375
+          },
+          {
+            "elapsedMs": 1114.9166669999995,
+            "cpuPercent": 100.08133861493663,
+            "rssMiB": 128.25
+          },
+          {
+            "elapsedMs": 1215.0290839999998,
+            "cpuPercent": 98.21658785842692,
+            "rssMiB": 128.265625
+          },
+          {
+            "elapsedMs": 1316.9001669999998,
+            "cpuPercent": 105.13189498535125,
+            "rssMiB": 128.34375
+          },
+          {
+            "elapsedMs": 1418.0136669999993,
+            "cpuPercent": 97.00583997191326,
+            "rssMiB": 128.375
+          },
+          {
+            "elapsedMs": 1519.321249999999,
+            "cpuPercent": 103.88758361750689,
+            "rssMiB": 128.390625
+          },
+          {
+            "elapsedMs": 1619.5945839999986,
+            "cpuPercent": 99.61471910368562,
+            "rssMiB": 128.390625
+          },
+          {
+            "elapsedMs": 1720.8899999999994,
+            "cpuPercent": 100.59487785705836,
+            "rssMiB": 128.40625
+          },
+          {
+            "elapsedMs": 1821.6709999999985,
+            "cpuPercent": 100.05755053035885,
+            "rssMiB": 128.40625
+          },
+          {
+            "elapsedMs": 1923.6461249999993,
+            "cpuPercent": 100.09990181428967,
+            "rssMiB": 128.40625
+          },
+          {
+            "elapsedMs": 2024.9862919999996,
+            "cpuPercent": 101.72965276443615,
+            "rssMiB": 128.46875
+          },
+          {
+            "elapsedMs": 2125.012084,
+            "cpuPercent": 100.05919273300994,
+            "rssMiB": 128.484375
+          },
+          {
+            "elapsedMs": 2226.6809999999987,
+            "cpuPercent": 99.15518328138884,
+            "rssMiB": 128.484375
+          },
+          {
+            "elapsedMs": 2328.080499999998,
+            "cpuPercent": 101.66125079512274,
+            "rssMiB": 128.5
+          },
+          {
+            "elapsedMs": 2428.8984169999985,
+            "cpuPercent": 98.76022334403089,
+            "rssMiB": 128.5
+          },
+          {
+            "elapsedMs": 2530.005292,
+            "cpuPercent": 98.65995759437595,
+            "rssMiB": 128.5
+          },
+          {
+            "elapsedMs": 2605.5406249999996,
+            "cpuPercent": 103.68127985879165,
+            "rssMiB": 128.53125
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 164,
+          "referenceCharacters": 684,
+          "wordEdits": 44,
+          "referenceWords": 102
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.639208000000508,
+        "rssMiB": 204.921875,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "single-sroie-001",
+      "round": 1,
+      "latencyMs": [
+        650.521917, 651.532541, 652.3279160000002, 652.9630830000001, 654.1982500000004,
+        654.6948329999996, 656.2019579999996, 656.2085420000003, 659.8702080000003,
+        690.0513749999991
+      ],
+      "coldMs": 874.745833,
+      "loadMs": 4.410375000000002,
+      "textHash": "a3894fa973ce9d8a3f564b3abb1e9740d1e3fb77014e0f7a5f5b69724356fed5",
+      "normalizedHash": "9a82eee68aa973e70cd5074fd390f959195895c41ff57e1506936ac7a3b141a6",
+      "textLengths": [612],
+      "resource": {
+        "wallMs": 2609.8749580000003,
+        "userMs": 2624.804,
+        "systemMs": 7.702,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 100.86713127503022,
+        "machineCpuPercent": 12.608391409378777,
+        "documentsPerSecond": 1.5326404767932944,
+        "peakRssMiB": 207.546875,
+        "rssAfterGcMiB": 207.453125,
+        "heapAfterGcMiB": 6.514533996582031,
+        "idleCpuPercent": 0.08797080528098106,
+        "series": [
+          {
+            "elapsedMs": 102.09337500000038,
+            "cpuPercent": 107.70434418491857,
+            "rssMiB": 207.265625
+          },
+          {
+            "elapsedMs": 203.04100000000108,
+            "cpuPercent": 98.30741436462652,
+            "rssMiB": 207.265625
+          },
+          {
+            "elapsedMs": 305.222667,
+            "cpuPercent": 94.30458792573917,
+            "rssMiB": 207.265625
+          },
+          {
+            "elapsedMs": 405.450667000001,
+            "cpuPercent": 110.01616314802143,
+            "rssMiB": 207.265625
+          },
+          {
+            "elapsedMs": 506.8077920000014,
+            "cpuPercent": 98.7804261417237,
+            "rssMiB": 207.265625
+          },
+          {
+            "elapsedMs": 609.4620830000003,
+            "cpuPercent": 97.50493527835194,
+            "rssMiB": 207.265625
+          },
+          {
+            "elapsedMs": 711.2989580000012,
+            "cpuPercent": 106.1246233252926,
+            "rssMiB": 207.28125
+          },
+          {
+            "elapsedMs": 813.0608330000014,
+            "cpuPercent": 102.59441465676595,
+            "rssMiB": 207.28125
+          },
+          {
+            "elapsedMs": 915.3929580000004,
+            "cpuPercent": 97.23828172238285,
+            "rssMiB": 207.28125
+          },
+          {
+            "elapsedMs": 1015.7181670000009,
+            "cpuPercent": 102.42889202453537,
+            "rssMiB": 207.28125
+          },
+          {
+            "elapsedMs": 1116.1898330000004,
+            "cpuPercent": 100.61841713662889,
+            "rssMiB": 207.28125
+          },
+          {
+            "elapsedMs": 1218.6302920000016,
+            "cpuPercent": 101.68443310079145,
+            "rssMiB": 207.296875
+          },
+          {
+            "elapsedMs": 1320.1000000000004,
+            "cpuPercent": 100.80052659656937,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 1420.6850830000003,
+            "cpuPercent": 97.26392530789089,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 1520.8352080000004,
+            "cpuPercent": 98.86358104895014,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 1622.0054170000003,
+            "cpuPercent": 105.1613919271434,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 1724.0467500000013,
+            "cpuPercent": 100.05063340362182,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 1824.496792,
+            "cpuPercent": 100.11245191913551,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 1926.2959580000006,
+            "cpuPercent": 95.38486788781681,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 2028.5884170000008,
+            "cpuPercent": 105.48871447112221,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 2128.994667000001,
+            "cpuPercent": 100.7845627139745,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 2230.9782080000004,
+            "cpuPercent": 98.74828723587896,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 2333.258708000001,
+            "cpuPercent": 101.38393926505955,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 2433.7793330000004,
+            "cpuPercent": 99.62234118620015,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 2533.5787920000002,
+            "cpuPercent": 97.56766316739267,
+            "rssMiB": 207.3125
+          },
+          {
+            "elapsedMs": 2609.875333,
+            "cpuPercent": 105.0938862352886,
+            "rssMiB": 207.3125
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 272,
+          "referenceCharacters": 684,
+          "wordEdits": 62,
+          "referenceWords": 102
+        }
+      ],
+      "package": "undms",
+      "workload": "single-sroie-001",
+      "round": 1,
+      "latencyMs": [
+        530.2195420000007, 534.1231670000006, 534.3541660000001, 534.4171670000001,
+        535.0598340000006, 539.3147090000002, 541.8079589999998, 541.8233749999999,
+        543.1333340000001, 545.6529999999998
+      ],
+      "coldMs": 536.7190420000001,
+      "loadMs": 8.067333000000005,
+      "textHash": "25276c7be649e88d091d97e6dda52f9b4da82ca612bf0d4f3ee23fb01c27b607",
+      "normalizedHash": "c61539097a39afb0c7346277fd3169531ff912b22e865f8d1ad191742fe035fb",
+      "textLengths": [550],
+      "resource": {
+        "wallMs": 2182.5487920000005,
+        "userMs": 8303.659,
+        "systemMs": 141.553,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 386.9426438921049,
+        "machineCpuPercent": 48.367830486513114,
+        "documentsPerSecond": 1.8327196233421017,
+        "peakRssMiB": 323.328125,
+        "rssAfterGcMiB": 320.359375,
+        "heapAfterGcMiB": 6.5186920166015625,
+        "idleCpuPercent": 0.06648864689814754,
+        "series": [
+          {
+            "elapsedMs": 102.42095900000004,
+            "cpuPercent": 355.0816195735874,
+            "rssMiB": 314.484375
+          },
+          {
+            "elapsedMs": 204.71312500000022,
+            "cpuPercent": 389.8675877095019,
+            "rssMiB": 314.5
+          },
+          {
+            "elapsedMs": 305.3938339999995,
+            "cpuPercent": 403.01861600915305,
+            "rssMiB": 314.703125
+          },
+          {
+            "elapsedMs": 406.39658399999917,
+            "cpuPercent": 393.51601812822065,
+            "rssMiB": 316.046875
+          },
+          {
+            "elapsedMs": 508.6367500000006,
+            "cpuPercent": 403.23975999803673,
+            "rssMiB": 317.203125
+          },
+          {
+            "elapsedMs": 611.0234169999994,
+            "cpuPercent": 357.006444989565,
+            "rssMiB": 319.5625
+          },
+          {
+            "elapsedMs": 711.6353750000007,
+            "cpuPercent": 392.2476093746181,
+            "rssMiB": 320.1875
+          },
+          {
+            "elapsedMs": 812.4062920000006,
+            "cpuPercent": 392.4187769373982,
+            "rssMiB": 320.203125
+          },
+          {
+            "elapsedMs": 914.7320840000002,
+            "cpuPercent": 401.63285518474316,
+            "rssMiB": 320.234375
+          },
+          {
+            "elapsedMs": 1015.6865000000007,
+            "cpuPercent": 392.0739831727599,
+            "rssMiB": 320.234375
+          },
+          {
+            "elapsedMs": 1117.8405840000005,
+            "cpuPercent": 359.91708368703183,
+            "rssMiB": 320.234375
+          },
+          {
+            "elapsedMs": 1218.5723750000006,
+            "cpuPercent": 368.24223645541997,
+            "rssMiB": 320.25
+          },
+          {
+            "elapsedMs": 1320.7294589999992,
+            "cpuPercent": 384.7760572335889,
+            "rssMiB": 320.25
+          },
+          {
+            "elapsedMs": 1422.9299170000004,
+            "cpuPercent": 399.9199299087245,
+            "rssMiB": 320.25
+          },
+          {
+            "elapsedMs": 1524.1305839999995,
+            "cpuPercent": 406.7236039066851,
+            "rssMiB": 320.25
+          },
+          {
+            "elapsedMs": 1626.0493340000003,
+            "cpuPercent": 390.84859262892957,
+            "rssMiB": 320.28125
+          },
+          {
+            "elapsedMs": 1728.7443749999993,
+            "cpuPercent": 334.9012733730767,
+            "rssMiB": 320.28125
+          },
+          {
+            "elapsedMs": 1830.9457919999995,
+            "cpuPercent": 394.97495421222897,
+            "rssMiB": 320.28125
+          },
+          {
+            "elapsedMs": 1933.1272920000001,
+            "cpuPercent": 406.8055372058519,
+            "rssMiB": 320.28125
+          },
+          {
+            "elapsedMs": 2033.4600419999997,
+            "cpuPercent": 389.9624001136236,
+            "rssMiB": 320.296875
+          },
+          {
+            "elapsedMs": 2135.602749999999,
+            "cpuPercent": 411.3685726836247,
+            "rssMiB": 320.3125
+          },
+          {
+            "elapsedMs": 2182.5493749999996,
+            "cpuPercent": 382.9029243316172,
+            "rssMiB": 320.328125
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 272,
+          "referenceCharacters": 684,
+          "wordEdits": 62,
+          "referenceWords": 102
+        }
+      ],
+      "package": "undms",
+      "workload": "single-sroie-001",
+      "round": 2,
+      "latencyMs": [
+        544.8542920000004, 553.7904170000002, 554.1594999999998, 555.109708, 562.6434160000003,
+        571.1423329999998, 571.4080409999997, 585.1777080000002, 586.603333, 586.6136669999996
+      ],
+      "coldMs": 540.906708,
+      "loadMs": 4.481792000000013,
+      "textHash": "25276c7be649e88d091d97e6dda52f9b4da82ca612bf0d4f3ee23fb01c27b607",
+      "normalizedHash": "c61539097a39afb0c7346277fd3169531ff912b22e865f8d1ad191742fe035fb",
+      "textLengths": [550],
+      "resource": {
+        "wallMs": 2257.8162079999993,
+        "userMs": 8566.957,
+        "systemMs": 154.645,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 386.28485211051344,
+        "machineCpuPercent": 48.28560651381418,
+        "documentsPerSecond": 1.7716233880450563,
+        "peakRssMiB": 345.875,
+        "rssAfterGcMiB": 344.984375,
+        "heapAfterGcMiB": 6.5191192626953125,
+        "idleCpuPercent": 0.1448094055467776,
+        "series": [
+          {
+            "elapsedMs": 102.4164579999997,
+            "cpuPercent": 341.53788056212704,
+            "rssMiB": 344.640625
+          },
+          {
+            "elapsedMs": 204.71016699999927,
+            "cpuPercent": 409.0251532476955,
+            "rssMiB": 344.65625
+          },
+          {
+            "elapsedMs": 306.39808299999913,
+            "cpuPercent": 390.2263077158554,
+            "rssMiB": 344.6875
+          },
+          {
+            "elapsedMs": 408.6351249999998,
+            "cpuPercent": 395.112174704739,
+            "rssMiB": 344.6875
+          },
+          {
+            "elapsedMs": 510.4103750000004,
+            "cpuPercent": 396.3655210869024,
+            "rssMiB": 344.6875
+          },
+          {
+            "elapsedMs": 612.2081250000001,
+            "cpuPercent": 375.1634982109143,
+            "rssMiB": 344.6875
+          },
+          {
+            "elapsedMs": 713.9797499999995,
+            "cpuPercent": 388.5562405041703,
+            "rssMiB": 344.6875
+          },
+          {
+            "elapsedMs": 815.9546249999994,
+            "cpuPercent": 394.52953484865805,
+            "rssMiB": 344.6875
+          },
+          {
+            "elapsedMs": 918.2229579999994,
+            "cpuPercent": 397.61966199253493,
+            "rssMiB": 344.71875
+          },
+          {
+            "elapsedMs": 1020.4818750000004,
+            "cpuPercent": 403.3359750915374,
+            "rssMiB": 344.71875
+          },
+          {
+            "elapsedMs": 1122.6707079999987,
+            "cpuPercent": 364.9821502511982,
+            "rssMiB": 344.71875
+          },
+          {
+            "elapsedMs": 1224.865499999999,
+            "cpuPercent": 349.06769025959676,
+            "rssMiB": 344.734375
+          },
+          {
+            "elapsedMs": 1326.1353329999993,
+            "cpuPercent": 404.2023057350147,
+            "rssMiB": 344.734375
+          },
+          {
+            "elapsedMs": 1426.998917,
+            "cpuPercent": 376.3449452678557,
+            "rssMiB": 344.734375
+          },
+          {
+            "elapsedMs": 1529.1983329999994,
+            "cpuPercent": 391.3182830712086,
+            "rssMiB": 344.734375
+          },
+          {
+            "elapsedMs": 1631.363375,
+            "cpuPercent": 408.76702228537016,
+            "rssMiB": 344.75
+          },
+          {
+            "elapsedMs": 1733.4121249999998,
+            "cpuPercent": 354.50801700167835,
+            "rssMiB": 344.75
+          },
+          {
+            "elapsedMs": 1835.5873330000004,
+            "cpuPercent": 368.4866489334653,
+            "rssMiB": 344.75
+          },
+          {
+            "elapsedMs": 1937.7334579999997,
+            "cpuPercent": 408.94747598110337,
+            "rssMiB": 344.75
+          },
+          {
+            "elapsedMs": 2039.1819580000001,
+            "cpuPercent": 397.9092840209548,
+            "rssMiB": 344.75
+          },
+          {
+            "elapsedMs": 2140.8366670000005,
+            "cpuPercent": 394.7716775225814,
+            "rssMiB": 344.75
+          },
+          {
+            "elapsedMs": 2241.485916999999,
+            "cpuPercent": 398.61797281152684,
+            "rssMiB": 344.75
+          },
+          {
+            "elapsedMs": 2257.8166250000004,
+            "cpuPercent": 319.2758084952335,
+            "rssMiB": 344.75
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 164,
+          "referenceCharacters": 684,
+          "wordEdits": 44,
+          "referenceWords": 102
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.4765840000000026,
+        "rssMiB": 206.65625,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "single-sroie-001",
+      "round": 2,
+      "latencyMs": [
+        650.4686659999988, 650.5379170000006, 651.083791, 652.8202080000001, 653.0984170000002,
+        653.3162499999999, 654.039334, 654.9074589999996, 656.5170830000002, 657.3644590000004
+      ],
+      "coldMs": 870.044583,
+      "loadMs": 6.941625000000002,
+      "textHash": "a3894fa973ce9d8a3f564b3abb1e9740d1e3fb77014e0f7a5f5b69724356fed5",
+      "normalizedHash": "9a82eee68aa973e70cd5074fd390f959195895c41ff57e1506936ac7a3b141a6",
+      "textLengths": [612],
+      "resource": {
+        "wallMs": 2057.8200419999994,
+        "userMs": 2031.272,
+        "systemMs": 13.969,
+        "calls": 3,
+        "documents": 3,
+        "cpuPercent": 99.38872001714135,
+        "machineCpuPercent": 12.423590002142669,
+        "documentsPerSecond": 1.4578534268158327,
+        "peakRssMiB": 208.21875,
+        "rssAfterGcMiB": 208.140625,
+        "heapAfterGcMiB": 6.514122009277344,
+        "idleCpuPercent": 0.04523372490162282,
+        "series": [
+          {
+            "elapsedMs": 102.11345799999981,
+            "cpuPercent": 104.96657551250512,
+            "rssMiB": 207.984375
+          },
+          {
+            "elapsedMs": 203.14883299999929,
+            "cpuPercent": 100.97552466153614,
+            "rssMiB": 207.984375
+          },
+          {
+            "elapsedMs": 305.2587079999994,
+            "cpuPercent": 103.85185566038535,
+            "rssMiB": 207.984375
+          },
+          {
+            "elapsedMs": 406.77058299999953,
+            "cpuPercent": 99.82280398229257,
+            "rssMiB": 207.984375
+          },
+          {
+            "elapsedMs": 508.2016249999997,
+            "cpuPercent": 98.06268183659184,
+            "rssMiB": 207.984375
+          },
+          {
+            "elapsedMs": 608.7157499999994,
+            "cpuPercent": 100.82463534354034,
+            "rssMiB": 207.984375
+          },
+          {
+            "elapsedMs": 709.6332919999986,
+            "cpuPercent": 105.47224782783633,
+            "rssMiB": 208
+          },
+          {
+            "elapsedMs": 809.7052919999987,
+            "cpuPercent": 101.31205532016936,
+            "rssMiB": 208
+          },
+          {
+            "elapsedMs": 909.7113329999993,
+            "cpuPercent": 99.11401252250297,
+            "rssMiB": 208
+          },
+          {
+            "elapsedMs": 1009.4754999999986,
+            "cpuPercent": 100.67743060491914,
+            "rssMiB": 208
+          },
+          {
+            "elapsedMs": 1110.2322079999994,
+            "cpuPercent": 97.51906543036245,
+            "rssMiB": 208
+          },
+          {
+            "elapsedMs": 1211.4529169999987,
+            "cpuPercent": 101.25793527093427,
+            "rssMiB": 208.015625
+          },
+          {
+            "elapsedMs": 1311.77225,
+            "cpuPercent": 103.1506060751009,
+            "rssMiB": 208.015625
+          },
+          {
+            "elapsedMs": 1413.0828329999986,
+            "cpuPercent": 102.30520537030317,
+            "rssMiB": 208.015625
+          },
+          {
+            "elapsedMs": 1514.6171669999985,
+            "cpuPercent": 76.70213309322543,
+            "rssMiB": 208.015625
+          },
+          {
+            "elapsedMs": 1615.0579579999994,
+            "cpuPercent": 90.46722859838806,
+            "rssMiB": 208.015625
+          },
+          {
+            "elapsedMs": 1715.6401669999996,
+            "cpuPercent": 98.82960514418593,
+            "rssMiB": 208.015625
+          },
+          {
+            "elapsedMs": 1816.7467079999988,
+            "cpuPercent": 101.20908003370505,
+            "rssMiB": 208.015625
+          },
+          {
+            "elapsedMs": 1917.020708,
+            "cpuPercent": 100.47270478887722,
+            "rssMiB": 208.015625
+          },
+          {
+            "elapsedMs": 2018.5739999999987,
+            "cpuPercent": 98.30208163020582,
+            "rssMiB": 208.015625
+          },
+          {
+            "elapsedMs": 2057.8203329999997,
+            "cpuPercent": 105.84683160079945,
+            "rssMiB": 208.015625
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 246,
+          "referenceCharacters": 723,
+          "wordEdits": 76,
+          "referenceWords": 123
+        }
+      ],
+      "package": "undms",
+      "workload": "single-sroie-002",
+      "round": 0,
+      "latencyMs": [
+        654.7927499999987, 660.1807910000007, 660.7383329999993, 661.2526669999997,
+        683.1067079999993, 683.7901660000007, 690.5828750000001, 692.2332500000002,
+        706.3498340000006, 714.0931250000003
+      ],
+      "coldMs": 935.4735000000001,
+      "loadMs": 8.25,
+      "textHash": "36c88030fc3deca2a22a771db07f15455d232b9df8031638fed439fb3152b770",
+      "normalizedHash": "d1a41aba0a160ab9672d039bc1f9a1b94976b649f376d0eadc85ac9f9705eb83",
+      "textLengths": [709],
+      "resource": {
+        "wallMs": 2085.982,
+        "userMs": 7787.853,
+        "systemMs": 172.401,
+        "calls": 3,
+        "documents": 3,
+        "cpuPercent": 381.6070320836901,
+        "machineCpuPercent": 47.700879010461264,
+        "documentsPerSecond": 1.4381715661975991,
+        "peakRssMiB": 363.6875,
+        "rssAfterGcMiB": 329.53125,
+        "heapAfterGcMiB": 6.524192810058594,
+        "idleCpuPercent": 0.10716006744780693,
+        "series": [
+          {
+            "elapsedMs": 101.45883299999878,
+            "cpuPercent": 339.778203441394,
+            "rssMiB": 325.109375
+          },
+          {
+            "elapsedMs": 202.74399999999878,
+            "cpuPercent": 397.7611055328565,
+            "rssMiB": 295.828125
+          },
+          {
+            "elapsedMs": 303.9339169999985,
+            "cpuPercent": 398.80653326358714,
+            "rssMiB": 302.078125
+          },
+          {
+            "elapsedMs": 405.13633299999856,
+            "cpuPercent": 410.08408336812795,
+            "rssMiB": 313.40625
+          },
+          {
+            "elapsedMs": 505.6051669999997,
+            "cpuPercent": 395.4271032945356,
+            "rssMiB": 330.609375
+          },
+          {
+            "elapsedMs": 606.8600829999996,
+            "cpuPercent": 391.8624553498227,
+            "rssMiB": 330.625
+          },
+          {
+            "elapsedMs": 708.8602080000001,
+            "cpuPercent": 340.99958210835365,
+            "rssMiB": 330.640625
+          },
+          {
+            "elapsedMs": 810.0461669999986,
+            "cpuPercent": 373.11204413253165,
+            "rssMiB": 363.65625
+          },
+          {
+            "elapsedMs": 911.3394579999986,
+            "cpuPercent": 389.4157215209842,
+            "rssMiB": 363.671875
+          },
+          {
+            "elapsedMs": 1012.5088329999999,
+            "cpuPercent": 400.08945394789157,
+            "rssMiB": 363.671875
+          },
+          {
+            "elapsedMs": 1113.723,
+            "cpuPercent": 385.0617078140846,
+            "rssMiB": 363.671875
+          },
+          {
+            "elapsedMs": 1213.889541999999,
+            "cpuPercent": 394.6597257994629,
+            "rssMiB": 329.234375
+          },
+          {
+            "elapsedMs": 1314.3158329999987,
+            "cpuPercent": 396.70189552255886,
+            "rssMiB": 329.234375
+          },
+          {
+            "elapsedMs": 1414.995583,
+            "cpuPercent": 311.98329356200867,
+            "rssMiB": 329.25
+          },
+          {
+            "elapsedMs": 1516.1939169999987,
+            "cpuPercent": 349.7587223125671,
+            "rssMiB": 329.25
+          },
+          {
+            "elapsedMs": 1617.3423749999984,
+            "cpuPercent": 388.902616785321,
+            "rssMiB": 329.25
+          },
+          {
+            "elapsedMs": 1718.5212079999983,
+            "cpuPercent": 382.6768786708582,
+            "rssMiB": 329.25
+          },
+          {
+            "elapsedMs": 1819.6904169999998,
+            "cpuPercent": 408.6846226108122,
+            "rssMiB": 329.25
+          },
+          {
+            "elapsedMs": 1919.8563329999997,
+            "cpuPercent": 386.96596155522633,
+            "rssMiB": 329.25
+          },
+          {
+            "elapsedMs": 2021.0158749999991,
+            "cpuPercent": 405.30630318591426,
+            "rssMiB": 329.25
+          },
+          {
+            "elapsedMs": 2085.982582999999,
+            "cpuPercent": 357.5954625867764,
+            "rssMiB": 329.25
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 34,
+          "referenceCharacters": 723,
+          "wordEdits": 28,
+          "referenceWords": 123
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.4604579999995622,
+        "rssMiB": 116.484375,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "single-sroie-002",
+      "round": 0,
+      "latencyMs": [
+        731.4718750000011, 731.6390409999999, 732.2522499999995, 732.2815419999997,
+        732.4932079999999, 732.5495839999994, 732.8316249999993, 736.6237920000003,
+        737.2835420000001, 739.492209
+      ],
+      "coldMs": 979.461459,
+      "loadMs": 7.039417,
+      "textHash": "774e00eaef1e9ecf2be2b11ce05b18ad31691b2475ae1813e174dcd50f2929f2",
+      "normalizedHash": "eb614c2b75cfa37d52ccf45a87428b0ffb6539704e265d766267594f68657773",
+      "textLengths": [734],
+      "resource": {
+        "wallMs": 2194.234542,
+        "userMs": 2206.795,
+        "systemMs": 5.06,
+        "calls": 3,
+        "documents": 3,
+        "cpuPercent": 100.80303439138913,
+        "machineCpuPercent": 12.600379298923642,
+        "documentsPerSecond": 1.367219384517373,
+        "peakRssMiB": 207.671875,
+        "rssAfterGcMiB": 115.546875,
+        "heapAfterGcMiB": 6.522972106933594,
+        "idleCpuPercent": 0.11576409580615332,
+        "series": [
+          {
+            "elapsedMs": 101.32266700000037,
+            "cpuPercent": 109.121683502468,
+            "rssMiB": 115.65625
+          },
+          {
+            "elapsedMs": 201.6945420000011,
+            "cpuPercent": 97.00725427317094,
+            "rssMiB": 115.65625
+          },
+          {
+            "elapsedMs": 302.30416700000023,
+            "cpuPercent": 103.32709221409073,
+            "rssMiB": 115.671875
+          },
+          {
+            "elapsedMs": 401.84070900000006,
+            "cpuPercent": 96.63285268640352,
+            "rssMiB": 115.671875
+          },
+          {
+            "elapsedMs": 501.9075840000005,
+            "cpuPercent": 100.12803937366841,
+            "rssMiB": 115.671875
+          },
+          {
+            "elapsedMs": 602.6072500000009,
+            "cpuPercent": 99.42734070240071,
+            "rssMiB": 115.546875
+          },
+          {
+            "elapsedMs": 703.365917000001,
+            "cpuPercent": 104.2897877956245,
+            "rssMiB": 115.546875
+          },
+          {
+            "elapsedMs": 803.6803340000006,
+            "cpuPercent": 102.31829388990062,
+            "rssMiB": 115.609375
+          },
+          {
+            "elapsedMs": 904.3085840000003,
+            "cpuPercent": 100.37539160225906,
+            "rssMiB": 115.625
+          },
+          {
+            "elapsedMs": 1005.0931670000009,
+            "cpuPercent": 101.3657019347884,
+            "rssMiB": 115.65625
+          },
+          {
+            "elapsedMs": 1105.6358340000006,
+            "cpuPercent": 99.59055492331458,
+            "rssMiB": 115.65625
+          },
+          {
+            "elapsedMs": 1207.2267090000005,
+            "cpuPercent": 93.61569136991893,
+            "rssMiB": 115.671875
+          },
+          {
+            "elapsedMs": 1307.538125000001,
+            "cpuPercent": 104.3430590193239,
+            "rssMiB": 115.671875
+          },
+          {
+            "elapsedMs": 1407.6080840000013,
+            "cpuPercent": 97.07808514241485,
+            "rssMiB": 115.34375
+          },
+          {
+            "elapsedMs": 1508.2523340000007,
+            "cpuPercent": 107.27388797671071,
+            "rssMiB": 115.421875
+          },
+          {
+            "elapsedMs": 1608.9637500000008,
+            "cpuPercent": 97.10219941699549,
+            "rssMiB": 115.4375
+          },
+          {
+            "elapsedMs": 1709.5192500000012,
+            "cpuPercent": 96.21751172238179,
+            "rssMiB": 115.4375
+          },
+          {
+            "elapsedMs": 1810.8280840000007,
+            "cpuPercent": 101.50842324372277,
+            "rssMiB": 115.4375
+          },
+          {
+            "elapsedMs": 1912.1305840000005,
+            "cpuPercent": 106.16914686212111,
+            "rssMiB": 115.453125
+          },
+          {
+            "elapsedMs": 2012.6907920000012,
+            "cpuPercent": 96.25676191918701,
+            "rssMiB": 115.453125
+          },
+          {
+            "elapsedMs": 2114.285250000001,
+            "cpuPercent": 95.0238840784016,
+            "rssMiB": 115.453125
+          },
+          {
+            "elapsedMs": 2194.234792000001,
+            "cpuPercent": 111.69544911214085,
+            "rssMiB": 115.484375
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 34,
+          "referenceCharacters": 723,
+          "wordEdits": 28,
+          "referenceWords": 123
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.5006669999984297,
+        "rssMiB": 196.640625,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "single-sroie-002",
+      "round": 1,
+      "latencyMs": [
+        730.3239580000009, 730.9717500000006, 731.415833, 731.5698750000001, 731.767417,
+        735.1842910000014, 735.2172499999997, 736.3914580000005, 741.826333, 789.5617500000003
+      ],
+      "coldMs": 949.344042,
+      "loadMs": 7.191292000000004,
+      "textHash": "774e00eaef1e9ecf2be2b11ce05b18ad31691b2475ae1813e174dcd50f2929f2",
+      "normalizedHash": "eb614c2b75cfa37d52ccf45a87428b0ffb6539704e265d766267594f68657773",
+      "textLengths": [734],
+      "resource": {
+        "wallMs": 2209.338417000001,
+        "userMs": 2219.762,
+        "systemMs": 7.074,
+        "calls": 3,
+        "documents": 3,
+        "cpuPercent": 100.79198292418046,
+        "machineCpuPercent": 12.598997865522557,
+        "documentsPerSecond": 1.3578725544788275,
+        "peakRssMiB": 206.203125,
+        "rssAfterGcMiB": 199.046875,
+        "heapAfterGcMiB": 6.521476745605469,
+        "idleCpuPercent": 0.12179373633398355,
+        "series": [
+          {
+            "elapsedMs": 100.77308400000038,
+            "cpuPercent": 107.87999700396149,
+            "rssMiB": 198.765625
+          },
+          {
+            "elapsedMs": 201.55516700000044,
+            "cpuPercent": 100.48512293598849,
+            "rssMiB": 198.765625
+          },
+          {
+            "elapsedMs": 301.9067500000001,
+            "cpuPercent": 100.61824336144286,
+            "rssMiB": 198.78125
+          },
+          {
+            "elapsedMs": 402.3230000000003,
+            "cpuPercent": 97.93235656579466,
+            "rssMiB": 198.78125
+          },
+          {
+            "elapsedMs": 502.5588339999995,
+            "cpuPercent": 102.47632598138591,
+            "rssMiB": 198.796875
+          },
+          {
+            "elapsedMs": 604.0650000000005,
+            "cpuPercent": 99.95254869541517,
+            "rssMiB": 198.796875
+          },
+          {
+            "elapsedMs": 704.4068339999994,
+            "cpuPercent": 97.04725947106074,
+            "rssMiB": 198.8125
+          },
+          {
+            "elapsedMs": 805.441334000001,
+            "cpuPercent": 106.66257565484891,
+            "rssMiB": 198.875
+          },
+          {
+            "elapsedMs": 906.8401670000003,
+            "cpuPercent": 100.23784001537838,
+            "rssMiB": 198.875
+          },
+          {
+            "elapsedMs": 1008.0456670000003,
+            "cpuPercent": 98.6655863564727,
+            "rssMiB": 198.875
+          },
+          {
+            "elapsedMs": 1109.0513339999998,
+            "cpuPercent": 102.29327033700058,
+            "rssMiB": 198.875
+          },
+          {
+            "elapsedMs": 1209.1718340000007,
+            "cpuPercent": 97.57242522759985,
+            "rssMiB": 198.890625
+          },
+          {
+            "elapsedMs": 1310.3504589999993,
+            "cpuPercent": 98.1640143854508,
+            "rssMiB": 198.90625
+          },
+          {
+            "elapsedMs": 1410.5677919999998,
+            "cpuPercent": 102.33159966450063,
+            "rssMiB": 198.90625
+          },
+          {
+            "elapsedMs": 1511.704334,
+            "cpuPercent": 104.56655715992326,
+            "rssMiB": 198.984375
+          },
+          {
+            "elapsedMs": 1612.9579589999994,
+            "cpuPercent": 96.58419636827877,
+            "rssMiB": 198.984375
+          },
+          {
+            "elapsedMs": 1712.5580420000006,
+            "cpuPercent": 100.26698471727057,
+            "rssMiB": 198.984375
+          },
+          {
+            "elapsedMs": 1813.0917919999993,
+            "cpuPercent": 103.52045954716833,
+            "rssMiB": 199
+          },
+          {
+            "elapsedMs": 1912.606584000001,
+            "cpuPercent": 99.94192622137847,
+            "rssMiB": 199
+          },
+          {
+            "elapsedMs": 2013.3443750000006,
+            "cpuPercent": 100.32084185765046,
+            "rssMiB": 199.015625
+          },
+          {
+            "elapsedMs": 2114.3295,
+            "cpuPercent": 94.55055880754786,
+            "rssMiB": 199.015625
+          },
+          {
+            "elapsedMs": 2209.3387920000005,
+            "cpuPercent": 105.62545819202538,
+            "rssMiB": 199.046875
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 246,
+          "referenceCharacters": 723,
+          "wordEdits": 76,
+          "referenceWords": 123
+        }
+      ],
+      "package": "undms",
+      "workload": "single-sroie-002",
+      "round": 1,
+      "latencyMs": [
+        620.6075410000003, 627.8679999999995, 628.0524580000001, 628.531332999999,
+        632.6959169999996, 645.1739589999997, 648.9397079999999, 660.665, 669.2775000000001,
+        669.382916999999
+      ],
+      "coldMs": 619.5386249999999,
+      "loadMs": 8.250582999999992,
+      "textHash": "36c88030fc3deca2a22a771db07f15455d232b9df8031638fed439fb3152b770",
+      "normalizedHash": "d1a41aba0a160ab9672d039bc1f9a1b94976b649f376d0eadc85ac9f9705eb83",
+      "textLengths": [709],
+      "resource": {
+        "wallMs": 2596.3582079999996,
+        "userMs": 9886.101,
+        "systemMs": 173.451,
+        "calls": 4,
+        "documents": 4,
+        "cpuPercent": 387.44854115291633,
+        "machineCpuPercent": 48.43106764411454,
+        "documentsPerSecond": 1.5406194675584612,
+        "peakRssMiB": 384.828125,
+        "rssAfterGcMiB": 335.71875,
+        "heapAfterGcMiB": 6.523529052734375,
+        "idleCpuPercent": 0.0998626473886413,
+        "series": [
+          {
+            "elapsedMs": 100.51591700000063,
+            "cpuPercent": 337.27792584332474,
+            "rssMiB": 374.46875
+          },
+          {
+            "elapsedMs": 201.3032920000005,
+            "cpuPercent": 398.34751128303566,
+            "rssMiB": 374.484375
+          },
+          {
+            "elapsedMs": 302.51395800000137,
+            "cpuPercent": 396.0985692950549,
+            "rssMiB": 374.484375
+          },
+          {
+            "elapsedMs": 403.7624169999999,
+            "cpuPercent": 395.1447794380809,
+            "rssMiB": 374.484375
+          },
+          {
+            "elapsedMs": 504.6993330000005,
+            "cpuPercent": 415.08995578981,
+            "rssMiB": 374.484375
+          },
+          {
+            "elapsedMs": 605.046792000001,
+            "cpuPercent": 383.87419456231373,
+            "rssMiB": 323.9375
+          },
+          {
+            "elapsedMs": 704.6075000000001,
+            "cpuPercent": 354.7755003911817,
+            "rssMiB": 356.90625
+          },
+          {
+            "elapsedMs": 805.8494580000006,
+            "cpuPercent": 364.4003013059053,
+            "rssMiB": 356.90625
+          },
+          {
+            "elapsedMs": 907.0821670000005,
+            "cpuPercent": 417.9350766954191,
+            "rssMiB": 371.5625
+          },
+          {
+            "elapsedMs": 1006.7728750000006,
+            "cpuPercent": 380.95225484806434,
+            "rssMiB": 371.5625
+          },
+          {
+            "elapsedMs": 1107.9943330000006,
+            "cpuPercent": 410.40705025213146,
+            "rssMiB": 371.5625
+          },
+          {
+            "elapsedMs": 1209.1725000000006,
+            "cpuPercent": 389.8163128414848,
+            "rssMiB": 371.5625
+          },
+          {
+            "elapsedMs": 1310.9367920000004,
+            "cpuPercent": 381.4854821571407,
+            "rssMiB": 371.5625
+          },
+          {
+            "elapsedMs": 1412.147500000001,
+            "cpuPercent": 352.4449211441127,
+            "rssMiB": 371.5625
+          },
+          {
+            "elapsedMs": 1512.508417000001,
+            "cpuPercent": 403.6162802298828,
+            "rssMiB": 371.5625
+          },
+          {
+            "elapsedMs": 1613.7282080000004,
+            "cpuPercent": 415.470132713475,
+            "rssMiB": 300.3125
+          },
+          {
+            "elapsedMs": 1714.7946250000005,
+            "cpuPercent": 381.21861983095727,
+            "rssMiB": 300.3125
+          },
+          {
+            "elapsedMs": 1815.1149580000001,
+            "cpuPercent": 410.59672319867735,
+            "rssMiB": 300.3125
+          },
+          {
+            "elapsedMs": 1915.250833,
+            "cpuPercent": 394.50396773384193,
+            "rssMiB": 300.3125
+          },
+          {
+            "elapsedMs": 2016.818792,
+            "cpuPercent": 328.3309060094435,
+            "rssMiB": 375.46875
+          },
+          {
+            "elapsedMs": 2117.2265829999997,
+            "cpuPercent": 393.9823753318121,
+            "rssMiB": 375.46875
+          },
+          {
+            "elapsedMs": 2218.3663750000014,
+            "cpuPercent": 404.8465909441388,
+            "rssMiB": 375.46875
+          },
+          {
+            "elapsedMs": 2318.862583,
+            "cpuPercent": 402.01616363475665,
+            "rssMiB": 375.46875
+          },
+          {
+            "elapsedMs": 2420.0440420000014,
+            "cpuPercent": 370.68056114904937,
+            "rssMiB": 354.4375
+          },
+          {
+            "elapsedMs": 2520.1946669999998,
+            "cpuPercent": 406.7912706485921,
+            "rssMiB": 334.703125
+          },
+          {
+            "elapsedMs": 2596.3586670000004,
+            "cpuPercent": 382.45102673178593,
+            "rssMiB": 335.484375
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 246,
+          "referenceCharacters": 723,
+          "wordEdits": 76,
+          "referenceWords": 123
+        }
+      ],
+      "package": "undms",
+      "workload": "single-sroie-002",
+      "round": 2,
+      "latencyMs": [
+        638.9175829999999, 656.5107499999999, 657.073958, 667.2810419999996, 667.4497499999998,
+        667.6563749999996, 678.137166999999, 707.216958, 709.7495000000004, 741.6715830000003
+      ],
+      "coldMs": 619.418584,
+      "loadMs": 4.421250000000001,
+      "textHash": "36c88030fc3deca2a22a771db07f15455d232b9df8031638fed439fb3152b770",
+      "normalizedHash": "d1a41aba0a160ab9672d039bc1f9a1b94976b649f376d0eadc85ac9f9705eb83",
+      "textLengths": [709],
+      "resource": {
+        "wallMs": 2143.479792,
+        "userMs": 7899.152,
+        "systemMs": 225.909,
+        "calls": 3,
+        "documents": 3,
+        "cpuPercent": 379.05937020375694,
+        "machineCpuPercent": 47.38242127546962,
+        "documentsPerSecond": 1.399593320728633,
+        "peakRssMiB": 381.15625,
+        "rssAfterGcMiB": 358.234375,
+        "heapAfterGcMiB": 6.524284362792969,
+        "idleCpuPercent": 0.05842827114045568,
+        "series": [
+          {
+            "elapsedMs": 101.48712499999965,
+            "cpuPercent": 333.12501462624067,
+            "rssMiB": 339.84375
+          },
+          {
+            "elapsedMs": 201.10974999999962,
+            "cpuPercent": 395.68622087603103,
+            "rssMiB": 339.859375
+          },
+          {
+            "elapsedMs": 301.895708,
+            "cpuPercent": 388.1760988966325,
+            "rssMiB": 339.734375
+          },
+          {
+            "elapsedMs": 403.18354200000067,
+            "cpuPercent": 404.1126992606015,
+            "rssMiB": 351.4375
+          },
+          {
+            "elapsedMs": 503.97091700000055,
+            "cpuPercent": 395.0822213595705,
+            "rssMiB": 351.453125
+          },
+          {
+            "elapsedMs": 605.2374579999996,
+            "cpuPercent": 401.165079786821,
+            "rssMiB": 351.5
+          },
+          {
+            "elapsedMs": 706.4965420000008,
+            "cpuPercent": 369.76929398254845,
+            "rssMiB": 351.578125
+          },
+          {
+            "elapsedMs": 807.7020000000011,
+            "cpuPercent": 361.16431586130335,
+            "rssMiB": 351.59375
+          },
+          {
+            "elapsedMs": 908.9840830000012,
+            "cpuPercent": 381.8572728208994,
+            "rssMiB": 320.6875
+          },
+          {
+            "elapsedMs": 1009.7303330000013,
+            "cpuPercent": 406.6176160402986,
+            "rssMiB": 320.75
+          },
+          {
+            "elapsedMs": 1110.5044580000013,
+            "cpuPercent": 386.3571129989969,
+            "rssMiB": 320.75
+          },
+          {
+            "elapsedMs": 1211.7192080000004,
+            "cpuPercent": 405.3203707957618,
+            "rssMiB": 320.75
+          },
+          {
+            "elapsedMs": 1312.8653750000012,
+            "cpuPercent": 389.4907851525376,
+            "rssMiB": 320.75
+          },
+          {
+            "elapsedMs": 1414.0075420000012,
+            "cpuPercent": 344.0800314274462,
+            "rssMiB": 320.765625
+          },
+          {
+            "elapsedMs": 1515.2630420000005,
+            "cpuPercent": 339.37712025519835,
+            "rssMiB": 353.75
+          },
+          {
+            "elapsedMs": 1615.9504580000012,
+            "cpuPercent": 397.51740177739526,
+            "rssMiB": 353.75
+          },
+          {
+            "elapsedMs": 1717.1556250000012,
+            "cpuPercent": 406.2430923116798,
+            "rssMiB": 353.75
+          },
+          {
+            "elapsedMs": 1818.350375,
+            "cpuPercent": 391.15072669284217,
+            "rssMiB": 353.984375
+          },
+          {
+            "elapsedMs": 1918.5459580000006,
+            "cpuPercent": 377.7451946160118,
+            "rssMiB": 354.03125
+          },
+          {
+            "elapsedMs": 2019.7050419999996,
+            "cpuPercent": 372.06643745410327,
+            "rssMiB": 357.984375
+          },
+          {
+            "elapsedMs": 2120.8506670000006,
+            "cpuPercent": 322.1434441677499,
+            "rssMiB": 357.984375
+          },
+          {
+            "elapsedMs": 2143.4802500000005,
+            "cpuPercent": 346.28565625800667,
+            "rssMiB": 357.984375
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 34,
+          "referenceCharacters": 723,
+          "wordEdits": 28,
+          "referenceWords": 123
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.563625000000684,
+        "rssMiB": 198.265625,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "single-sroie-002",
+      "round": 2,
+      "latencyMs": [
+        730.8010419999991, 730.8745000000008, 731.0756250000004, 731.4665420000001, 731.473833,
+        731.699666999999, 731.887667, 731.943874999999, 734.018916, 736.7401250000003
+      ],
+      "coldMs": 1005.6398750000001,
+      "loadMs": 8.884249999999994,
+      "textHash": "774e00eaef1e9ecf2be2b11ce05b18ad31691b2475ae1813e174dcd50f2929f2",
+      "normalizedHash": "eb614c2b75cfa37d52ccf45a87428b0ffb6539704e265d766267594f68657773",
+      "textLengths": [734],
+      "resource": {
+        "wallMs": 2216.1317499999986,
+        "userMs": 2225.452,
+        "systemMs": 7.866,
+        "calls": 3,
+        "documents": 3,
+        "cpuPercent": 100.7755066908816,
+        "machineCpuPercent": 12.5969383363602,
+        "documentsPerSecond": 1.3537101302754233,
+        "peakRssMiB": 200.125,
+        "rssAfterGcMiB": 198.1875,
+        "heapAfterGcMiB": 6.516822814941406,
+        "idleCpuPercent": 0.10947936467744518,
+        "series": [
+          {
+            "elapsedMs": 101.1013329999987,
+            "cpuPercent": 109.13308136105526,
+            "rssMiB": 197.640625
+          },
+          {
+            "elapsedMs": 201.5452499999992,
+            "cpuPercent": 98.44199923027644,
+            "rssMiB": 197.65625
+          },
+          {
+            "elapsedMs": 302.87162499999977,
+            "cpuPercent": 99.11930630104891,
+            "rssMiB": 197.65625
+          },
+          {
+            "elapsedMs": 403.7124159999985,
+            "cpuPercent": 102.58646225811667,
+            "rssMiB": 197.65625
+          },
+          {
+            "elapsedMs": 504.7370409999985,
+            "cpuPercent": 100.41908099139194,
+            "rssMiB": 197.671875
+          },
+          {
+            "elapsedMs": 605.6142909999999,
+            "cpuPercent": 99.69641321506944,
+            "rssMiB": 197.671875
+          },
+          {
+            "elapsedMs": 706.3131249999988,
+            "cpuPercent": 96.1272302318824,
+            "rssMiB": 197.671875
+          },
+          {
+            "elapsedMs": 806.7403749999994,
+            "cpuPercent": 107.64010764010695,
+            "rssMiB": 197.75
+          },
+          {
+            "elapsedMs": 906.7375409999986,
+            "cpuPercent": 96.9157465922592,
+            "rssMiB": 197.75
+          },
+          {
+            "elapsedMs": 1007.9994579999984,
+            "cpuPercent": 99.5171758401534,
+            "rssMiB": 197.75
+          },
+          {
+            "elapsedMs": 1108.8000829999983,
+            "cpuPercent": 103.85848302031873,
+            "rssMiB": 197.765625
+          },
+          {
+            "elapsedMs": 1209.0637909999987,
+            "cpuPercent": 100.9707321017886,
+            "rssMiB": 197.765625
+          },
+          {
+            "elapsedMs": 1309.5041659999988,
+            "cpuPercent": 98.5320893116935,
+            "rssMiB": 197.765625
+          },
+          {
+            "elapsedMs": 1410.2393329999995,
+            "cpuPercent": 98.05810914077234,
+            "rssMiB": 197.78125
+          },
+          {
+            "elapsedMs": 1510.6449159999993,
+            "cpuPercent": 104.98320596375628,
+            "rssMiB": 197.84375
+          },
+          {
+            "elapsedMs": 1611.9372079999994,
+            "cpuPercent": 90.39187305584903,
+            "rssMiB": 197.84375
+          },
+          {
+            "elapsedMs": 1712.8182079999988,
+            "cpuPercent": 105.73943557260598,
+            "rssMiB": 197.84375
+          },
+          {
+            "elapsedMs": 1814.0214159999996,
+            "cpuPercent": 99.98398469740127,
+            "rssMiB": 197.859375
+          },
+          {
+            "elapsedMs": 1914.6090829999994,
+            "cpuPercent": 104.02269296095736,
+            "rssMiB": 197.859375
+          },
+          {
+            "elapsedMs": 2014.4444999999996,
+            "cpuPercent": 100.66968518797268,
+            "rssMiB": 197.875
+          },
+          {
+            "elapsedMs": 2115.795082999999,
+            "cpuPercent": 97.65903369297888,
+            "rssMiB": 197.875
+          },
+          {
+            "elapsedMs": 2216.1320829999986,
+            "cpuPercent": 102.66800881030973,
+            "rssMiB": 197.90625
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 262,
+          "referenceCharacters": 485,
+          "wordEdits": 64,
+          "referenceWords": 85
+        },
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 272,
+          "referenceCharacters": 684,
+          "wordEdits": 62,
+          "referenceWords": 102
+        },
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 246,
+          "referenceCharacters": 723,
+          "wordEdits": 76,
+          "referenceWords": 123
+        }
+      ],
+      "package": "undms",
+      "workload": "batch-image",
+      "round": 0,
+      "latencyMs": [
+        1771.6841669999994, 1772.320541000001, 1786.8010839999988, 1787.612416, 1806.0214579999993,
+        1824.4230410000018, 1830.650375000001, 1844.2500419999997, 1854.7324590000007,
+        1911.1371659999986
+      ],
+      "coldMs": 1704.812583,
+      "loadMs": 5.492417000000003,
+      "textHash": "8ea26207419a52d8e6bc928d0b3a8c6def376e02e98f8c08366e283801da6a74",
+      "normalizedHash": "059e3d82bb145315fd49afe7117dd09d333de969e57a252251208a19433f00ce",
+      "textLengths": [528, 550, 709],
+      "resource": {
+        "wallMs": 3647.865999999998,
+        "userMs": 13970.263,
+        "systemMs": 172.813,
+        "calls": 2,
+        "documents": 6,
+        "cpuPercent": 387.7082107730933,
+        "machineCpuPercent": 48.46352634663666,
+        "documentsPerSecond": 1.6447972595484601,
+        "peakRssMiB": 368.859375,
+        "rssAfterGcMiB": 364.765625,
+        "heapAfterGcMiB": 6.549263000488281,
+        "idleCpuPercent": 0.0821759094913601,
+        "series": [
+          {
+            "elapsedMs": 101.45062499999767,
+            "cpuPercent": 336.9688456823286,
+            "rssMiB": 362.5625
+          },
+          {
+            "elapsedMs": 202.47845799999777,
+            "cpuPercent": 400.8449829860249,
+            "rssMiB": 362.578125
+          },
+          {
+            "elapsedMs": 303.2628749999967,
+            "cpuPercent": 400.3158543845169,
+            "rssMiB": 362.578125
+          },
+          {
+            "elapsedMs": 404.4654999999984,
+            "cpuPercent": 400.7751775213273,
+            "rssMiB": 362.578125
+          },
+          {
+            "elapsedMs": 505.6442079999979,
+            "cpuPercent": 410.58638542805096,
+            "rssMiB": 363.890625
+          },
+          {
+            "elapsedMs": 606.8522919999996,
+            "cpuPercent": 355.90832842956894,
+            "rssMiB": 364.3125
+          },
+          {
+            "elapsedMs": 708.1259169999976,
+            "cpuPercent": 379.06908141187563,
+            "rssMiB": 364.328125
+          },
+          {
+            "elapsedMs": 809.0033749999966,
+            "cpuPercent": 389.6539502412955,
+            "rssMiB": 364.328125
+          },
+          {
+            "elapsedMs": 909.6368329999968,
+            "cpuPercent": 411.02135236175525,
+            "rssMiB": 364.34375
+          },
+          {
+            "elapsedMs": 1010.8604579999992,
+            "cpuPercent": 381.96517858354804,
+            "rssMiB": 364.34375
+          },
+          {
+            "elapsedMs": 1111.8799169999984,
+            "cpuPercent": 415.9050188538461,
+            "rssMiB": 364.34375
+          },
+          {
+            "elapsedMs": 1213.0331669999978,
+            "cpuPercent": 338.29165152874674,
+            "rssMiB": 364.34375
+          },
+          {
+            "elapsedMs": 1314.1903329999986,
+            "cpuPercent": 380.15102162905265,
+            "rssMiB": 364.34375
+          },
+          {
+            "elapsedMs": 1414.3330419999984,
+            "cpuPercent": 404.1742070308893,
+            "rssMiB": 364.34375
+          },
+          {
+            "elapsedMs": 1515.4871669999993,
+            "cpuPercent": 412.33217132766083,
+            "rssMiB": 364.34375
+          },
+          {
+            "elapsedMs": 1616.6962079999976,
+            "cpuPercent": 389.13618398973546,
+            "rssMiB": 364.3125
+          },
+          {
+            "elapsedMs": 1717.872124999998,
+            "cpuPercent": 400.1218985739443,
+            "rssMiB": 364.5
+          },
+          {
+            "elapsedMs": 1819.2683749999997,
+            "cpuPercent": 377.94888864232547,
+            "rssMiB": 364.578125
+          },
+          {
+            "elapsedMs": 1920.4558749999997,
+            "cpuPercent": 340.77825818406427,
+            "rssMiB": 364.578125
+          },
+          {
+            "elapsedMs": 2021.6344169999975,
+            "cpuPercent": 390.15189604136464,
+            "rssMiB": 364.578125
+          },
+          {
+            "elapsedMs": 2122.8166249999995,
+            "cpuPercent": 417.4834769369647,
+            "rssMiB": 364.578125
+          },
+          {
+            "elapsedMs": 2223.9824579999986,
+            "cpuPercent": 394.5729384742016,
+            "rssMiB": 364.578125
+          },
+          {
+            "elapsedMs": 2324.845416999997,
+            "cpuPercent": 398.9046167087038,
+            "rssMiB": 364.484375
+          },
+          {
+            "elapsedMs": 2425.868832999997,
+            "cpuPercent": 335.4549008716949,
+            "rssMiB": 364.484375
+          },
+          {
+            "elapsedMs": 2526.314124999997,
+            "cpuPercent": 360.9985025480326,
+            "rssMiB": 364.484375
+          },
+          {
+            "elapsedMs": 2627.534667,
+            "cpuPercent": 418.96337603091325,
+            "rssMiB": 364.484375
+          },
+          {
+            "elapsedMs": 2728.118291999999,
+            "cpuPercent": 384.00882847481654,
+            "rssMiB": 364.671875
+          },
+          {
+            "elapsedMs": 2829.275207999999,
+            "cpuPercent": 395.9679830492266,
+            "rssMiB": 364.671875
+          },
+          {
+            "elapsedMs": 2930.4308329999985,
+            "cpuPercent": 416.81122527788483,
+            "rssMiB": 364.671875
+          },
+          {
+            "elapsedMs": 3032.046291999999,
+            "cpuPercent": 353.3694612352221,
+            "rssMiB": 364.671875
+          },
+          {
+            "elapsedMs": 3133.247292,
+            "cpuPercent": 361.2553235639931,
+            "rssMiB": 364.671875
+          },
+          {
+            "elapsedMs": 3233.4463749999995,
+            "cpuPercent": 418.8421564696376,
+            "rssMiB": 364.671875
+          },
+          {
+            "elapsedMs": 3334.607791999999,
+            "cpuPercent": 378.56527849941295,
+            "rssMiB": 364.671875
+          },
+          {
+            "elapsedMs": 3435.7739999999976,
+            "cpuPercent": 406.593276679902,
+            "rssMiB": 364.671875
+          },
+          {
+            "elapsedMs": 3536.913249999998,
+            "cpuPercent": 386.66096495672974,
+            "rssMiB": 364.671875
+          },
+          {
+            "elapsedMs": 3638.132666999998,
+            "cpuPercent": 415.98145146400014,
+            "rssMiB": 364.671875
+          },
+          {
+            "elapsedMs": 3647.8721669999977,
+            "cpuPercent": 363.98172390781014,
+            "rssMiB": 364.671875
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 81,
+          "referenceCharacters": 485,
+          "wordEdits": 41,
+          "referenceWords": 85
+        },
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 164,
+          "referenceCharacters": 684,
+          "wordEdits": 44,
+          "referenceWords": 102
+        },
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 34,
+          "referenceCharacters": 723,
+          "wordEdits": 28,
+          "referenceWords": 123
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.5274999999983265,
+        "rssMiB": 339.8125,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "batch-image",
+      "round": 0,
+      "latencyMs": [
+        843.1014169999999, 850.4184160000004, 852.1949169999989, 852.4698749999998,
+        856.0063749999999, 856.527250000001, 857.3125410000002, 859.717584, 868.0154170000005,
+        868.8737080000001
+      ],
+      "coldMs": 1120.8915000000002,
+      "loadMs": 7.764084000000011,
+      "textHash": "81f6ce9ba053579521762b0deebf759029ab53a89d5f1ae3a145bcf2371d9405",
+      "normalizedHash": "b20785f9e6fb93f2175023932fbb7377962a27757242dd344b72562f3d6bac45",
+      "textLengths": [499, 612, 734],
+      "resource": {
+        "wallMs": 2579.0557499999995,
+        "userMs": 6746.324,
+        "systemMs": 18.581,
+        "calls": 3,
+        "documents": 9,
+        "cpuPercent": 262.3016194977561,
+        "machineCpuPercent": 32.787702437219515,
+        "documentsPerSecond": 3.4896492640765913,
+        "peakRssMiB": 345.9375,
+        "rssAfterGcMiB": 345.859375,
+        "heapAfterGcMiB": 6.60601806640625,
+        "idleCpuPercent": 0.1286856336599011,
+        "series": [
+          {
+            "elapsedMs": 100.09629099999984,
+            "cpuPercent": 300.08304703318174,
+            "rssMiB": 345.65625
+          },
+          {
+            "elapsedMs": 200.79170800000065,
+            "cpuPercent": 297.15850921000464,
+            "rssMiB": 345.671875
+          },
+          {
+            "elapsedMs": 301.57145800000035,
+            "cpuPercent": 298.13032876148327,
+            "rssMiB": 345.671875
+          },
+          {
+            "elapsedMs": 401.74833299999955,
+            "cpuPercent": 299.8516374163223,
+            "rssMiB": 345.671875
+          },
+          {
+            "elapsedMs": 501.94704100000126,
+            "cpuPercent": 302.7753611353899,
+            "rssMiB": 345.671875
+          },
+          {
+            "elapsedMs": 602.5152080000007,
+            "cpuPercent": 299.07376158103955,
+            "rssMiB": 345.671875
+          },
+          {
+            "elapsedMs": 702.7971660000003,
+            "cpuPercent": 204.25209487832382,
+            "rssMiB": 345.671875
+          },
+          {
+            "elapsedMs": 803.9980830000004,
+            "cpuPercent": 185.48053275050836,
+            "rssMiB": 345.703125
+          },
+          {
+            "elapsedMs": 905.5413750000007,
+            "cpuPercent": 168.67190006012362,
+            "rssMiB": 345.734375
+          },
+          {
+            "elapsedMs": 1006.1255000000001,
+            "cpuPercent": 290.5279535910878,
+            "rssMiB": 345.75
+          },
+          {
+            "elapsedMs": 1106.485208,
+            "cpuPercent": 304.6730666055746,
+            "rssMiB": 345.75
+          },
+          {
+            "elapsedMs": 1206.8440410000003,
+            "cpuPercent": 307.28535872871225,
+            "rssMiB": 345.75
+          },
+          {
+            "elapsedMs": 1307.4256249999999,
+            "cpuPercent": 297.81694430264815,
+            "rssMiB": 345.765625
+          },
+          {
+            "elapsedMs": 1407.0148750000008,
+            "cpuPercent": 301.67613472337354,
+            "rssMiB": 345.765625
+          },
+          {
+            "elapsedMs": 1507.5465830000012,
+            "cpuPercent": 285.48903197785,
+            "rssMiB": 345.765625
+          },
+          {
+            "elapsedMs": 1607.6400830000002,
+            "cpuPercent": 195.7949317388261,
+            "rssMiB": 345.78125
+          },
+          {
+            "elapsedMs": 1708.6945830000004,
+            "cpuPercent": 130.5058161685029,
+            "rssMiB": 345.796875
+          },
+          {
+            "elapsedMs": 1808.7802080000001,
+            "cpuPercent": 274.13227424018265,
+            "rssMiB": 345.828125
+          },
+          {
+            "elapsedMs": 1909.266791,
+            "cpuPercent": 308.4620759768499,
+            "rssMiB": 345.828125
+          },
+          {
+            "elapsedMs": 2008.769083000001,
+            "cpuPercent": 289.84457966053384,
+            "rssMiB": 345.828125
+          },
+          {
+            "elapsedMs": 2109.8909160000003,
+            "cpuPercent": 312.8434192841445,
+            "rssMiB": 345.828125
+          },
+          {
+            "elapsedMs": 2210.5218750000004,
+            "cpuPercent": 301.3148269808298,
+            "rssMiB": 345.828125
+          },
+          {
+            "elapsedMs": 2310.3643329999995,
+            "cpuPercent": 292.5809378611276,
+            "rssMiB": 345.828125
+          },
+          {
+            "elapsedMs": 2410.953458,
+            "cpuPercent": 226.07414071849124,
+            "rssMiB": 345.84375
+          },
+          {
+            "elapsedMs": 2511.837458,
+            "cpuPercent": 191.9174497442607,
+            "rssMiB": 345.859375
+          },
+          {
+            "elapsedMs": 2579.056125000001,
+            "cpuPercent": 103.90714829259997,
+            "rssMiB": 345.859375
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 81,
+          "referenceCharacters": 485,
+          "wordEdits": 41,
+          "referenceWords": 85
+        },
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 164,
+          "referenceCharacters": 684,
+          "wordEdits": 44,
+          "referenceWords": 102
+        },
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 34,
+          "referenceCharacters": 723,
+          "wordEdits": 28,
+          "referenceWords": 123
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.4873750000006112,
+        "rssMiB": 349.125,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "batch-image",
+      "round": 1,
+      "latencyMs": [
+        833.8748749999995, 844.7787910000006, 848.4664999999995, 848.5114169999997,
+        853.1312499999995, 853.6516250000004, 854.7480840000007, 862.1691250000003,
+        862.7877080000003, 863.2310830000006
+      ],
+      "coldMs": 1096.128584,
+      "loadMs": 4.511583000000002,
+      "textHash": "81f6ce9ba053579521762b0deebf759029ab53a89d5f1ae3a145bcf2371d9405",
+      "normalizedHash": "b20785f9e6fb93f2175023932fbb7377962a27757242dd344b72562f3d6bac45",
+      "textLengths": [499, 612, 734],
+      "resource": {
+        "wallMs": 2558.1733750000003,
+        "userMs": 6698.539,
+        "systemMs": 18.85,
+        "calls": 3,
+        "documents": 9,
+        "cpuPercent": 262.58536914058845,
+        "machineCpuPercent": 32.82317114257356,
+        "documentsPerSecond": 3.518135278849112,
+        "peakRssMiB": 350.515625,
+        "rssAfterGcMiB": 350.4375,
+        "heapAfterGcMiB": 6.6019744873046875,
+        "idleCpuPercent": 0.12801446836766983,
+        "series": [
+          {
+            "elapsedMs": 100.31937499999913,
+            "cpuPercent": 299.4157409772565,
+            "rssMiB": 350.109375
+          },
+          {
+            "elapsedMs": 200.90141699999913,
+            "cpuPercent": 302.1603001458252,
+            "rssMiB": 350.109375
+          },
+          {
+            "elapsedMs": 301.80774999999994,
+            "cpuPercent": 289.9451315904995,
+            "rssMiB": 350.125
+          },
+          {
+            "elapsedMs": 402.63337499999943,
+            "cpuPercent": 306.21382213103226,
+            "rssMiB": 350.140625
+          },
+          {
+            "elapsedMs": 503.6842089999991,
+            "cpuPercent": 296.39636620911114,
+            "rssMiB": 350.140625
+          },
+          {
+            "elapsedMs": 604.6085419999999,
+            "cpuPercent": 300.7778114322514,
+            "rssMiB": 350.15625
+          },
+          {
+            "elapsedMs": 705.273459,
+            "cpuPercent": 211.10830499169825,
+            "rssMiB": 350.171875
+          },
+          {
+            "elapsedMs": 805.9553749999995,
+            "cpuPercent": 160.45979895734277,
+            "rssMiB": 350.171875
+          },
+          {
+            "elapsedMs": 907.2345000000005,
+            "cpuPercent": 218.48233779665648,
+            "rssMiB": 350.234375
+          },
+          {
+            "elapsedMs": 1006.9133340000008,
+            "cpuPercent": 296.25647507072483,
+            "rssMiB": 350.234375
+          },
+          {
+            "elapsedMs": 1107.1335,
+            "cpuPercent": 308.1625308822604,
+            "rssMiB": 350.234375
+          },
+          {
+            "elapsedMs": 1206.7236250000005,
+            "cpuPercent": 293.4487731589835,
+            "rssMiB": 350.234375
+          },
+          {
+            "elapsedMs": 1307.3243340000008,
+            "cpuPercent": 296.1251495752373,
+            "rssMiB": 350.25
+          },
+          {
+            "elapsedMs": 1407.5870419999992,
+            "cpuPercent": 304.0542252259982,
+            "rssMiB": 350.25
+          },
+          {
+            "elapsedMs": 1509.0522920000003,
+            "cpuPercent": 249.760385944939,
+            "rssMiB": 350.28125
+          },
+          {
+            "elapsedMs": 1609.5750420000004,
+            "cpuPercent": 209.0332785364505,
+            "rssMiB": 350.28125
+          },
+          {
+            "elapsedMs": 1710.5195839999997,
+            "cpuPercent": 126.99052119132992,
+            "rssMiB": 350.296875
+          },
+          {
+            "elapsedMs": 1811.5532089999997,
+            "cpuPercent": 292.1502618558919,
+            "rssMiB": 350.296875
+          },
+          {
+            "elapsedMs": 1912.6212500000001,
+            "cpuPercent": 297.715278759582,
+            "rssMiB": 350.3125
+          },
+          {
+            "elapsedMs": 2013.8721249999999,
+            "cpuPercent": 301.9114649626493,
+            "rssMiB": 350.3125
+          },
+          {
+            "elapsedMs": 2113.461959,
+            "cpuPercent": 306.33849635696646,
+            "rssMiB": 350.328125
+          },
+          {
+            "elapsedMs": 2214.1931669999994,
+            "cpuPercent": 291.4975466193181,
+            "rssMiB": 350.34375
+          },
+          {
+            "elapsedMs": 2314.87975,
+            "cpuPercent": 308.6309920756752,
+            "rssMiB": 350.34375
+          },
+          {
+            "elapsedMs": 2415.0878749999993,
+            "cpuPercent": 204.1600918089243,
+            "rssMiB": 350.359375
+          },
+          {
+            "elapsedMs": 2515.6860419999994,
+            "cpuPercent": 162.97016624567306,
+            "rssMiB": 350.359375
+          },
+          {
+            "elapsedMs": 2558.173666999999,
+            "cpuPercent": 100.62224000517857,
+            "rssMiB": 350.359375
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 262,
+          "referenceCharacters": 485,
+          "wordEdits": 64,
+          "referenceWords": 85
+        },
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 272,
+          "referenceCharacters": 684,
+          "wordEdits": 62,
+          "referenceWords": 102
+        },
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 246,
+          "referenceCharacters": 723,
+          "wordEdits": 76,
+          "referenceWords": 123
+        }
+      ],
+      "package": "undms",
+      "workload": "batch-image",
+      "round": 1,
+      "latencyMs": [
+        1832.4809999999998, 1842.043416999999, 1847.2379589999982, 1847.5948750000007,
+        1852.644957999999, 1857.8601249999992, 1877.1048749999973, 1887.6972920000007,
+        1901.930292000001, 2020.8862090000002
+      ],
+      "coldMs": 1775.256625,
+      "loadMs": 8.538957999999994,
+      "textHash": "8ea26207419a52d8e6bc928d0b3a8c6def376e02e98f8c08366e283801da6a74",
+      "normalizedHash": "059e3d82bb145315fd49afe7117dd09d333de969e57a252251208a19433f00ce",
+      "textLengths": [528, 550, 709],
+      "resource": {
+        "wallMs": 3716.4306249999972,
+        "userMs": 14163.523,
+        "systemMs": 251.564,
+        "calls": 2,
+        "documents": 6,
+        "cpuPercent": 387.8745079494121,
+        "machineCpuPercent": 48.48431349367651,
+        "documentsPerSecond": 1.6144523079857045,
+        "peakRssMiB": 379.234375,
+        "rssAfterGcMiB": 378.125,
+        "heapAfterGcMiB": 6.548927307128906,
+        "idleCpuPercent": 0.07731484110106199,
+        "series": [
+          {
+            "elapsedMs": 101.42033299999821,
+            "cpuPercent": 341.2017982626877,
+            "rssMiB": 377.59375
+          },
+          {
+            "elapsedMs": 201.6828749999986,
+            "cpuPercent": 404.7453734017619,
+            "rssMiB": 377.609375
+          },
+          {
+            "elapsedMs": 302.8870829999978,
+            "cpuPercent": 398.21071471652954,
+            "rssMiB": 377.609375
+          },
+          {
+            "elapsedMs": 404.09037499999977,
+            "cpuPercent": 397.2173158161616,
+            "rssMiB": 377.609375
+          },
+          {
+            "elapsedMs": 505.317665999999,
+            "cpuPercent": 410.0129479904813,
+            "rssMiB": 377.609375
+          },
+          {
+            "elapsedMs": 606.5351249999985,
+            "cpuPercent": 363.07273827137055,
+            "rssMiB": 377.625
+          },
+          {
+            "elapsedMs": 705.9562909999986,
+            "cpuPercent": 382.42963274037606,
+            "rssMiB": 377.625
+          },
+          {
+            "elapsedMs": 807.1464579999993,
+            "cpuPercent": 399.3935497705003,
+            "rssMiB": 377.625
+          },
+          {
+            "elapsedMs": 908.4531659999993,
+            "cpuPercent": 386.27649414883734,
+            "rssMiB": 377.6875
+          },
+          {
+            "elapsedMs": 1008.6747499999983,
+            "cpuPercent": 399.4349161354345,
+            "rssMiB": 377.6875
+          },
+          {
+            "elapsedMs": 1109.7650829999984,
+            "cpuPercent": 411.46565418871415,
+            "rssMiB": 377.6875
+          },
+          {
+            "elapsedMs": 1210.9845829999977,
+            "cpuPercent": 355.3208620868535,
+            "rssMiB": 377.6875
+          },
+          {
+            "elapsedMs": 1312.1686249999984,
+            "cpuPercent": 370.0277164258739,
+            "rssMiB": 377.703125
+          },
+          {
+            "elapsedMs": 1413.3259579999976,
+            "cpuPercent": 406.9116768825877,
+            "rssMiB": 377.703125
+          },
+          {
+            "elapsedMs": 1514.304624999997,
+            "cpuPercent": 407.92477484378196,
+            "rssMiB": 377.703125
+          },
+          {
+            "elapsedMs": 1614.856832999998,
+            "cpuPercent": 398.50343216729374,
+            "rssMiB": 377.703125
+          },
+          {
+            "elapsedMs": 1716.0433749999975,
+            "cpuPercent": 387.6394945881262,
+            "rssMiB": 377.703125
+          },
+          {
+            "elapsedMs": 1817.222249999999,
+            "cpuPercent": 399.19894345533515,
+            "rssMiB": 377.71875
+          },
+          {
+            "elapsedMs": 1918.494290999999,
+            "cpuPercent": 331.7707401591713,
+            "rssMiB": 377.71875
+          },
+          {
+            "elapsedMs": 2018.721125,
+            "cpuPercent": 395.98377416570514,
+            "rssMiB": 377.71875
+          },
+          {
+            "elapsedMs": 2119.881165999999,
+            "cpuPercent": 395.6216269228314,
+            "rssMiB": 377.71875
+          },
+          {
+            "elapsedMs": 2220.535291,
+            "cpuPercent": 409.57486839212623,
+            "rssMiB": 377.71875
+          },
+          {
+            "elapsedMs": 2320.690749999998,
+            "cpuPercent": 390.30224004066383,
+            "rssMiB": 377.734375
+          },
+          {
+            "elapsedMs": 2421.5258749999994,
+            "cpuPercent": 373.23105415894975,
+            "rssMiB": 377.734375
+          },
+          {
+            "elapsedMs": 2521.7479160000003,
+            "cpuPercent": 359.11860944839145,
+            "rssMiB": 377.734375
+          },
+          {
+            "elapsedMs": 2622.9404159999976,
+            "cpuPercent": 384.22215085111054,
+            "rssMiB": 377.734375
+          },
+          {
+            "elapsedMs": 2724.110582999998,
+            "cpuPercent": 419.59009517103897,
+            "rssMiB": 377.734375
+          },
+          {
+            "elapsedMs": 2825.288290999997,
+            "cpuPercent": 393.4641413304232,
+            "rssMiB": 378.015625
+          },
+          {
+            "elapsedMs": 2926.3317499999976,
+            "cpuPercent": 396.81737340365424,
+            "rssMiB": 378.015625
+          },
+          {
+            "elapsedMs": 3027.4693329999973,
+            "cpuPercent": 359.47863219155727,
+            "rssMiB": 378.015625
+          },
+          {
+            "elapsedMs": 3128.597999999998,
+            "cpuPercent": 343.0501066527428,
+            "rssMiB": 378.015625
+          },
+          {
+            "elapsedMs": 3229.739999999998,
+            "cpuPercent": 389.03620652152483,
+            "rssMiB": 378.015625
+          },
+          {
+            "elapsedMs": 3330.7571659999994,
+            "cpuPercent": 394.7586492378872,
+            "rssMiB": 378.015625
+          },
+          {
+            "elapsedMs": 3431.5380829999995,
+            "cpuPercent": 399.84454596697094,
+            "rssMiB": 378.015625
+          },
+          {
+            "elapsedMs": 3531.706833,
+            "cpuPercent": 398.9497722593095,
+            "rssMiB": 378.015625
+          },
+          {
+            "elapsedMs": 3632.8859159999993,
+            "cpuPercent": 399.6962494708552,
+            "rssMiB": 378.015625
+          },
+          {
+            "elapsedMs": 3716.431124999999,
+            "cpuPercent": 400.5986746648757,
+            "rssMiB": 378.015625
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 262,
+          "referenceCharacters": 485,
+          "wordEdits": 64,
+          "referenceWords": 85
+        },
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 272,
+          "referenceCharacters": 684,
+          "wordEdits": 62,
+          "referenceWords": 102
+        },
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 246,
+          "referenceCharacters": 723,
+          "wordEdits": 76,
+          "referenceWords": 123
+        }
+      ],
+      "package": "undms",
+      "workload": "batch-image",
+      "round": 2,
+      "latencyMs": [
+        1884.4021250000005, 1892.1087499999994, 1897.905584, 1900.6560830000017, 1905.1971249999988,
+        1925.826083, 1929.3044579999987, 1930.9557920000007, 1994.059541999999, 2008.4363749999993
+      ],
+      "coldMs": 1870.9086670000002,
+      "loadMs": 4.781208000000007,
+      "textHash": "8ea26207419a52d8e6bc928d0b3a8c6def376e02e98f8c08366e283801da6a74",
+      "normalizedHash": "059e3d82bb145315fd49afe7117dd09d333de969e57a252251208a19433f00ce",
+      "textLengths": [528, 550, 709],
+      "resource": {
+        "wallMs": 3790.5491669999974,
+        "userMs": 14418.303,
+        "systemMs": 235.421,
+        "calls": 2,
+        "documents": 6,
+        "cpuPercent": 386.5857783239779,
+        "machineCpuPercent": 48.323222290497235,
+        "documentsPerSecond": 1.5828840982291377,
+        "peakRssMiB": 343.171875,
+        "rssAfterGcMiB": 331.4375,
+        "heapAfterGcMiB": 6.549354553222656,
+        "idleCpuPercent": 0.05908740662301774,
+        "series": [
+          {
+            "elapsedMs": 101.69779199999903,
+            "cpuPercent": 341.6308192807208,
+            "rssMiB": 331.25
+          },
+          {
+            "elapsedMs": 201.9494999999988,
+            "cpuPercent": 386.8702167149121,
+            "rssMiB": 331.3125
+          },
+          {
+            "elapsedMs": 303.14595799999734,
+            "cpuPercent": 423.8883538789532,
+            "rssMiB": 331.3125
+          },
+          {
+            "elapsedMs": 404.35241699999824,
+            "cpuPercent": 387.91298883403925,
+            "rssMiB": 331.3125
+          },
+          {
+            "elapsedMs": 505.6110829999998,
+            "cpuPercent": 410.34315028403955,
+            "rssMiB": 331.359375
+          },
+          {
+            "elapsedMs": 606.8513329999987,
+            "cpuPercent": 351.20221453424284,
+            "rssMiB": 331.390625
+          },
+          {
+            "elapsedMs": 708.1479579999977,
+            "cpuPercent": 352.9979404545841,
+            "rssMiB": 331.421875
+          },
+          {
+            "elapsedMs": 808.7781249999971,
+            "cpuPercent": 403.2518399775712,
+            "rssMiB": 331.4375
+          },
+          {
+            "elapsedMs": 910.0701249999984,
+            "cpuPercent": 395.8752912372102,
+            "rssMiB": 331.453125
+          },
+          {
+            "elapsedMs": 1011.3066249999974,
+            "cpuPercent": 401.29992640994476,
+            "rssMiB": 331.453125
+          },
+          {
+            "elapsedMs": 1111.6799999999967,
+            "cpuPercent": 407.40385585321127,
+            "rssMiB": 331.46875
+          },
+          {
+            "elapsedMs": 1214.0383329999968,
+            "cpuPercent": 370.2014177976106,
+            "rssMiB": 331.46875
+          },
+          {
+            "elapsedMs": 1315.2655829999967,
+            "cpuPercent": 347.4489329701245,
+            "rssMiB": 331.484375
+          },
+          {
+            "elapsedMs": 1415.4391249999971,
+            "cpuPercent": 397.87452059945946,
+            "rssMiB": 331.484375
+          },
+          {
+            "elapsedMs": 1516.130624999998,
+            "cpuPercent": 404.47704125968596,
+            "rssMiB": 331.484375
+          },
+          {
+            "elapsedMs": 1617.2749999999978,
+            "cpuPercent": 400.7291557241819,
+            "rssMiB": 331.5
+          },
+          {
+            "elapsedMs": 1718.4352499999986,
+            "cpuPercent": 380.8976351877312,
+            "rssMiB": 331.5
+          },
+          {
+            "elapsedMs": 1819.5998749999999,
+            "cpuPercent": 422.22960842289956,
+            "rssMiB": 331.5
+          },
+          {
+            "elapsedMs": 1920.7411669999965,
+            "cpuPercent": 363.99970053775104,
+            "rssMiB": 331.5625
+          },
+          {
+            "elapsedMs": 2021.9322079999984,
+            "cpuPercent": 358.19376539469863,
+            "rssMiB": 331.5625
+          },
+          {
+            "elapsedMs": 2123.107,
+            "cpuPercent": 405.1068372841265,
+            "rssMiB": 331.5625
+          },
+          {
+            "elapsedMs": 2224.2528329999986,
+            "cpuPercent": 404.2974266671029,
+            "rssMiB": 331.5625
+          },
+          {
+            "elapsedMs": 2324.6673749999973,
+            "cpuPercent": 402.7026284698939,
+            "rssMiB": 331.578125
+          },
+          {
+            "elapsedMs": 2425.8032079999975,
+            "cpuPercent": 370.79538366980074,
+            "rssMiB": 331.59375
+          },
+          {
+            "elapsedMs": 2527.0232499999984,
+            "cpuPercent": 352.2069275568934,
+            "rssMiB": 331.59375
+          },
+          {
+            "elapsedMs": 2628.251708,
+            "cpuPercent": 367.17441650646776,
+            "rssMiB": 331.671875
+          },
+          {
+            "elapsedMs": 2729.4435829999966,
+            "cpuPercent": 414.4364357316368,
+            "rssMiB": 331.6875
+          },
+          {
+            "elapsedMs": 2830.6219579999997,
+            "cpuPercent": 390.696134425946,
+            "rssMiB": 331.6875
+          },
+          {
+            "elapsedMs": 2931.756666999998,
+            "cpuPercent": 387.61667866173156,
+            "rssMiB": 331.6875
+          },
+          {
+            "elapsedMs": 3032.5735419999983,
+            "cpuPercent": 419.8999423459596,
+            "rssMiB": 331.6875
+          },
+          {
+            "elapsedMs": 3132.7454169999983,
+            "cpuPercent": 319.2552799875214,
+            "rssMiB": 331.6875
+          },
+          {
+            "elapsedMs": 3233.921875,
+            "cpuPercent": 356.4841141206918,
+            "rssMiB": 331.6875
+          },
+          {
+            "elapsedMs": 3335.113458,
+            "cpuPercent": 398.69225091577107,
+            "rssMiB": 331.6875
+          },
+          {
+            "elapsedMs": 3436.257458,
+            "cpuPercent": 408.4345092145842,
+            "rssMiB": 331.6875
+          },
+          {
+            "elapsedMs": 3537.4412919999995,
+            "cpuPercent": 403.1029304542879,
+            "rssMiB": 331.28125
+          },
+          {
+            "elapsedMs": 3637.627666999997,
+            "cpuPercent": 397.8125768099803,
+            "rssMiB": 331.28125
+          },
+          {
+            "elapsedMs": 3738.813457999997,
+            "cpuPercent": 394.9665225229108,
+            "rssMiB": 331.28125
+          },
+          {
+            "elapsedMs": 3790.5496669999993,
+            "cpuPercent": 390.29724810333624,
+            "rssMiB": 331.3125
+          }
+        ]
+      }
+    },
+    {
+      "quality": [
+        {
+          "documentId": "sroie-000",
+          "characterEdits": 81,
+          "referenceCharacters": 485,
+          "wordEdits": 41,
+          "referenceWords": 85
+        },
+        {
+          "documentId": "sroie-001",
+          "characterEdits": 164,
+          "referenceCharacters": 684,
+          "wordEdits": 44,
+          "referenceWords": 102
+        },
+        {
+          "documentId": "sroie-002",
+          "characterEdits": 34,
+          "referenceCharacters": 723,
+          "wordEdits": 28,
+          "referenceWords": 123
+        }
+      ],
+      "cleanup": {
+        "durationMs": 1.6129590000000462,
+        "rssMiB": 194.375,
+        "description": "Terminate reused Tesseract.js workers; native OCR models remain cached until process exit"
+      },
+      "package": "tesseract.js",
+      "workload": "batch-image",
+      "round": 2,
+      "latencyMs": [
+        862.9637089999997, 865.6456250000001, 869.7634999999991, 870.8129169999993,
+        875.5534160000007, 878.4037500000004, 886.0129579999998, 895.3297919999986,
+        900.8538750000007, 946.5866669999996
+      ],
+      "coldMs": 1158.080375,
+      "loadMs": 8.075000000000003,
+      "textHash": "81f6ce9ba053579521762b0deebf759029ab53a89d5f1ae3a145bcf2371d9405",
+      "normalizedHash": "b20785f9e6fb93f2175023932fbb7377962a27757242dd344b72562f3d6bac45",
+      "textLengths": [499, 612, 734],
+      "resource": {
+        "wallMs": 2680.5161660000012,
+        "userMs": 6870.666,
+        "systemMs": 28.208,
+        "calls": 3,
+        "documents": 9,
+        "cpuPercent": 257.37110215958296,
+        "machineCpuPercent": 32.17138776994787,
+        "documentsPerSecond": 3.3575622912322314,
+        "peakRssMiB": 349.5,
+        "rssAfterGcMiB": 191.609375,
+        "heapAfterGcMiB": 6.602264404296875,
+        "idleCpuPercent": 0.044490059667312266,
+        "series": [
+          {
+            "elapsedMs": 99.3322500000013,
+            "cpuPercent": 293.57434267319644,
+            "rssMiB": 349.28125
+          },
+          {
+            "elapsedMs": 199.8543750000008,
+            "cpuPercent": 302.6149715796413,
+            "rssMiB": 349.296875
+          },
+          {
+            "elapsedMs": 299.7835410000007,
+            "cpuPercent": 298.90972971794866,
+            "rssMiB": 349.3125
+          },
+          {
+            "elapsedMs": 399.54058299999997,
+            "cpuPercent": 305.65461233303427,
+            "rssMiB": 349.328125
+          },
+          {
+            "elapsedMs": 499.44425000000047,
+            "cpuPercent": 293.0102655791389,
+            "rssMiB": 349.328125
+          },
+          {
+            "elapsedMs": 599.6667909999996,
+            "cpuPercent": 302.3651136524292,
+            "rssMiB": 349.34375
+          },
+          {
+            "elapsedMs": 701.1268749999999,
+            "cpuPercent": 219.17979094123302,
+            "rssMiB": 349.375
+          },
+          {
+            "elapsedMs": 802.890625,
+            "cpuPercent": 170.96461166181462,
+            "rssMiB": 349.375
+          },
+          {
+            "elapsedMs": 903.5904580000006,
+            "cpuPercent": 202.56140841862054,
+            "rssMiB": 349.484375
+          },
+          {
+            "elapsedMs": 1003.708458000001,
+            "cpuPercent": 300.78906889869836,
+            "rssMiB": 349.484375
+          },
+          {
+            "elapsedMs": 1104.952416,
+            "cpuPercent": 284.2490610649601,
+            "rssMiB": 306.109375
+          },
+          {
+            "elapsedMs": 1205.2289579999997,
+            "cpuPercent": 165.33278540857606,
+            "rssMiB": 225.640625
+          },
+          {
+            "elapsedMs": 1305.6006660000003,
+            "cpuPercent": 298.7176426249499,
+            "rssMiB": 225.640625
+          },
+          {
+            "elapsedMs": 1405.534541000001,
+            "cpuPercent": 305.8092163443058,
+            "rssMiB": 225.6875
+          },
+          {
+            "elapsedMs": 1506.1320830000004,
+            "cpuPercent": 296.9317083314038,
+            "rssMiB": 225.6875
+          },
+          {
+            "elapsedMs": 1606.3725410000006,
+            "cpuPercent": 246.1221795295463,
+            "rssMiB": 191.171875
+          },
+          {
+            "elapsedMs": 1706.7372910000013,
+            "cpuPercent": 202.61496192637227,
+            "rssMiB": 191.203125
+          },
+          {
+            "elapsedMs": 1806.475958000001,
+            "cpuPercent": 111.09232089496486,
+            "rssMiB": 191.390625
+          },
+          {
+            "elapsedMs": 1907.1037080000006,
+            "cpuPercent": 291.0708030339554,
+            "rssMiB": 191.421875
+          },
+          {
+            "elapsedMs": 2007.0893750000014,
+            "cpuPercent": 296.83054472197256,
+            "rssMiB": 191.4375
+          },
+          {
+            "elapsedMs": 2106.312250000001,
+            "cpuPercent": 310.2873203381797,
+            "rssMiB": 191.46875
+          },
+          {
+            "elapsedMs": 2206.184083,
+            "cpuPercent": 291.1992213059734,
+            "rssMiB": 191.46875
+          },
+          {
+            "elapsedMs": 2307.103833000001,
+            "cpuPercent": 303.40245591174886,
+            "rssMiB": 191.5
+          },
+          {
+            "elapsedMs": 2407.4503330000007,
+            "cpuPercent": 291.81585805185136,
+            "rssMiB": 191.5
+          },
+          {
+            "elapsedMs": 2508.7917500000003,
+            "cpuPercent": 234.31091357248425,
+            "rssMiB": 191.546875
+          },
+          {
+            "elapsedMs": 2609.8236660000002,
+            "cpuPercent": 180.1005139801567,
+            "rssMiB": 191.578125
+          },
+          {
+            "elapsedMs": 2680.5165830000005,
+            "cpuPercent": 108.65586434918177,
+            "rssMiB": 191.609375
+          }
+        ]
+      }
+    }
+  ],
+  "failures": []
+}

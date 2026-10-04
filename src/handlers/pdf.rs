@@ -1,170 +1,239 @@
-use crate::core::handler::{DocumentHandler, ExtractionResult};
-use crate::models::metadata::{MetadataPayload, PdfMetadata, PdfPageSize, build_text_metadata};
+use crate::types::*;
 use lopdf::{Document, Object};
-use rayon::prelude::*;
-
+#[derive(Default)]
 pub struct PdfHandler;
-
 impl PdfHandler {
   pub fn new() -> Self {
     Self
   }
-
-  fn extract_text_with_metadata(&self, content: &[u8]) -> Result<(String, PdfMetadata), String> {
-    let document =
-      Document::load_mem(content).map_err(|e| format!("PDF extraction failed: {}", e))?;
-
-    let pages = document.get_pages();
-    let page_count = pages.len() as u32;
-
-    let page_numbers = pages.keys().copied().collect::<Vec<_>>();
-    let page_texts = page_numbers
-      .par_iter()
-      .filter_map(|page_num| document.extract_text(&[*page_num]).ok())
-      .collect::<Vec<_>>();
-
-    let mut text = String::new();
-    for page_text in page_texts {
-      text.push_str(&page_text);
-      text.push('\n');
-    }
-
-    let mut cleaned = String::new();
-    for line in text.lines().map(str::trim).filter(|line| !line.is_empty()) {
-      if !cleaned.is_empty() {
-        cleaned.push('\n');
-      }
-      cleaned.push_str(line);
-    }
-
-    let mut pdf_metadata = self.extract_pdf_metadata(&document, page_count);
-
-    if pdf_metadata.page_count == 0 {
-      pdf_metadata.page_count = page_count;
-    }
-
-    Ok((cleaned, pdf_metadata))
+  fn resolved<'a>(document: &'a Document, object: &'a Object) -> Option<&'a Object> {
+    document.dereference(object).ok().map(|(_, value)| value)
   }
-
-  fn extract_pdf_metadata(&self, document: &Document, page_count: u32) -> PdfMetadata {
-    let mut title = None;
-    let mut author = None;
-    let mut subject = None;
-    let mut producer = None;
-    let mut page_size = None;
-
-    let pages = document.get_pages();
-
-    if let Some((_, first_page_id)) = pages.iter().next() {
-      if let Ok(Object::Dictionary(page_dict)) = document.get_object(*first_page_id) {
-        if let Some(size) = Self::extract_page_size(document, page_dict) {
-          page_size = Some(size);
-        }
+  fn inherited<'a>(
+    document: &'a Document,
+    page: &'a lopdf::Dictionary,
+    key: &[u8],
+  ) -> Option<&'a Object> {
+    let mut current = page;
+    for _ in 0..64 {
+      if let Ok(value) = current.get(key) {
+        return Self::resolved(document, value);
       }
+      current = Self::resolved(document, current.get(b"Parent").ok()?)?
+        .as_dict()
+        .ok()?;
     }
-
-    if let Ok(Object::Reference(info_ref)) = document.trailer.get(b"Info") {
-      if let Ok(Object::Dictionary(info_dict)) = document.get_object(*info_ref) {
-        title = Self::extract_info_string(&info_dict, b"Title");
-        author = Self::extract_info_string(&info_dict, b"Author");
-        subject = Self::extract_info_string(&info_dict, b"Subject");
-        producer = Self::extract_info_string(&info_dict, b"Producer");
-      }
-    }
-
-    PdfMetadata {
-      title,
-      author,
-      subject,
-      producer,
-      page_size,
-      page_count,
-    }
+    None
   }
-
-  fn extract_page_size(document: &Document, page_dict: &lopdf::Dictionary) -> Option<PdfPageSize> {
-    let media_box = page_dict
-      .get(b"MediaBox")
-      .ok()
-      .or_else(|| page_dict.get(b"CropBox").ok())?;
-
-    let resolved = match media_box {
-      Object::Reference(object_id) => document.get_object(*object_id).ok()?.clone(),
-      other => other.clone(),
-    };
-
-    let array = match resolved {
-      Object::Array(values) => values,
-      _ => return None,
-    };
-
-    if array.len() != 4 {
+  fn extract_page_size(document: &Document, page: &lopdf::Dictionary) -> Option<Dimensions> {
+    let values = Self::inherited(document, page, b"CropBox")
+      .or_else(|| Self::inherited(document, page, b"MediaBox"))?
+      .as_array()
+      .ok()?;
+    if values.len() != 4 {
       return None;
     }
-
-    let llx = Self::object_to_f64(&array[0])?;
-    let lly = Self::object_to_f64(&array[1])?;
-    let urx = Self::object_to_f64(&array[2])?;
-    let ury = Self::object_to_f64(&array[3])?;
-
-    Some(PdfPageSize {
-      width: (urx - llx).abs(),
-      height: (ury - lly).abs(),
-    })
-  }
-
-  fn object_to_f64(object: &Object) -> Option<f64> {
-    match object {
-      Object::Real(value) => Some((*value).into()),
-      Object::Integer(value) => Some(*value as f64),
+    let number = |v: &Object| match v {
+      Object::Integer(n) => Some(*n as f64),
+      Object::Real(n) => Some(f64::from(*n)),
       _ => None,
-    }
+    };
+    let width = (number(&values[2])? - number(&values[0])?).abs();
+    let height = (number(&values[3])? - number(&values[1])?).abs();
+    (width.is_finite() && height.is_finite()).then_some(Dimensions { width, height })
   }
-
-  fn extract_info_string(info: &lopdf::Dictionary, key: &[u8]) -> Option<String> {
-    match info.get(key).ok()? {
-      Object::String(bytes, _) => Some(String::from_utf8_lossy(bytes).to_string()),
-      Object::Name(bytes) => Some(String::from_utf8_lossy(bytes).to_string()),
-      _ => None,
-    }
-  }
-
-  fn build_metadata(&self, content: &str, pdf_metadata: PdfMetadata) -> MetadataPayload {
-    let text_metadata = build_text_metadata(content);
-
-    MetadataPayload {
-      text: text_metadata,
-      docx: None,
-      xlsx: None,
-      pptx: None,
-      pdf: Some(pdf_metadata),
-      image: None,
+  fn properties(document: &Document) -> DocumentProperties {
+    let Some(info) = document
+      .trailer
+      .get(b"Info")
+      .ok()
+      .and_then(|o| Self::resolved(document, o))
+      .and_then(|o| o.as_dict().ok())
+    else {
+      return DocumentProperties::default();
+    };
+    let field = |key: &[u8]| {
+      info
+        .get(key)
+        .ok()
+        .and_then(|o| Self::resolved(document, o))
+        .and_then(|o| lopdf::decode_text_string(o).ok())
+    };
+    DocumentProperties {
+      title: field(b"Title"),
+      author: field(b"Author"),
+      subject: field(b"Subject"),
+      creator: field(b"Creator"),
+      producer: field(b"Producer"),
+      created: field(b"CreationDate"),
+      modified: field(b"ModDate"),
     }
   }
 }
-
 impl DocumentHandler for PdfHandler {
-  fn is_supported(&self, mime_type: &str) -> bool {
-    mime_type == "application/pdf"
-  }
-
-  fn extract(&self, content: &[u8]) -> ExtractionResult {
-    match self.extract_text_with_metadata(content) {
-      Ok((text, pdf_metadata)) => {
-        let metadata = self.build_metadata(&text, pdf_metadata);
-        ExtractionResult {
-          content: Some(text),
-          encoding: Some("utf-8".to_string()),
-          metadata: Some(metadata),
-          error: None,
-        }
-      }
-      Err(error) => ExtractionResult {
-        content: None,
-        encoding: Some("utf-8".to_string()),
-        metadata: None,
-        error: Some(error),
-      },
+  fn extract(&self, content: &[u8], options: &ResolvedOptions) -> ExtractionResult<HandlerOutput> {
+    let document = Document::load_mem(content)
+      .map_err(|e| ExtractionError::invalid(format!("PDF parsing failed: {e}")))?;
+    let pages = document.get_pages();
+    let page_count = u32::try_from(pages.len())
+      .map_err(|_| ExtractionError::limit("PDF page count exceeds supported range"))?;
+    let page_size_points = pages
+      .values()
+      .next()
+      .and_then(|id| document.get_dictionary(*id).ok())
+      .and_then(|page| Self::extract_page_size(&document, page));
+    let mut output = HandlerOutput::new(
+      options.needs_text().then(String::new),
+      FormatMetadata::Pdf(PdfMetadata {
+        page_count,
+        page_size_points,
+      }),
+      options,
+    );
+    if let Some(metadata) = output.metadata.as_mut() {
+      metadata.properties = Self::properties(&document);
     }
+    if !options.needs_text() {
+      return Ok(output);
+    }
+    let text = output.text.as_mut().expect("text requested");
+    let mut succeeded = 0usize;
+    for page in pages.keys() {
+      match document.extract_text(&[*page]) {
+        Ok(page_text) => {
+          succeeded += 1;
+          for line in page_text
+            .lines()
+            .map(str::trim)
+            .filter(|line| !line.is_empty())
+          {
+            if !text.is_empty() {
+              push_text(text, "\n", options)?;
+            }
+            push_text(text, line, options)?;
+          }
+        }
+        Err(error) => warn(
+          &mut output.warnings,
+          ExtractionWarning {
+            code: "PDF_PAGE_FAILED",
+            message: error.to_string(),
+            location: Some(format!("page:{page}")),
+            partial: true,
+          },
+          options,
+        ),
+      }
+    }
+    if !options.metadata && !pages.is_empty() && succeeded == 0 {
+      return Err(ExtractionError::invalid("all PDF pages failed to extract"));
+    }
+    Ok(output)
+  }
+}
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use lopdf::dictionary;
+  #[test]
+  fn inherited_page_box() {
+    let mut document = Document::with_version("1.7");
+    let parent =
+      document.add_object(dictionary! {"MediaBox"=>vec![0.into(),0.into(),612.into(),792.into()]});
+    let page = dictionary! {"Parent"=>parent};
+    let size = PdfHandler::extract_page_size(&document, &page).unwrap();
+    assert_eq!(size.width, 612.0);
+    assert_eq!(size.height, 792.0);
+  }
+  #[test]
+  fn cyclic_page_parent_is_bounded() {
+    let mut document = Document::with_version("1.7");
+    let id = document.new_object_id();
+    document
+      .objects
+      .insert(id, Object::Dictionary(dictionary! {"Parent"=>id}));
+    assert!(
+      PdfHandler::extract_page_size(&document, document.get_dictionary(id).unwrap()).is_none()
+    );
+  }
+  #[test]
+  fn info_decodes_utf16() {
+    let mut document = Document::with_version("1.7");
+    let info = document.add_object(
+      dictionary! {"Title"=>Object::String(vec![0xfe,0xff,0,0x41],lopdf::StringFormat::Literal)},
+    );
+    document.trailer.set("Info", info);
+    assert_eq!(
+      PdfHandler::properties(&document).title.as_deref(),
+      Some("A")
+    );
+  }
+  fn damaged_page_pdf() -> Vec<u8> {
+    let mut document = Document::with_version("1.7");
+    let pages = document.new_object_id();
+    let stream = document.add_object(lopdf::Stream::new(dictionary! {}, b"Tf".to_vec()));
+    let page=document.add_object(dictionary!{"Type"=>"Page","Parent"=>pages,"Contents"=>stream,"MediaBox"=>vec![0.into(),0.into(),612.into(),792.into()]});
+    document.objects.insert(
+      pages,
+      Object::Dictionary(dictionary! {"Type"=>"Pages","Count"=>1,"Kids"=>vec![page.into()]}),
+    );
+    let catalog = document.add_object(dictionary! {"Type"=>"Catalog","Pages"=>pages});
+    document.trailer.set("Root", catalog);
+    let mut bytes = Vec::new();
+    document.save_to(&mut bytes).unwrap();
+    bytes
+  }
+  #[test]
+  fn metadata_does_not_extract_damaged_page() {
+    let options = ResolvedOptions {
+      text: false,
+      statistics: false,
+      ..Default::default()
+    };
+    let output = PdfHandler::new()
+      .extract(&damaged_page_pdf(), &options)
+      .unwrap();
+    assert!(output.warnings.is_empty());
+    assert!(output.text.is_none());
+    assert!(output.metadata.is_some());
+  }
+  #[test]
+  fn page_failure_preserves_metadata() {
+    let output = PdfHandler::new()
+      .extract(&damaged_page_pdf(), &ResolvedOptions::default())
+      .unwrap();
+    assert!(output.metadata.is_some());
+    assert_eq!(output.warnings.len(), 1);
+    assert!(output.warnings[0].partial);
+    assert_eq!(output.warnings[0].location.as_deref(), Some("page:1"));
+  }
+  #[test]
+  fn inherited_crop_box_precedes_local_media_box() {
+    let mut document = Document::with_version("1.7");
+    let parent =
+      document.add_object(dictionary! {"CropBox"=>vec![0.into(),0.into(),100.into(),100.into()]});
+    let page =
+      dictionary! {"Parent"=>parent,"MediaBox"=>vec![0.into(),0.into(),600.into(),800.into()]};
+    assert_eq!(
+      PdfHandler::extract_page_size(&document, &page)
+        .unwrap()
+        .width,
+      100.0
+    );
+  }
+  #[test]
+  fn all_page_failure_is_fatal_for_text_only() {
+    let options = ResolvedOptions {
+      metadata: false,
+      statistics: false,
+      ..Default::default()
+    };
+    assert_eq!(
+      PdfHandler::new()
+        .extract(&damaged_page_pdf(), &options)
+        .unwrap_err()
+        .code,
+      ErrorCode::InvalidDocument
+    );
   }
 }

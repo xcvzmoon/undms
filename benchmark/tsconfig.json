@@ -3,7 +3,9 @@
   "compilerOptions": {
     "moduleResolution": "NodeNext",
     "module": "NodeNext",
-    "outDir": "lib"
+    "outDir": "lib",
+    "types": ["node"],
+    "rootDir": ".."
   },
   "include": ["."],
   "exclude": ["lib"]

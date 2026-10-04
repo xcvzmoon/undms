@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "skills": {
+    "ast-grep": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/ast-grep/SKILL.md",
+      "computedHash": "02c4c0e5b61af2427e2b108d80198fd9c20ffe00cd1ef791a38bd983e8eb3a06"
+    },
+    "codex": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/codex/SKILL.md",
+      "computedHash": "59cd12b1b33756c15845b8bdc63ea9ddba86827d4b1cbf6098a38107bff503ae"
+    },
+    "commit": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/commit/SKILL.md",
+      "computedHash": "29f654b5bce384f947fbf8ccbb4f42e9f8b844ce218ba5b5bf9e56a7e46f499b"
+    },
+    "debugging": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/debugging/SKILL.md",
+      "computedHash": "67515a1c5460a50d6482f2425f18aafb303bbdb1edd0c36a2d236717b55789f1"
+    },
+    "execute": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/execute/SKILL.md",
+      "computedHash": "ae9dd81a75349b4c5b84e4dd708b2a5db4ca666106f21db7935645157964e450"
+    },
+    "find-skills": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/find-skills/SKILL.md",
+      "computedHash": "dcbde82d3a424a85b3ad1d40131e2b617dea62a74b6ee1c2d5faf012f6277475"
+    },
+    "genbumppush": {
+      "source": "xcvzmoon/genbumppush",
+      "sourceType": "github",
+      "skillPath": "skills/genbumppush/SKILL.md",
+      "computedHash": "143aba35c8c5e594517fa0cd7760647f864d6737bcd4f714e2273ed74809f841"
+    },
+    "meditate": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/meditate/SKILL.md",
+      "computedHash": "ff3734644dccb81138aefe002fa1bde54e71a4afd801ffe20ad758e1de63bf7b"
+    },
+    "oops": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/oops/SKILL.md",
+      "computedHash": "167a5db77dc53ddde997430257a494397f5ccf0cf5c60f9ea44ff0b6f600a3ef"
+    },
+    "optimise-github-actions": {
+      "source": "enesgules/dotfiles",
+      "sourceType": "github",
+      "skillPath": "skills/optimise-github-actions/SKILL.md",
+      "computedHash": "c82f63628c0e6e3d5258f94b8f90b66f9c32a077417aaafbba1bbd74e7c7173e"
+    },
+    "plan": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/plan/SKILL.md",
+      "computedHash": "e4c7033ae034754142b8e54355d4e2d97a7e493eeeb1a9daeabd596e17bda2f4"
+    },
+    "quality": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/quality/SKILL.md",
+      "computedHash": "2631463a7a01f0dd61819c3d89ae41f840127755273e9676f7aeb0c63c94a5e7"
+    },
+    "refine": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/refine/SKILL.md",
+      "computedHash": "0efce32b64060846062e6a5640152c0e7ef59a5a94bfa6281244ec267df7516e"
+    },
+    "reflect": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/reflect/SKILL.md",
+      "computedHash": "0e66ad7744b9fc970ac77373019a3d972ae05f55944acad21031316f6c9407a8"
+    },
+    "review": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/review/SKILL.md",
+      "computedHash": "b6d22d23fb6b21a52df926aed3fab784120d986516958981a1992ebc9988df70"
+    },
+    "ruminate": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/ruminate/SKILL.md",
+      "computedHash": "04bf74a62d7e682fe75bdff4aa2ad6e5150472b890c6012bc96a55f5bbff6617"
+    },
+    "skill-creator": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "computedHash": "9b03bb78ec5c81c4e0546dbb78cfc970368c72dcae5482e8c59690175abbc8e7"
+    },
+    "testing": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/testing/SKILL.md",
+      "computedHash": "54fc94e3c8658a0039819f899dc3d0c48fb1c07ad5a41d2d1533ea237aa0c4fb"
+    },
+    "todo": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/todo/SKILL.md",
+      "computedHash": "dcdd0f18f75b05a3af4c795e47182db13c033802765a67731c72542c38c6aa9a"
+    },
+    "unslop": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/unslop/SKILL.md",
+      "computedHash": "96ca1f318c41bd0e4adaffc1c881a85555a736b5824d1a9a6ee6139d5851774a"
+    },
+    "worktree": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/worktree/SKILL.md",
+      "computedHash": "e0f76c1a6808fb416ec1e993e6b528eaf574877ddb3e483a35a5d0a882dd9897"
+    }
+  }
+}
