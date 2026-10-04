@@ -37,6 +37,12 @@
       "skillPath": ".agents/skills/find-skills/SKILL.md",
       "computedHash": "dcbde82d3a424a85b3ad1d40131e2b617dea62a74b6ee1c2d5faf012f6277475"
     },
+    "genbumppush": {
+      "source": "xcvzmoon/genbumppush",
+      "sourceType": "github",
+      "skillPath": "skills/genbumppush/SKILL.md",
+      "computedHash": "143aba35c8c5e594517fa0cd7760647f864d6737bcd4f714e2273ed74809f841"
+    },
     "meditate": {
       "source": "poteto/noodle",
       "sourceType": "github",
