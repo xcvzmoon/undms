@@ -1,5 +1,35 @@
 # Changelog
 
+## v2.0.1
+
+[compare changes](https://github.com/xcvzmoon/undms/compare/v2.0.0...v2.0.1)
+
+### 🩹 Fixes
+
+- **publish:** Allow explicit token authentication for release recovery ([8151652](https://github.com/xcvzmoon/undms/commit/8151652))
+- **publish:** Require OIDC authentication for normal releases ([09eaa2f](https://github.com/xcvzmoon/undms/commit/09eaa2f))
+- **limits:** Support larger bounded document extraction ([d32ee7f](https://github.com/xcvzmoon/undms/commit/d32ee7f))
+- **scheduler:** Release worker admission before completion ([7780fe4](https://github.com/xcvzmoon/undms/commit/7780fe4))
+
+### 📖 Documentation
+
+- **release:** Explain publication retries without version bumps ([e2c79b6](https://github.com/xcvzmoon/undms/commit/e2c79b6))
+- **release:** Explain trusted publishing and trust downgrade warnings ([d49e94d](https://github.com/xcvzmoon/undms/commit/d49e94d))
+
+### 🏡 Chore
+
+- **linguist:** Exclude benchmarks and scripts from language statistics ([6827f6c](https://github.com/xcvzmoon/undms/commit/6827f6c))
+- **release:** Configure patch releases ([1dbb543](https://github.com/xcvzmoon/undms/commit/1dbb543))
+
+### 🤖 CI
+
+- **publish:** Retry releases using original CI artifacts ([203272f](https://github.com/xcvzmoon/undms/commit/203272f))
+- **test:** Restore native binding tests and release checks ([41d0326](https://github.com/xcvzmoon/undms/commit/41d0326))
+
+### ❤️ Contributors
+
+- Mon Albert Gamil ([@xcvzmoon](https://github.com/xcvzmoon))
+
 ## v2.0.0
 
 [compare changes](https://github.com/xcvzmoon/undms/compare/v1.6.3...v2.0.0)
