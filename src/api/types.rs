@@ -259,13 +259,38 @@ pub struct ExtractionError {
   pub code: ErrorCode,
   pub message: String,
   pub stage: String,
+  /// ResourceLimits field responsible for a configured-budget failure, when known.
+  pub limit_name: Option<String>,
+  /// The configured byte, count, or pixel limit named by limitName.
+  pub configured_limit: Option<f64>,
+  /// Exact observed bytes, when the complete size is known.
+  pub observed_bytes: Option<f64>,
+  /// Lower bound on bytes when processing stopped, or estimated result/storage accounting.
+  pub observed_at_least_bytes: Option<f64>,
+  /// Observed count or pixels for non-byte limits.
+  pub observed_value: Option<f64>,
 }
 impl From<domain::ExtractionError> for ExtractionError {
   fn from(value: domain::ExtractionError) -> Self {
+    let details = value.limit_details;
     Self {
       code: value.code.into(),
       message: value.message,
       stage: value.stage.to_string(),
+      limit_name: details.as_ref().map(|d| d.name.to_string()),
+      configured_limit: details.as_ref().map(|d| d.configured as f64),
+      observed_bytes: details
+        .as_ref()
+        .and_then(|d| d.observed_bytes)
+        .map(|n| n as f64),
+      observed_at_least_bytes: details
+        .as_ref()
+        .and_then(|d| d.observed_at_least_bytes)
+        .map(|n| n as f64),
+      observed_value: details
+        .as_ref()
+        .and_then(|d| d.observed_value)
+        .map(|n| n as f64),
     }
   }
 }

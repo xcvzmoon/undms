@@ -91,7 +91,9 @@ pub async fn run(
       return;
     }
     let output = process(input, &options, submitted);
-    let _ = tx.send(output);
+    // Transfer the worker reservation with its output, rather than retaining
+    // it after waking the receiver. Cancellation drops both together.
+    let _ = tx.send((output, _admission));
   };
   if image {
     submit_image(Box::new(job))?;
@@ -99,11 +101,24 @@ pub async fn run(
     pool()?.spawn_fifo(job);
   }
   rx.await
+    .map(|(output, admission)| {
+      // The API retains its own reservation through JavaScript conversion.
+      drop(admission);
+      output
+    })
     .map_err(|_| "extraction worker stopped".to_string())
 }
 #[cfg(test)]
 mod tests {
   use super::*;
+  #[test]
+  fn maximum_single_document_configuration_fits_admission() {
+    assert!(
+      crate::types::MAX_INPUT_BYTES
+        .checked_add(crate::types::MAX_OUTPUT_BYTES)
+        .is_some_and(|n| n <= MAX_RESERVED_BYTES)
+    );
+  }
   #[test]
   fn admission_releases_capacity() {
     let a = Admission::reserve(MAX_RESERVED_BYTES).unwrap();

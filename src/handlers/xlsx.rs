@@ -55,14 +55,26 @@ impl DocumentHandler for XlsxHandler {
           if options.needs_text() {
             let remaining = options.limits.max_output_bytes.saturating_sub(text.len());
             if u64::from(row_count) * u64::from(column_count) > remaining as u64 {
-              return Err(ExtractionError::limit(
+              return Err(ExtractionError::byte_limit(
                 "worksheet coordinates exceed maxOutputBytes",
+                "maxOutputBytes",
+                options.limits.max_output_bytes,
+                text
+                  .len()
+                  .saturating_add((u64::from(row_count) * u64::from(column_count)) as usize),
+                true,
               ));
             }
             // Charge conservative node/string overhead before inserting into the map.
             if cells.len() >= remaining / 128 {
-              return Err(ExtractionError::limit(
+              return Err(ExtractionError::byte_limit(
                 "worksheet cell storage exceeds output budget",
+                "maxOutputBytes",
+                options.limits.max_output_bytes,
+                text
+                  .len()
+                  .saturating_add(cells.len().saturating_add(1).saturating_mul(128)),
+                true,
               ));
             }
             let value = calamine::Data::from(cell.get_value().clone()).to_string();
@@ -70,16 +82,27 @@ impl DocumentHandler for XlsxHandler {
               .checked_add(value.len())
               .ok_or_else(|| ExtractionError::limit("worksheet text size overflow"))?;
             if text_bytes > options.limits.max_output_bytes.saturating_sub(text.len()) {
-              return Err(ExtractionError::limit(
+              return Err(ExtractionError::byte_limit(
                 "worksheet text exceeds maxOutputBytes",
+                "maxOutputBytes",
+                options.limits.max_output_bytes,
+                text.len().saturating_add(text_bytes),
+                true,
               ));
             }
             if text_bytes
               .checked_add((cells.len() + 1).saturating_mul(128))
               .is_none_or(|cost| cost > remaining)
             {
-              return Err(ExtractionError::limit(
+              return Err(ExtractionError::byte_limit(
                 "worksheet cell storage exceeds output budget",
+                "maxOutputBytes",
+                options.limits.max_output_bytes,
+                text
+                  .len()
+                  .saturating_add(text_bytes)
+                  .saturating_add(cells.len().saturating_add(1).saturating_mul(128)),
+                true,
               ));
             }
             if cells.insert((row, col), value).is_some() {
@@ -116,8 +139,12 @@ impl DocumentHandler for XlsxHandler {
         if u64::from(row_count) * u64::from(column_count.max(1))
           > options.limits.max_output_bytes as u64
         {
-          return Err(ExtractionError::limit(
+          return Err(ExtractionError::byte_limit(
             "worksheet coordinates exceed maxOutputBytes",
+            "maxOutputBytes",
+            options.limits.max_output_bytes,
+            (u64::from(row_count) * u64::from(column_count.max(1))) as usize,
+            true,
           ));
         }
         if succeeded > 0 {

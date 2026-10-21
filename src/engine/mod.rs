@@ -225,8 +225,14 @@ pub fn process(mut input: Input, options: &ResolvedOptions, submitted: Instant) 
     processing_time_ms: start.elapsed().as_secs_f64() * 1000.,
     metrics: options.metrics,
   };
-  if result.output_bytes() > options.limits.max_output_bytes {
-    result.output = Err(ExtractionError::limit("result exceeds maxOutputBytes"));
+  if result.output.is_ok() && result.output_bytes() > options.limits.max_output_bytes {
+    result.output = Err(ExtractionError::byte_limit(
+      "result exceeds maxOutputBytes",
+      "maxOutputBytes",
+      options.limits.max_output_bytes,
+      result.output_bytes(),
+      true,
+    ));
   }
   result
 }

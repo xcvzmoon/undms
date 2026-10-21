@@ -7,9 +7,13 @@ export interface BatchItemResult {
 
 export interface BatchOptions {
   extraction?: ExtractionOptions
+  /** Active documents, 1..=32; default and effective maximum are the CPU worker count (1..=4). */
   concurrency?: number
+  /** Total batch input bytes. Default 128 MiB; inclusive range 1..=256 MiB. */
   maxTotalInputBytes?: number
+  /** Total estimated batch result bytes. Default 64 MiB; inclusive range 1..=256 MiB. */
   maxTotalOutputBytes?: number
+  /** Documents per batch. Default 1,000; inclusive range 1..=10,000. */
   maxDocuments?: number
 }
 
@@ -79,6 +83,16 @@ export interface ExtractionError {
   code: ErrorCode
   message: string
   stage: string
+  /** ResourceLimits field responsible for a configured-budget failure, when known. */
+  limitName?: string
+  /** The configured byte, count, or pixel limit named by limitName. */
+  configuredLimit?: number
+  /** Exact observed bytes, when the complete size is known. */
+  observedBytes?: number
+  /** Lower bound on bytes when processing stopped, or estimated result/storage accounting. */
+  observedAtLeastBytes?: number
+  /** Observed count or pixels for non-byte limits. */
+  observedValue?: number
 }
 
 export interface ExtractionInput {
@@ -136,6 +150,12 @@ export interface GeoLocation {
   longitude?: number
 }
 
+/**
+ * Discover per-document configuration ranges. Returns a fresh object on every call.
+ * Valid configuration does not guarantee scheduler admission or a process-memory bound.
+ */
+export declare function getResourceLimitRanges(): ResourceLimitRanges
+
 export interface ImageMetadata {
   width: number
   height: number
@@ -167,12 +187,34 @@ export interface ProcessingMetrics {
   processingTimeMs: number
 }
 
+/** An inclusive integer configuration range. Units are documented on ResourceLimits. */
+export interface ResourceLimitRange {
+  minimum: number
+  maximum: number
+  defaultValue: number
+}
+
+export interface ResourceLimitRanges {
+  maxInputBytes: ResourceLimitRange
+  maxOutputBytes: ResourceLimitRange
+  maxDecompressedBytes: ResourceLimitRange
+  maxArchiveEntries: ResourceLimitRange
+  maxImagePixels: ResourceLimitRange
+  maxWarnings: ResourceLimitRange
+}
+
 export interface ResourceLimits {
+  /** Input bytes. Default 64 MiB; inclusive range 1..=256 MiB. */
   maxInputBytes?: number
+  /** UTF-8 output and estimated result bytes. Default 16 MiB; inclusive range 1..=256 MiB. */
   maxOutputBytes?: number
+  /** Cumulative actual ZIP inflation bytes. Default 128 MiB; inclusive range 1..=2 GiB. */
   maxDecompressedBytes?: number
+  /** ZIP entry count. Default 10,000; inclusive range 1..=100,000. */
   maxArchiveEntries?: number
+  /** Image width times height in pixels. Default 20,000,000; inclusive range 1..=100,000,000. */
   maxImagePixels?: number
+  /** Retained warning count. Default 100; inclusive range 1..=1,000. */
   maxWarnings?: number
 }
 

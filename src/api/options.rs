@@ -26,12 +26,18 @@ pub struct TextOptions {
 }
 #[napi(object)]
 pub struct ResourceLimits {
+  /// Input bytes. Default 64 MiB; inclusive range 1..=256 MiB.
   pub max_input_bytes: Option<f64>,
+  /// UTF-8 output and estimated result bytes. Default 16 MiB; inclusive range 1..=256 MiB.
   pub max_output_bytes: Option<f64>,
+  /// Cumulative actual ZIP inflation bytes. Default 128 MiB; inclusive range 1..=2 GiB.
   pub max_decompressed_bytes: Option<f64>,
-  pub max_archive_entries: Option<u32>,
+  /// ZIP entry count. Default 10,000; inclusive range 1..=100,000.
+  pub max_archive_entries: Option<f64>,
+  /// Image width times height in pixels. Default 20,000,000; inclusive range 1..=100,000,000.
   pub max_image_pixels: Option<f64>,
-  pub max_warnings: Option<u32>,
+  /// Retained warning count. Default 100; inclusive range 1..=1,000.
+  pub max_warnings: Option<f64>,
 }
 #[napi(object)]
 pub struct ExtractionOptions {
@@ -45,9 +51,13 @@ pub struct ExtractionOptions {
 #[napi(object)]
 pub struct BatchOptions {
   pub extraction: Option<ExtractionOptions>,
+  /// Active documents, 1..=32; default and effective maximum are the CPU worker count (1..=4).
   pub concurrency: Option<u32>,
+  /// Total batch input bytes. Default 128 MiB; inclusive range 1..=256 MiB.
   pub max_total_input_bytes: Option<f64>,
+  /// Total estimated batch result bytes. Default 64 MiB; inclusive range 1..=256 MiB.
   pub max_total_output_bytes: Option<f64>,
+  /// Documents per batch. Default 1,000; inclusive range 1..=10,000.
   pub max_documents: Option<u32>,
 }
 pub fn invalid(message: impl Into<String>) -> Error {
@@ -109,40 +119,39 @@ pub fn resolve(options: Option<ExtractionOptions>) -> Result<ResolvedOptions> {
         v.max_input_bytes,
         d.max_input_bytes,
         "maxInputBytes",
-        256 * 1024 * 1024,
+        types::MAX_INPUT_BYTES,
       )?,
       max_output_bytes: limit(
         v.max_output_bytes,
         d.max_output_bytes,
         "maxOutputBytes",
-        64 * 1024 * 1024,
+        types::MAX_OUTPUT_BYTES,
       )?,
       max_decompressed_bytes: limit(
         v.max_decompressed_bytes,
         d.max_decompressed_bytes,
         "maxDecompressedBytes",
-        512 * 1024 * 1024,
+        types::MAX_DECOMPRESSED_BYTES,
       )?,
-      max_archive_entries: v
-        .max_archive_entries
-        .unwrap_or(d.max_archive_entries as u32) as usize,
+      max_archive_entries: limit(
+        v.max_archive_entries,
+        d.max_archive_entries,
+        "maxArchiveEntries",
+        types::MAX_ARCHIVE_ENTRIES,
+      )?,
       max_image_pixels: limit(
         v.max_image_pixels,
         d.max_image_pixels as usize,
         "maxImagePixels",
-        100_000_000,
+        types::MAX_IMAGE_PIXELS,
       )? as u64,
-      max_warnings: v.max_warnings.unwrap_or(d.max_warnings as u32) as usize,
+      max_warnings: limit(
+        v.max_warnings,
+        d.max_warnings,
+        "maxWarnings",
+        types::MAX_WARNINGS,
+      )?,
     };
-    if out.limits.max_archive_entries == 0
-      || out.limits.max_archive_entries > 100_000
-      || out.limits.max_warnings == 0
-      || out.limits.max_warnings > 1000
-    {
-      return Err(invalid(
-        "archive entries and warnings must be positive and bounded",
-      ));
-    }
   }
   Ok(out)
 }
@@ -188,4 +197,42 @@ pub fn resolve_batch(options: Option<BatchOptions>) -> Result<ResolvedBatchOptio
     )?,
     max_documents,
   })
+}
+
+/// An inclusive integer configuration range. Units are documented on ResourceLimits.
+#[napi(object, object_from_js = false)]
+pub struct ResourceLimitRange {
+  pub minimum: f64,
+  pub maximum: f64,
+  pub default_value: f64,
+}
+#[napi(object, object_from_js = false)]
+pub struct ResourceLimitRanges {
+  pub max_input_bytes: ResourceLimitRange,
+  pub max_output_bytes: ResourceLimitRange,
+  pub max_decompressed_bytes: ResourceLimitRange,
+  pub max_archive_entries: ResourceLimitRange,
+  pub max_image_pixels: ResourceLimitRange,
+  pub max_warnings: ResourceLimitRange,
+}
+/// Discover per-document configuration ranges. Returns a fresh object on every call.
+/// Valid configuration does not guarantee scheduler admission or a process-memory bound.
+#[napi]
+pub fn get_resource_limit_ranges() -> ResourceLimitRanges {
+  fn range(default: usize, maximum: usize) -> ResourceLimitRange {
+    ResourceLimitRange {
+      minimum: 1.0,
+      maximum: maximum as f64,
+      default_value: default as f64,
+    }
+  }
+  let d = types::ResourceLimits::default();
+  ResourceLimitRanges {
+    max_input_bytes: range(d.max_input_bytes, types::MAX_INPUT_BYTES),
+    max_output_bytes: range(d.max_output_bytes, types::MAX_OUTPUT_BYTES),
+    max_decompressed_bytes: range(d.max_decompressed_bytes, types::MAX_DECOMPRESSED_BYTES),
+    max_archive_entries: range(d.max_archive_entries, types::MAX_ARCHIVE_ENTRIES),
+    max_image_pixels: range(d.max_image_pixels as usize, types::MAX_IMAGE_PIXELS),
+    max_warnings: range(d.max_warnings, types::MAX_WARNINGS),
+  }
 }
