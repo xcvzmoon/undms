@@ -91,7 +91,9 @@ pub async fn run(
       return;
     }
     let output = process(input, &options, submitted);
-    let _ = tx.send(output);
+    // Transfer the worker reservation with its output, rather than retaining
+    // it after waking the receiver. Cancellation drops both together.
+    let _ = tx.send((output, _admission));
   };
   if image {
     submit_image(Box::new(job))?;
@@ -99,6 +101,11 @@ pub async fn run(
     pool()?.spawn_fifo(job);
   }
   rx.await
+    .map(|(output, admission)| {
+      // The API retains its own reservation through JavaScript conversion.
+      drop(admission);
+      output
+    })
     .map_err(|_| "extraction worker stopped".to_string())
 }
 #[cfg(test)]

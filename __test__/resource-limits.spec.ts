@@ -161,6 +161,27 @@ test.serial(
 );
 
 test.serial(
+  'sequential completion handoffs do not retain the previous worker reservation',
+  async (t) => {
+    // Together these reservations exceed 512 MiB. Each request must release
+    // its reservation before the next awaited request is admitted.
+    for (let index = 0; index < 10_000; index += 1) {
+      const batch = await extractBatch([{ data: Buffer.from('hello') }], {
+        concurrency: 1,
+        maxTotalOutputBytes: 16 * MiB,
+        extraction: { limits: { maxOutputBytes: 256 * MiB } },
+      });
+      t.is(batch.summary.successCount, 1);
+      const single = await extract(
+        { data: Buffer.from('hello') },
+        { limits: { maxOutputBytes: 256 * MiB } },
+      );
+      t.is(single.status, 'success');
+    }
+  },
+);
+
+test.serial(
   'archive expansion, entry count, and image pixels identify their configured limits',
   async (t) => {
     const archive = await extract(
