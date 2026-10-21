@@ -88,8 +88,15 @@ fn snapshot(input: InspectedInput, options: &domain::ResolvedOptions) -> Input {
       .filter(|v| !v.is_empty()),
     ..Default::default()
   };
-  let pre_error = (byte_length > options.limits.max_input_bytes)
-    .then(|| domain::ExtractionError::limit("input exceeds maxInputBytes"));
+  let pre_error = (byte_length > options.limits.max_input_bytes).then(|| {
+    domain::ExtractionError::byte_limit(
+      "input exceeds maxInputBytes",
+      "maxInputBytes",
+      options.limits.max_input_bytes,
+      byte_length,
+      false,
+    )
+  });
   let bytes = if pre_error.is_some() {
     Vec::new()
   } else {

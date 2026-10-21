@@ -40,8 +40,12 @@ impl DocumentHandler for TextHandler {
       match utf8 {
         Ok(text) => {
           if text.len() > options.limits.max_output_bytes {
-            return Err(ExtractionError::limit(
+            return Err(ExtractionError::byte_limit(
               "decoded text exceeds maxOutputBytes",
+              "maxOutputBytes",
+              options.limits.max_output_bytes,
+              text.len(),
+              false,
             ));
           }
           (text.to_owned(), false)
@@ -113,6 +117,26 @@ fn decode_bounded(
 #[cfg(test)]
 mod tests {
   use super::*;
+  #[test]
+  fn utf8_output_boundary_counts_bytes_not_characters() {
+    let mut options = ResolvedOptions::default();
+    options.limits.max_output_bytes = 4;
+    assert_eq!(
+      TextHandler::new()
+        .extract("🙂".as_bytes(), &options)
+        .unwrap()
+        .text
+        .as_deref(),
+      Some("🙂")
+    );
+    options.limits.max_output_bytes = 3;
+    let error = TextHandler::new()
+      .extract("🙂".as_bytes(), &options)
+      .unwrap_err();
+    let details = error.limit_details.unwrap();
+    assert_eq!(details.configured, 3);
+    assert_eq!(details.observed_bytes, Some(4));
+  }
   #[test]
   fn handles_bom_and_empty() {
     let h = TextHandler::new();

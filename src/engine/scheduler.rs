@@ -105,6 +105,14 @@ pub async fn run(
 mod tests {
   use super::*;
   #[test]
+  fn maximum_single_document_configuration_fits_admission() {
+    assert!(
+      crate::types::MAX_INPUT_BYTES
+        .checked_add(crate::types::MAX_OUTPUT_BYTES)
+        .is_some_and(|n| n <= MAX_RESERVED_BYTES)
+    );
+  }
+  #[test]
   fn admission_releases_capacity() {
     let a = Admission::reserve(MAX_RESERVED_BYTES).unwrap();
     assert!(Admission::reserve(1).is_err());

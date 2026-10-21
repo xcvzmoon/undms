@@ -123,8 +123,12 @@ pub(crate) fn core_properties(
         .checked_add(value.len())
         .ok_or_else(|| ExtractionError::limit("property size overflow"))?;
       if property_bytes > options.limits.max_output_bytes {
-        return Err(ExtractionError::limit(
+        return Err(ExtractionError::byte_limit(
           "document properties exceed maxOutputBytes",
+          "maxOutputBytes",
+          options.limits.max_output_bytes,
+          property_bytes,
+          true,
         ));
       }
       push_text(target.get_or_insert_with(String::new), value, options)?;

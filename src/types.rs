@@ -119,8 +119,18 @@ impl ErrorCode {
     }
   }
 }
+/// Measurements are UTF-8/ZIP bytes, or count/pixels for observed_value.
+#[derive(Clone, Debug)]
+pub struct LimitDetails {
+  pub name: &'static str,
+  pub configured: u64,
+  pub observed_bytes: Option<u64>,
+  pub observed_at_least_bytes: Option<u64>,
+  pub observed_value: Option<u64>,
+}
 #[derive(Clone, Debug)]
 pub struct ExtractionError {
+  pub limit_details: Option<LimitDetails>,
   pub code: ErrorCode,
   pub message: String,
   pub stage: &'static str,
@@ -128,6 +138,7 @@ pub struct ExtractionError {
 impl ExtractionError {
   pub fn new(code: ErrorCode, stage: &'static str, message: impl Into<String>) -> Self {
     Self {
+      limit_details: None,
       code,
       stage,
       message: message.into(),
@@ -138,6 +149,39 @@ impl ExtractionError {
   }
   pub fn limit(message: impl Into<String>) -> Self {
     Self::new(ErrorCode::LimitExceeded, "limits", message)
+  }
+  pub fn byte_limit(
+    message: impl Into<String>,
+    name: &'static str,
+    configured: usize,
+    observed: usize,
+    at_least: bool,
+  ) -> Self {
+    let mut error = Self::limit(message);
+    error.limit_details = Some(LimitDetails {
+      name,
+      configured: configured as u64,
+      observed_bytes: (!at_least).then_some(observed as u64),
+      observed_at_least_bytes: at_least.then_some(observed as u64),
+      observed_value: None,
+    });
+    error
+  }
+  pub fn count_limit(
+    message: impl Into<String>,
+    name: &'static str,
+    configured: u64,
+    observed: u64,
+  ) -> Self {
+    let mut error = Self::limit(message);
+    error.limit_details = Some(LimitDetails {
+      name,
+      configured,
+      observed_bytes: None,
+      observed_at_least_bytes: None,
+      observed_value: Some(observed),
+    });
+    error
   }
 }
 impl std::fmt::Display for ExtractionError {
@@ -182,6 +226,13 @@ pub enum OcrPolicy {
   Balanced,
   Accurate,
 }
+// Keep single-document input + output within scheduler::MAX_RESERVED_BYTES.
+pub const MAX_INPUT_BYTES: usize = 256 * 1024 * 1024;
+pub const MAX_OUTPUT_BYTES: usize = 256 * 1024 * 1024;
+pub const MAX_DECOMPRESSED_BYTES: usize = 2 * 1024 * 1024 * 1024;
+pub const MAX_ARCHIVE_ENTRIES: usize = 100_000;
+pub const MAX_IMAGE_PIXELS: usize = 100_000_000;
+pub const MAX_WARNINGS: usize = 1000;
 #[derive(Clone, Debug)]
 pub struct ResourceLimits {
   pub max_input_bytes: usize,
@@ -248,8 +299,12 @@ pub fn push_text(
     .checked_add(value.len())
     .is_none_or(|n| n > options.limits.max_output_bytes)
   {
-    return Err(ExtractionError::limit(
+    return Err(ExtractionError::byte_limit(
       "extracted text exceeds maxOutputBytes",
+      "maxOutputBytes",
+      options.limits.max_output_bytes,
+      output.len().saturating_add(value.len()),
+      true,
     ));
   }
   let required = output.len() + value.len();

@@ -253,7 +253,12 @@ impl DocumentHandler for ImageHandler {
       .into_dimensions()
       .map_err(|e| ExtractionError::new(ErrorCode::DecodeFailed, "decode", e.to_string()))?;
     if u64::from(width) * u64::from(height) > options.limits.max_image_pixels {
-      return Err(ExtractionError::limit("image exceeds maxImagePixels"));
+      return Err(ExtractionError::count_limit(
+        "image exceeds maxImagePixels",
+        "maxImagePixels",
+        options.limits.max_image_pixels,
+        u64::from(width) * u64::from(height),
+      ));
     }
     let (location, camera_make, camera_model, datetime_original) =
       self.extract_exif_metadata(content);
